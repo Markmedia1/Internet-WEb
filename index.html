@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wide Broadband | Find the Best Internet Plans in Your Area</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family (already premium and clean) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #f7f9fb; /* Soft gray background */
+        }
+
+        /* --- Custom Premium Styles & Animations --- */
+        .gradient-accent {
+            /* Softer, more elegant blue gradient for CTAs */
+            background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%); 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .gradient-accent:hover {
+            opacity: 0.95;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.5), 0 4px 6px -2px rgba(59, 130, 246, 0.05); /* Subtle glow */
+        }
+        .main-content {
+            min-height: calc(100vh - 12rem);
+        }
+        
+        /* Premium Micro-interaction for desktop navigation links */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #1d4ed8; /* Darker blue underline */
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Background with Soft Abstract Gradient */
+        .hero-bg {
+             /* Darker, professional blue background with a subtle radial gradient for depth */
+             background: radial-gradient(circle at 10% 20%, rgba(20, 40, 70, 0.9) 0%, rgba(20, 40, 70, 0.8) 100%);
+             /* Parallax effect placeholder: image moved into separate div for better control */
+        }
+        
+        /* Define slow floating animation for subtle background effect */
+        @keyframes slow-float {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(0, -10px); }
+            100% { transform: translate(0, 0); }
+        }
+        .float-subtle {
+            animation: slow-float 8s ease-in-out infinite;
+        }
+
+        /* Animation overrides for smoother scroll reveal */
+        .animate-fade-in {
+             /* Initial state applied in JS */
+             transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        /* Decorative Header Accent */
+        .header-accent {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .header-accent::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px; /* Short decorative line */
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 9999px;
+        }
+        .header-accent-left::after {
+            left: 0;
+            transform: translateX(0);
+        }
+        
+        /* Loading Screen Spinner Style */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Countdown Style */
+        .countdown-digit {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+    </style>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Compare and order the best internet plans from Spectrum, Frontier, and Viasat. Fast, reliable connectivity tailored for your home." />
+    <meta name="keywords" content="internet plans, broadband deals, spectrum, frontier, viasat, high-speed internet, wifi" />
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Wide Broadband | Compare Internet Plans" />
+    <meta property="og:description" content="Find the fastest and cheapest internet in your area today." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://widebroadband.com" />
+    <!-- Favicon (using an emoji placeholder) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
+</head>
+<body class="text-gray-800">
+
+    <!-- 💥 PROMOTIONAL TOP BANNER 💥 -->
+    <div class="bg-yellow-500 text-gray-900 font-extrabold text-sm sm:text-lg py-3 text-center z-50 shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-center items-center">
+            <span class="tracking-wider flex-1 mb-2 sm:mb-0">"Get 4 Months Free on Select Internet Plans!"</span>
+            <!-- 16. Special Offers Countdown -->
+            <div id="countdown" class="flex items-center space-x-2 text-sm sm:text-base font-bold bg-yellow-600 px-3 py-1 rounded-full text-white shadow-md">
+                <span class="mr-1">OFFER ENDS:</span>
+                <span id="days" class="countdown-digit">00</span>
+                <span class="text-sm">:</span>
+                <span id="hours" class="countdown-digit">00</span>
+                <span class="text-sm">:</span>
+                <span id="minutes" class="countdown-digit">00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 right-0 p-4 bg-gray-900 text-white text-sm z-50 transform translate-y-full transition-transform duration-500 ease-in-out">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between">
+            <p class="mb-2 sm:mb-0">We use cookies to ensure you get the best experience on our site. <a href="#" onclick="showPage('contact'); return false;" class="text-blue-400 hover:text-blue-300 underline">Read our Privacy Policy</a>.</p>
+            <button onclick="acceptCookies()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition duration-300 transform hover:scale-[1.03]">Accept & Close</button>
+        </div>
+    </div>
+
+    <!-- Global Trust and Contact Bar -->
+    <div class="bg-blue-900 text-white text-xs py-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center sm:justify-end items-center space-x-4">
+            <span class="flex items-center opacity-80">
+                <svg class="w-4 h-4 mr-1 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 005.412 16.96h13.176c-.846-2.185-.884-4.577-.104-6.848"></path></svg>
+                Verified Providers
+            </span>
+            <span class="flex items-center opacity-80">
+                <svg class="w-4 h-4 mr-1 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Open 24/7
+            </span>
+            <span class="hidden md:inline-block opacity-80">
+                Call Us: <a href="tel:8888080237" class="font-bold hover:underline">(888) 808-0237</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Sticky Header/Navigation -->
+    <header id="header" class="sticky top-0 z-40 bg-white shadow-lg transition duration-300">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#" onclick="showPage('home'); return false;" class="text-2xl font-extrabold text-blue-600 tracking-tight transition duration-300 hover:text-blue-800">Wide Broadband</a>
+
+                <!-- Desktop Nav Links (Micro-interaction: Smooth Underline) -->
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#" onclick="showPage('home'); return false;" class="text-gray-900 nav-link transition duration-300">Home</a>
+                    <a href="#" onclick="showPage('providers'); return false;" class="text-gray-900 nav-link transition duration-300">Providers</a>
+                    <a href="#" onclick="showPage('blog'); return false;" class="text-gray-900 nav-link transition duration-300">Articles</a>
+                    <a href="#" onclick="showPage('reviews'); return false;" class="text-gray-900 nav-link transition duration-300">Reviews</a>
+                    <a href="#" onclick="showPage('contact'); return false;" class="text-gray-900 nav-link transition duration-300">Contact</a>
+                </div>
+
+                <!-- CTA Button (Micro-interaction: Scale/Glow) -->
+                <button onclick="showPage('order-form'); return false;" class="hidden md:inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-full shadow-xl text-white gradient-accent transform hover:scale-[1.05] transition duration-300">
+                    Order Now
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl transition-all duration-300 ease-in-out">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" onclick="showPage('home'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Home</a>
+                <a href="#" onclick="showPage('providers'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Providers</a>
+                <a href="#" onclick="showPage('blog'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Articles</a>
+                <a href="#" onclick="showPage('reviews'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Reviews</a>
+                <a href="#" onclick="showPage('contact'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Contact</a>
+                <button onclick="showPage('order-form'); closeMobileMenu(); return false;" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white gradient-accent hover:opacity-90 transition duration-300 mt-2 shadow-md">Order Now</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Loading Screen Overlay (Hidden initially, shown after ZIP search) -->
+    <div id="loading-screen" class="fixed inset-0 bg-gray-900 bg-opacity-95 flex items-center justify-center z-50 hidden transition-opacity duration-500 opacity-0">
+        <div class="text-center text-white p-8 bg-gray-800 rounded-xl shadow-2xl">
+            <!-- Spinner -->
+            <div class="w-16 h-16 mx-auto mb-4 border-4 border-t-4 border-blue-500 border-opacity-25 rounded-full animate-spin"></div>
+            <p class="text-xl font-semibold tracking-wider">Searching for providers in your area...</p>
+            <p class="text-sm text-gray-400 mt-2">Finding the best plans near you...</p>
+        </div>
+    </div>
+
+
+    <main id="main-content" class="main-content">
+        <!-- Main Content Sections (Simulated Pages) -->
+        <div id="page-container" class="space-y-16">
+
+            <!-- 1. HOME PAGE SECTION -->
+            <section id="home" class="page-section">
+                
+                <!-- Hero Section (Premium Layout) -->
+                <div class="relative pt-20 pb-24 lg:pt-32 lg:pb-40 hero-bg overflow-hidden">
+                    
+                    <!-- Subtle Animated Elements (Floating Icons) -->
+                    <div class="absolute top-1/4 left-[5%] w-16 h-16 bg-blue-400 rounded-full opacity-10 float-subtle hidden lg:block"></div>
+                    <div class="absolute bottom-1/4 right-[10%] w-20 h-20 bg-blue-300 rounded-xl opacity-10 float-subtle hidden lg:block" style="animation-delay: 1.5s;"></div>
+                    <div class="absolute top-[70%] left-[30%] w-10 h-10 bg-blue-500 rounded-full opacity-5 float-subtle hidden lg:block" style="animation-duration: 10s;"></div>
+
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-white text-center">
+                        <!-- 1. Hero Headline -->
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-snug animate-fade-in-up drop-shadow-md">
+                            Find the Best Internet Plans in Your Area.
+                        </h1>
+                        <!-- 1. Hero Subheadline -->
+                        <p class="mt-6 text-xl sm:text-2xl font-light opacity-90 animate-fade-in delay-200">
+                            Compare deals from Spectrum, Frontier, and Viasat — trusted providers for reliable connectivity.
+                        </p>
+                        <!-- 1. ZIP Code Search -->
+                        <div class="mt-12 max-w-xl mx-auto bg-white p-2 rounded-full shadow-2xl animate-fade-in delay-400">
+                            <div class="flex">
+                                <input type="text" id="zip-search" placeholder="Enter your ZIP Code or City..." class="w-full px-6 py-4 text-lg text-gray-800 rounded-l-full focus:outline-none" required>
+                                <button onclick="handleZipSearch();" class="px-8 py-4 text-lg font-semibold rounded-full text-white gradient-accent transition duration-300 whitespace-nowrap transform hover:scale-[1.03]">
+                                    Check Availability
+                                </button>
+                            </div>
+                        </div>
+                        <!-- 1. Prominent Order Now -->
+                        <div class="mt-8 flex justify-center space-x-4 animate-fade-in delay-600">
+                            <button onclick="showPage('order-form');" class="px-8 py-3 text-lg font-semibold rounded-full bg-white text-blue-600 border-2 border-white hover:bg-gray-100 transition duration-300 transform hover:scale-[1.05] shadow-lg">
+                                Order Now
+                            </button>
+                            <!-- 9. Interactive Speed Test Widget -->
+                            <button onclick="document.getElementById('speed-test-modal').classList.remove('hidden'); return false;" class="px-8 py-3 text-lg font-semibold rounded-full bg-transparent text-white border-2 border-white hover:bg-blue-500 hover:border-blue-500 transition duration-300 transform hover:scale-[1.05] shadow-lg">
+                                Test Your Speed
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 15. Social Proof Counters -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white shadow-xl rounded-b-xl -mt-8 relative z-10 animate-fade-in delay-500">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                        <div>
+                            <p class="text-5xl font-extrabold text-blue-600">10K+</p>
+                            <p class="text-sm text-gray-500 mt-1">Happy Customers</p>
+                        </div>
+                        <div>
+                            <p class="text-5xl font-extrabold text-green-600">99.9%</p>
+                            <p class="text-sm text-gray-500 mt-1">Uptime Reliability</p>
+                        </div>
+                        <div>
+                            <p class="text-5xl font-extrabold text-yellow-600">4.8/5</p>
+                            <p class="text-sm text-gray-500 mt-1">Average Review Score</p>
+                        </div>
+                        <div>
+                            <p class="text-5xl font-extrabold text-red-600">0</p>
+                            <p class="text-sm text-gray-500 mt-1">Data Cap Fees</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Why Choose Us (Replaced Feature Row) -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Why Choose Wide Broadband?</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                        <div class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.02] animate-fade-in delay-200">
+                            <svg class="w-10 h-10 mx-auto mb-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <h3 class="text-xl font-bold mb-1">Fast, Reliable Speeds</h3>
+                            <p class="text-gray-600 text-sm">Experience smooth 4K streaming and low-lag gaming.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.02] animate-fade-in delay-300">
+                            <svg class="w-10 h-10 mx-auto mb-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 005.412 16.96h13.176c-.846-2.185-.884-4.577-.104-6.848"></path></svg>
+                            <h3 class="text-xl font-bold mb-1">No Data Caps or Fees</h3>
+                            <p class="text-gray-600 text-sm">Stream all month without worrying about hidden charges.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.02] animate-fade-in delay-400">
+                            <svg class="w-10 h-10 mx-auto mb-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m-7.072 0l-3.536-3.536m7.072 7.072l3.536-3.536m-3.536 3.536l3.536 3.536m3.536-7.072a9 9 0 11-12.728 0 9 9 0 0112.728 0z"></path></svg>
+                            <h3 class="text-xl font-bold mb-1">24/7 Customer Support</h3>
+                            <p class="text-gray-600 text-sm">Expert help is just a call or chat away, day or night.</p>
+                        </div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.02] animate-fade-in delay-500">
+                            <svg class="w-10 h-10 mx-auto mb-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                            <h3 class="text-xl font-bold mb-1">Free Equipment Included</h3>
+                            <p class="text-gray-600 text-sm">Save money with included modem and Wi-Fi router options.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Plans & Pricing Overview -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Plans & Pricing Overview</h2>
+                    <p class="text-lg text-gray-600 text-center mb-12 animate-fade-in delay-100">See typical starting prices across our most popular speed tiers.</p>
+                    
+                    <div id="home-plans-overview" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Plans Overview Cards -->
+                        <div class="bg-white p-8 rounded-xl shadow-xl border-l-4 border-blue-500 animate-fade-in delay-300">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Standard Speed</h3>
+                            <p class="text-4xl font-extrabold text-blue-600 mb-4">$39.99<span class="text-xl font-normal text-gray-500">/mo</span></p>
+                            <ul class="text-gray-700 space-y-2 text-sm">
+                                <li><span class="font-bold">300 Mbps</span> Download</li>
+                                <li>Great for 1-3 devices and HD streaming.</li>
+                            </ul>
+                            <button onclick="showPage('providers');" class="mt-6 w-full px-4 py-3 text-base font-semibold rounded-full text-white bg-blue-500 hover:bg-blue-600 transition duration-300 shadow-md">View Packages</button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-xl border-l-4 border-indigo-500 animate-fade-in delay-400">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Ultra Speed</h3>
+                            <p class="text-4xl font-extrabold text-indigo-600 mb-4">$69.99<span class="text-xl font-normal text-gray-500">/mo</span></p>
+                            <ul class="text-gray-700 space-y-2 text-sm">
+                                <li><span class="font-bold">500 Mbps</span> Download</li>
+                                <li>Perfect for 4K streaming and work from home.</li>
+                            </ul>
+                            <button onclick="showPage('providers');" class="mt-6 w-full px-4 py-3 text-base font-semibold rounded-full text-white bg-indigo-500 hover:bg-indigo-600 transition duration-300 shadow-md">View Packages</button>
+                        </div>
+
+                        <div class="bg-white p-8 rounded-xl shadow-xl border-l-4 border-green-500 animate-fade-in delay-500">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Gigabit Fiber</h3>
+                            <p class="text-4xl font-extrabold text-green-600 mb-4">$89.99<span class="text-xl font-normal text-gray-500">/mo</span></p>
+                            <ul class="text-gray-700 space-y-2 text-sm">
+                                <li><span class="font-bold">1000 Mbps</span> Download</li>
+                                <li>The ultimate speed for multiple users and 8K streaming.</li>
+                            </ul>
+                            <button onclick="showPage('providers');" class="mt-6 w-full px-4 py-3 text-base font-semibold rounded-full text-white bg-green-500 hover:bg-green-600 transition duration-300 shadow-md">View Packages</button>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-12 animate-fade-in delay-600">
+                        <button onclick="showPage('providers');" class="px-10 py-4 text-lg font-semibold rounded-full text-white gradient-accent transform hover:scale-[1.03] transition duration-300 shadow-xl">
+                            View All Packages &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Internet for Streaming & Gaming -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="animate-fade-in-up delay-100">
+                            <h2 class="text-4xl font-extrabold text-gray-900 mb-6 header-accent header-accent-left">Built for Streaming & Gaming</h2>
+                            <p class="text-xl text-gray-600 mb-6">Never miss a frame or lag during a critical moment. Our high-speed fiber and cable plans are engineered for maximum stability and low latency across all your smart devices.</p>
+                            <ul class="space-y-3 text-lg text-gray-700">
+                                <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L19.5 7.25M12 21H5a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v7.5"></path></svg>Seamless 4K/8K Streaming</li>
+                                <li class="flex items-center"><svg class="w-6 h-6 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 2m0 0l-2-2m2 2v4m4-4h2m-2-2v4m-2-2h4m-4-4h2m-2-2v4m-4-4H7m0 0h-2m2 0v4m-2-2h4"></path></svg>Competitive Low Latency Gaming</li>
+                            </ul>
+                            <button onclick="handleZipSearch();" class="mt-8 px-8 py-3 text-lg font-semibold rounded-full text-white gradient-accent transform hover:scale-[1.03] transition duration-300 shadow-xl">
+                                Check Gaming Plans
+                            </button>
+                        </div>
+                        <!-- Lifestyle Image Placeholder -->
+                        <div class="animate-fade-in delay-300">
+                            <img src="https://placehold.co/700x450/1d4ed8/ffffff?text=Connected+Family+Streaming" onerror="this.onerror=null; this.src='https://placehold.co/700x450/1d4ed8/ffffff?text=Connected+Family+Streaming';" alt="Family enjoying high-speed internet for streaming and gaming" class="w-full h-auto rounded-xl shadow-2xl">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 5. Internet Speeds Explained (Visual Infographic) -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white rounded-xl shadow-2xl my-16 animate-fade-in delay-100">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Internet Speeds Explained</h2>
+                    <p class="text-lg text-gray-600 text-center mb-16">Understand the difference and find the perfect speed for your home size and needs.</p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                        <!-- Card 1: 300 Mbps -->
+                        <div class="text-center p-6 border-2 border-gray-100 rounded-xl hover:border-blue-300 transition duration-300">
+                            <p class="text-4xl font-extrabold text-blue-500 mb-2">300 Mbps</p>
+                            <p class="text-gray-700 font-semibold mb-3">Small Households</p>
+                            <div class="h-2 bg-blue-500 w-1/3 mx-auto rounded-full mb-4"></div>
+                            <ul class="text-left text-sm text-gray-600 space-y-1">
+                                <li>2-4 Devices</li>
+                                <li>HD Streaming (1-2 screens)</li>
+                                <li>Basic Remote Work</li>
+                            </ul>
+                        </div>
+                        <!-- Card 2: 500 Mbps -->
+                        <div class="text-center p-6 border-2 border-gray-100 rounded-xl hover:border-indigo-300 transition duration-300">
+                            <p class="text-4xl font-extrabold text-indigo-500 mb-2">500 Mbps</p>
+                            <p class="text-gray-700 font-semibold mb-3">Medium Households</p>
+                            <div class="h-2 bg-indigo-500 w-2/3 mx-auto rounded-full mb-4"></div>
+                            <ul class="text-left text-sm text-gray-600 space-y-1">
+                                <li>4-8 Devices</li>
+                                <li>4K Streaming + Gaming</li>
+                                <li>Video Conferencing</li>
+                            </ul>
+                        </div>
+                        <!-- Card 3: 1000 Mbps -->
+                        <div class="text-center p-6 border-2 border-gray-100 rounded-xl hover:border-green-300 transition duration-300">
+                            <p class="text-4xl font-extrabold text-green-500 mb-2">1000 Mbps</p>
+                            <p class="text-gray-700 font-semibold mb-3">Large/Power Users</p>
+                            <div class="h-2 bg-green-500 w-full mx-auto rounded-full mb-4"></div>
+                            <ul class="text-left text-sm text-gray-600 space-y-1">
+                                <li>8+ Devices</li>
+                                <li>Multiple 4K/8K Streams</li>
+                                <li>Heavy Cloud Use/Live Streaming</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button onclick="document.getElementById('compare-modal').classList.remove('hidden');" class="text-blue-600 font-bold hover:underline transition">
+                            Use the Plan Comparison Tool to find your fit &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 12. Video Section (Explainer Video Placeholder) -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 animate-fade-in delay-200">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">See How Easy It Is</h2>
+                    <p class="text-lg text-gray-600 text-center mb-12">A short video explaining the Wide Broadband comparison process.</p>
+                    <div class="max-w-4xl mx-auto shadow-2xl rounded-xl overflow-hidden aspect-w-16 aspect-h-9">
+                        <!-- Placeholder for Embedded Video -->
+                        <img src="https://placehold.co/800x450/3b82f6/ffffff?text=Explainer+Video+Placeholder" onerror="this.onerror=null; this.src='https://placehold.co/800x450/3b82f6/ffffff?text=Explainer+Video+Placeholder';" alt="Wide Broadband Explainer Video" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- 6. Customer Testimonials (Grid) -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Trusted by Thousands</h2>
+                    
+                    <div id="home-reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Top 3 reviews rendered here by JS -->
+                    </div>
+
+                    <div class="text-center mt-12">
+                        <button onclick="showPage('reviews');" class="text-blue-600 font-bold hover:underline transition">
+                            Read All 1,245 Verified Reviews &rarr;
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 14. Latest Blog Highlights -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gray-100 rounded-xl shadow-2xl my-16 animate-fade-in delay-200">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Latest Articles & Guides</h2>
+                    
+                    <div id="home-blog-highlights" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Blog cards rendered here by JS -->
+                    </div>
+
+                    <div class="text-center mt-12">
+                        <button onclick="showPage('blog');" class="text-blue-600 font-bold hover:underline transition">
+                            Visit the Full Blog &rarr;
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 7. FAQ Section -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Common Questions</h2>
+                    <div class="max-w-3xl mx-auto">
+                         <div id="faq-homepage-accordion" class="space-y-4">
+                            <!-- FAQ items rendered here by JS (using a subset of the main list) -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MISSING CONTAINER RE-ADDED HERE TO FIX NULL ERROR -->
+                 <!-- Provider Spotlight (Rendered via JS - Placeholder for content that was previously there) -->
+                <div id="provider-spotlight" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-white rounded-xl shadow-2xl mb-16 animate-fade-in">
+                    <h2 class="text-4xl font-extrabold text-center mb-10 text-gray-900 header-accent mx-auto">Popular Providers on Wide Broadband</h2>
+                    <p class="text-lg text-gray-600 text-center mb-12">Choose from these top providers with competitive plans and reliable service.</p>
+
+                    <div id="home-provider-cards" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Provider cards will be rendered here by JS -->
+                    </div>
+                    <div class="text-center mt-12">
+                         <button onclick="showPage('providers');" class="px-10 py-4 text-lg font-semibold rounded-full text-white gradient-accent transform hover:scale-[1.03] transition duration-300 shadow-xl">
+                            Compare All Providers
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 2. PROVIDERS PAGE SECTION -->
+            <section id="providers" class="page-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4 animate-fade-in-up header-accent header-accent-left">Our Featured Internet Providers</h2>
+                <p class="text-xl text-gray-600 mb-12 animate-fade-in delay-200">Review key highlights from our trusted partners before diving into specific packages.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <!-- Provider List (3 Cols) -->
+                    <div id="providers-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:col-span-3">
+                        <!-- Detailed provider cards rendered here by JS -->
+                    </div>
+
+                    <!-- Sidebar CTA (1 Col) -->
+                    <aside class="lg:col-span-1 p-6 bg-blue-50 rounded-xl shadow-lg sticky top-20 h-fit animate-fade-in delay-400">
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold text-blue-800 mb-4">Need personalized help?</h3>
+                            <p class="text-gray-600 mb-6">Our experts can find the exact right plan for your needs and budget.</p>
+                            <a href="tel:8888080237" class="inline-block px-8 py-3 text-lg font-bold rounded-full text-white gradient-accent transform hover:scale-[1.03] transition duration-300 shadow-xl">
+                                CALL US: (888) 808-0237
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+            
+            <!-- 8. SEARCH RESULTS PAGE SECTION (NEW - Accessed after ZIP search) -->
+            <section id="search-results-page" class="page-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+                    <!-- Main Results List (Col 1, 2, 3) -->
+                    <div class="lg:col-span-3">
+                        <h2 class="text-4xl font-extrabold text-gray-900 mb-2 animate-fade-in-up header-accent header-accent-left">Available Plans in <span id="results-zip-code" class="text-blue-600">90210</span></h2>
+                        <p class="text-xl text-gray-600 mb-8 animate-fade-in delay-200">Exclusive deals and packages from top providers.</p>
+                        
+                        <div id="results-plans-list" class="space-y-8">
+                            <!-- Detailed plan cards rendered here by JS (defaults to Spectrum plans) -->
+                        </div>
+
+                        <!-- Contact & Chat Options -->
+                        <div class="mt-16 text-center lg:text-left animate-fade-in delay-500">
+                            <p class="text-lg font-semibold text-gray-700 mb-4">Don't see what you need? Talk to an expert:</p>
+                            <a href="tel:8888080237" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-green-500 hover:bg-green-600 transition duration-300 transform hover:scale-[1.03] mr-4">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684L10.5 10l2.5-1.5L14.492 13H19a2 2 0 012 2v2a2 2 0 01-2 2h-2.28c-.684.948-1.026 1.422-1.609 1.905"></path></svg>
+                                Call Now (888) 808-0237
+                            </a>
+                            <button class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white gradient-accent transform hover:scale-[1.03] transition duration-300 mt-4 sm:mt-0">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z"></path></svg>
+                                Live Chat (Mock)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar CTA (Col 4) -->
+                    <aside class="lg:col-span-1 p-6 bg-blue-50 rounded-xl shadow-lg sticky top-20 h-fit animate-fade-in delay-400">
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold text-blue-800 mb-4">Quick Compare Tool</h3>
+                            <p class="text-gray-600 mb-6">View up to 3 plans side-by-side to find the best value.</p>
+                            <button onclick="openCompareModal()" class="inline-block w-full px-8 py-3 text-lg font-bold rounded-full text-white gradient-accent transform hover:scale-[1.03] transition duration-300 shadow-xl">
+                                Open Comparison
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- 3. PACKAGE DETAIL PAGE SECTION (Dynamic) -->
+            <section id="packages-detail" class="page-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div id="package-content" class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    <!-- Main Package List (Col 1 & 2) -->
+                    <div class="lg:col-span-2">
+                        <h2 id="package-title" class="text-4xl font-extrabold text-gray-900 mb-2 animate-fade-in-up header-accent header-accent-left"></h2>
+                        <p id="package-tagline" class="text-xl text-blue-600 mb-8 animate-fade-in delay-200"></p>
+                        <div id="plans-list" class="space-y-8">
+                            <!-- Plan cards rendered here by JS -->
+                        </div>
+
+                        <!-- FAQ Accordion -->
+                        <div class="mt-16 animate-fade-in delay-500">
+                            <h3 class="text-3xl font-bold mb-6 border-b pb-2 text-gray-800">Frequently Asked Questions</h3>
+                            <div id="faq-accordion" class="space-y-4">
+                                <!-- FAQ items rendered here by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar CTA (Col 3) -->
+                    <aside class="lg:col-span-1 p-8 bg-blue-50 rounded-xl shadow-lg sticky top-20 h-fit animate-fade-in delay-600">
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold text-blue-800 mb-4">Need help choosing?</h3>
+                            <p class="text-gray-600 mb-6">Our experts are available 24/7 to assist you with finding the perfect plan.</p>
+                            <a href="tel:8888080237" class="inline-block px-8 py-3 text-lg font-bold rounded-full text-white gradient-accent transform hover:scale-[1.03] transition duration-300 shadow-xl">
+                                CALL US: (888) 808-0237
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+
+            <!-- 4. ORDER FORM PAGE SECTION -->
+            <section id="order-form" class="page-section hidden max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-10 text-center animate-fade-in-up header-accent mx-auto">Start Your Order</h2>
+
+                <form id="order-wizard" class="bg-white p-8 rounded-xl shadow-2xl animate-fade-in delay-200">
+                    <!-- Steps Indicator -->
+                    <div class="flex justify-between items-center mb-10">
+                        <div class="text-center w-1/4">
+                            <div id="step-1-status" class="w-12 h-12 mx-auto bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl transition duration-300">1</div>
+                            <span class="text-sm mt-2 text-blue-600 font-semibold">Contact Info</span>
+                        </div>
+                        <div class="h-1 w-1/4 bg-gray-200 transition duration-300"></div>
+                        <div class="text-center w-1/4">
+                            <div id="step-2-status" class="w-12 h-12 mx-auto bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-xl transition duration-300">2</div>
+                            <span class="text-sm mt-2 text-gray-600">Select Provider</span>
+                        </div>
+                        <div class="h-1 w-1/4 bg-gray-200 transition duration-300"></div>
+                        <div class="text-center w-1/4">
+                            <div id="step-3-status" class="w-12 h-12 mx-auto bg-gray-300 text-gray-600 rounded-full flex items-center justify-center font-bold text-xl transition duration-300">3</div>
+                            <span class="text-sm mt-2 text-gray-600">Select Plan</span>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Customer Info -->
+                    <div id="step-1" class="order-step">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Step 1: Your Contact Information</h3>
+                        <div class="space-y-4">
+                            <input type="text" id="order-name" placeholder="Full Name" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+                            <input type="email" id="order-email" placeholder="Email Address" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+                            <input type="tel" id="order-phone" placeholder="Phone Number" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+                            <input type="text" id="order-zip" placeholder="Service ZIP Code" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+                        </div>
+                        <button type="button" onclick="nextStep(1)" class="w-full mt-8 px-6 py-4 font-semibold rounded-full text-white gradient-accent transform hover:scale-[1.01] transition duration-300 shadow-lg">Next: Select Provider</button>
+                    </div>
+
+                    <!-- Step 2: Select Provider -->
+                    <div id="step-2" class="order-step hidden">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Step 2: Choose a Provider</h3>
+                        <div class="space-y-4">
+                            <select id="order-provider" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" onchange="loadPlans()" required>
+                                <option value="" disabled selected>Select a Provider</option>
+                                <!-- Options populated by JS -->
+                            </select>
+                        </div>
+                        <div class="flex justify-between mt-8">
+                            <button type="button" onclick="prevStep(2)" class="px-6 py-3 font-semibold rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300">Back</button>
+                            <button type="button" onclick="nextStep(2)" class="px-6 py-3 font-semibold rounded-full text-white gradient-accent transform hover:scale-[1.01] transition duration-300">Next: Select Plan</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Select Plan -->
+                    <div id="step-3" class="order-step hidden">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Step 3: Choose Your Plan</h3>
+                        <div id="plan-options" class="space-y-4">
+                            <p class="text-gray-500">Select a provider in Step 2 to see available plans.</p>
+                            <!-- Plans rendered here dynamically -->
+                        </div>
+                        <div class="flex justify-between mt-8">
+                            <button type="button" onclick="prevStep(3)" class="px-6 py-3 font-semibold rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300">Back</button>
+                            <button type="submit" class="px-6 py-3 font-semibold rounded-full text-white bg-green-500 hover:bg-green-600 transition duration-300 transform hover:scale-[1.01] shadow-lg">Submit Order</button>
+                        </div>
+                    </div>
+
+                    <!-- Confirmation Message -->
+                    <div id="order-confirmation" class="hidden text-center p-12">
+                        <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h3 class="3xl font-bold text-green-600 mb-4">Order Received!</h3>
+                        <p class="text-lg text-gray-700">Thank you! Your order has been submitted. A Wide Broadband specialist will contact you at <span id="conf-phone" class="font-bold"></span> shortly to confirm installation details.</p>
+                        <p class="mt-4 text-sm text-gray-500">Need immediate assistance? Call us: <a href="tel:8888080237" class="text-blue-600 font-bold hover:underline">(888) 808-0237</a></p>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 5. ARTICLES / BLOG PAGE SECTION -->
+            <section id="blog" class="page-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4 animate-fade-in-up header-accent header-accent-left">The Wide Broadband Blog</h2>
+                <p class="text-xl text-gray-600 mb-12 animate-fade-in delay-200">Expert insights and guides to help you master your digital life.</p>
+
+                <div id="articles-list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Article cards rendered here by JS -->
+                </div>
+            </section>
+
+            <!-- 6. REVIEWS PAGE SECTION -->
+            <section id="reviews" class="page-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4 text-center animate-fade-in-up header-accent mx-auto">What Our Customers Are Saying</h2>
+                <div class="text-center mb-12 animate-fade-in delay-200">
+                    <p class="text-6xl text-yellow-500 font-bold">4.8 / 5</p>
+                    <p class="text-lg text-gray-600">Average Rating based on 1,245 Verified Customer Reviews</p>
+                    <div class="flex justify-center mt-2">
+                         <!-- 5 full stars SVG -->
+                        <svg class="w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.416 3.967 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                        <svg class="w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.416 3.967 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                        <svg class="w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.416 3.967 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                        <svg class="w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.416 3.967 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                        <!-- Half star -->
+                        <svg class="w-6 h-6 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 18.271l-5.662 3.013 1.082-6.324-4.594-4.468 6.353-.925 2.821-5.744v18.448z"/></svg>
+                    </div>
+                </div>
+
+                <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Review cards rendered here by JS -->
+                </div>
+            </section>
+
+            <!-- 7. CONTACT PAGE SECTION -->
+            <section id="contact" class="page-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-12 text-center animate-fade-in-up header-accent mx-auto">Get In Touch With Wide Broadband</h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="bg-white p-8 rounded-xl shadow-xl animate-fade-in delay-200">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-600">Send Us a Message</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+                            <input type="email" placeholder="Email Address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required>
+                            <input type="tel" placeholder="Phone Number (Optional)" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300">
+                            <textarea placeholder="Your Message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-300" required></textarea>
+                            <button type="submit" class="w-full px-6 py-3 font-semibold rounded-full text-white gradient-accent transform hover:scale-[1.01] transition duration-300 shadow-md">Submit Inquiry</button>
+                            <p id="contact-message" class="text-green-600 hidden text-center pt-2">Message sent! We'll be in touch soon.</p>
+                        </form>
+                    </div>
+
+                    <!-- Company Info & Map -->
+                    <div class="space-y-8 animate-fade-in delay-400">
+                        <!-- Info Block -->
+                        <div class="bg-white p-8 rounded-xl shadow-xl">
+                            <h3 class="2xl font-bold mb-4 text-blue-600">Wide Broadband Headquarters</h3>
+                            <p class="mb-2"><span class="font-semibold">Address:</span> 3229 Greenpoint Ave, Long Island City, NY 11101</p>
+                            <p class="mb-2"><span class="font-semibold">Phone:</span> <a href="tel:8888080237" class="text-gray-700 hover:text-blue-600 transition">(888) 808-0237</a></p>
+                            <p class="mb-2"><span class="font-semibold">Hours:</span> Open 24/7 (Online & Phone Support)</p>
+                            <button class="mt-4 px-4 py-2 bg-green-500 text-white rounded-full shadow hover:bg-green-600 transition duration-300 transform hover:scale-[1.03]">
+                                Live Chat (Placeholder)
+                            </button>
+                        </div>
+                        <!-- Google Map Placeholder -->
+                        <div class="h-64 rounded-xl shadow-xl overflow-hidden">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                frameborder="0" style="border:0"
+                                src="https://www.google.com/maps/embed/v1/place?q=3229+Greenpoint+Ave%2C+Long+Island+City%2C+NY+11101&key="
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 10. Live Chat Integration (Floating Button) -->
+    <button class="fixed bottom-6 right-6 z-40 p-4 bg-green-500 text-white rounded-full shadow-2xl hover:bg-green-600 transition duration-300 transform hover:scale-[1.1] animate-fade-in delay-1000">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+    </button>
+    
+    <!-- Modal for Plan Comparison -->
+    <div id="compare-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-11/12 mx-4 p-8 transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-start mb-6 border-b pb-4">
+                <h3 class="2xl font-bold text-blue-600">Plan Comparison Tool</h3>
+                <button onclick="closeCompareModal()" class="text-gray-400 hover:text-gray-600 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="comparison-table" class="overflow-x-auto">
+                <p class="text-center py-8 text-gray-500">Select plans from the package pages to add them to the comparison tool.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Speed Test Modal (Mockup) -->
+    <div id="speed-test-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-11/12 mx-4 p-8 text-center transform scale-95 transition-transform duration-300">
+            <h3 class="2xl font-bold text-blue-600 mb-4">Run Speed Test</h3>
+            <p class="text-gray-600 mb-6">This is a mockup. In a real application, a speed test would run here.</p>
+            <div class="w-32 h-32 mx-auto mb-6 border-8 border-gray-200 border-t-blue-500 rounded-full animate-spin">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <p class="3xl font-extrabold text-green-600 mb-6">350 Mbps</p>
+            <button onclick="document.getElementById('speed-test-modal').classList.add('hidden')" class="px-6 py-3 font-semibold rounded-full text-white gradient-accent hover:opacity-90 transition duration-300 transform hover:scale-[1.03]">Close</button>
+        </div>
+    </div>
+    
+    <!-- 8. Footer CTA Banner -->
+    <div class="bg-blue-600 py-16 animate-fade-in delay-400">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h2 class="3xl sm:text-4xl font-extrabold mb-6">Ready to get started? Enter your ZIP code to see available plans!</h2>
+            <div class="max-w-lg mx-auto bg-white p-2 rounded-full shadow-2xl">
+                <div class="flex">
+                    <input type="text" id="footer-zip-search" placeholder="Enter your ZIP Code..." class="w-full px-6 py-4 text-lg text-gray-800 rounded-l-full focus:outline-none" required>
+                    <button onclick="handleFooterZipSearch();" class="px-8 py-4 text-lg font-semibold rounded-full text-white bg-green-500 hover:bg-green-600 transition duration-300 whitespace-nowrap transform hover:scale-[1.03]">
+                        Check Availability
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <!-- SEO Disclaimer -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-xs text-gray-400 text-center">
+            <p><strong>Affiliate Disclosure:</strong> Wide Broadband may earn commissions when you sign up for services through our links. We remain provider-independent, ensuring unbiased comparison data for you.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-gray-700 pb-8">
+            <!-- Col 1: Logo & Contact -->
+            <div class="col-span-2 md:col-span-2">
+                <h4 class="2xl font-extrabold text-blue-400 tracking-tight mb-4">Wide Broadband</h4>
+                <p class="sm text-gray-400 mb-2">3229 Greenpoint Ave, Long Island City, NY 11101</p>
+                <p class="sm text-gray-400 mb-2">Call Us: <a href="tel:8888080237" class="hover:text-white transition">(888) 808-0237</a></p>
+                <p class="sm text-gray-400">Hours: Open 24/7</p>
+                <!-- Social Icons -->
+                <div class="flex space-x-4 mt-4 text-gray-400">
+                    <a href="#" class="hover:text-blue-400 transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 4.032c-.78-.348-1.617-.584-2.484-.71.905-.54 1.59-1.396 1.914-2.418-.847.502-1.782.87-2.77 1.07-.803-.85-1.95-1.38-3.224-1.38C12.438 1.124 10.3 3.398 10.3 6.095c0 .47.052.93.153 1.37.03-.004.062-.007.094-.007 2.768 0 5.228-1.38 6.848-3.522.285.49.448 1.054.448 1.66 0 1.15-.584 2.16-1.47 2.753.847-.024 1.643-.257 2.366-.65-.003.013-.003.025-.003.038 0 2.583-1.87 4.743-4.343 5.234-.45.123-.923.188-1.407.188-.344 0-.68-.033-1.008-.095.688 2.134 2.68 3.68 5.045 3.722-1.85 1.45-4.188 2.32-6.726 2.32-2.31 0-4.48-.673-6.31-1.84a12.822 12.822 0 006.945 2.03c8.33 0 12.87-6.9 12.87-12.87 0-.197-.005-.393-.013-.589.883-.63 1.648-1.39 2.253-2.27z"/></svg></a>
+                    <a href="#" class="hover:text-blue-400 transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 5.084 3.738 9.314 8.643 10.05v-7.385H7.72V12h2.923V9.38c0-2.88 1.76-4.455 4.336-4.455 1.233 0 2.288.09 2.595.13v3.01h-1.78c-1.4 0-1.68.667-1.68 1.65v2.155h3.364l-.54 3.415h-2.824V22.05C18.262 21.314 22 17.084 22 12c0-5.523-4.477-10-10-10z"/></svg></a>
+                    <a href="#" class="hover:text-blue-400 transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.2 0 3.58.013 4.85.07c1.237.057 1.708.248 2.348.513.677.276 1.156.62 1.672 1.135s.859.995 1.135 1.672c.265.64.456 1.11.513 2.348.057 1.27.07 1.65.07 4.85s-.013 3.58-.07 4.85c-.057 1.237-.248 1.708-.513 2.348-.276.677-.62 1.156-1.135 1.672s-.995.859-1.672 1.135c-.64.265-1.11.456-2.348.513-1.27.057-1.65.07-4.85.07s-3.58-.013-4.85-.07c-1.237-.057-1.708-.248-2.348-.513-.677-.276-1.156-.62-1.672-1.135s-.859-.995-1.135-1.672c-.265-.64-.456-1.11-.513-2.348-.057-1.27-.07-1.65-.07-4.85s.013-3.58.07-4.85c.057-1.237.248-1.708.513-2.348.276-.677.62-1.156 1.135-1.672s.995-.859 1.672-1.135c.64-.265 1.11-.456 2.348-.513 1.27-.057 1.65-.07 4.85-.07zm0-2.163c-3.25 0-3.66.013-4.94.072-1.3.06-2.115.263-2.92.595-.826.335-1.53.844-2.227 1.54s-1.205 1.37-1.54 2.227c-.333.805-.536 1.62-.595 2.92-.058 1.28-.072 1.69-.072 4.94s.014 3.66.072 4.94c.06 1.3.263 2.115.595 2.92.335.826.844 1.53 1.54 2.227s1.37 1.205 2.227 1.54c.805.333 1.62.536 2.92.595 1.28.058 1.69.072 4.94.072s3.66-.014 4.94-.072c1.3-.06 2.115-.263 2.92-.595.826-.335 1.53-.844 2.227-1.54s1.37-1.205 1.54-2.227c.333-.805.536-1.62.595-2.92.058-1.28.072-1.69.072-4.94s-.014-3.66-.072-4.94c-.06-1.3-.263-2.115-.595-2.92-.335-.826-.844-1.53-1.54-2.227s-1.37-1.205-2.227-1.54c-.805-.333-1.62-.536-2.92-.595-1.28-.058-1.69-.072-4.94-.072zm0 4.163c2.25 0 4 1.75 4 4s-1.75 4-4 4-4-1.75-4-4 1.75-4 4-4zm0 2.163c-1.01 0-1.83.82-1.83 1.83s.82 1.83 1.83 1.83 1.83-.82 1.83-1.83-.82-1.83-1.83-1.83zm5.55-.38a.634.634 0 00-.635.635c0 .35.285.635.635.635.35 0 .635-.285.635-.635 0-.35-.285-.635-.635-.635z"/></svg></a>
+                </div>
+            </div>
+
+            <!-- Col 2: Quick Links -->
+            <div>
+                <h5 class="lg font-semibold mb-4">Quick Links</h5>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" onclick="showPage('home'); return false;" class="hover:text-blue-400 transition">Home</a></li>
+                    <li><a href="#" onclick="showPage('providers'); return false;" class="hover:text-blue-400 transition">Providers</a></li>
+                    <li><a href="#" onclick="showPage('reviews'); return false;" class="hover:text-blue-400 transition">Customer Reviews</a></li>
+                    <li><a href="#" onclick="showPage('contact'); return false;" class="hover:text-blue-400 transition">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Resources -->
+            <div>
+                <h5 class="lg font-semibold mb-4">Resources</h5>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" onclick="showPage('blog'); return false;" class="hover:text-blue-400 transition">Articles & Guides</a></li>
+                    <li><a href="#" onclick="showPage('packages-detail', 'spectrum'); return false;" class="hover:text-blue-400 transition">View Packages</a></li>
+                    <li><a href="#" onclick="document.getElementById('speed-test-modal').classList.remove('hidden'); return false;" class="hover:text-blue-400 transition">Speed Test (Mock)</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Legal -->
+            <div>
+                <h5 class="lg font-semibold mb-4">Legal</h5>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-blue-400 transition">Privacy Policy (Mock)</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition">Terms of Service (Mock)</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition">Affiliate Disclosure</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 text-center text-sm text-gray-400">
+            &copy; 2025 Wide Broadband. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JavaScript for Functionality, Data, and Page Simulation -->
+    <script>
+        // --- MOCK DATA ---
+        const providers = [
+            { id: 'spectrum', name: 'Spectrum', tagline: 'Reliable Cable Internet.', logo: 'Spectrum', accent: 'indigo', minPrice: 49.99, type: 'Cable' },
+            { id: 'frontier', name: 'Frontier', tagline: 'Future-proof Fiber Optic.', logo: 'Frontier', accent: 'green', minPrice: 39.99, type: 'Fiber' },
+            { id: 'viasat', name: 'Viasat', tagline: 'Satellite Internet Anywhere.', logo: 'Viasat', accent: 'blue', minPrice: 69.99, type: 'Satellite' },
+        ];
+
+        const packages = {
+            spectrum: [
+                { name: 'Standard Internet', price: 49.99, download: '300 Mbps', upload: '10 Mbps', contract: 'No Contract', promo: 'Free Modem' },
+                { name: 'Ultra Internet', price: 69.99, download: '500 Mbps', upload: '20 Mbps', contract: 'No Contract', promo: 'Free WiFi Router' },
+                { name: 'Gig Internet', price: 99.99, download: '940 Mbps', upload: '35 Mbps', contract: '12 Month Term', promo: 'Up to $500 Contract Buyout' }
+            ],
+            frontier: [
+                { name: 'Fiber 500', price: 39.99, download: '500 Mbps', upload: '500 Mbps', contract: '24 Month Term', promo: 'Price Lock Guarantee' },
+                { name: 'Gigabit Fiber', price: 59.99, download: '940 Mbps', upload: '880 Mbps', contract: '24 Month Term', promo: 'Free Installation' },
+                { name: 'Fiber 2 Gig', price: 109.99, download: '2000 Mbps', upload: '2000 Mbps', contract: '24 Month Term', promo: 'Best for Gamers & Streamers' }
+            ],
+            viasat: [
+                { name: 'Viasat 25', price: 69.99, download: '25 Mbps', upload: '3 Mbps', contract: '24 Month Term', promo: 'High Data Allowance' },
+                { name: 'Viasat 50', price: 99.99, download: '50 Mbps', upload: '5 Mbps', contract: '24 Month Term', promo: 'Stream HD Video' },
+            ],
+        };
+
+        const articles = [
+            { title: 'How to Pick the Right Internet Plan', excerpt: 'Choosing the perfect internet plan requires assessing your usage habits, the number of devices you own, and the type of connectivity technology available in your area. Fiber, cable, and satellite all offer different pros and cons...', image: 'https://placehold.co/300x200/3b82f6/ffffff?text=Plan+Selection' },
+            { title: 'Cable vs. Fiber: What’s the Difference?', excerpt: 'Fiber optic technology uses light signals to transmit data, making it significantly faster and more symmetrical than traditional coaxial cable. Learn about speed, reliability, and cost...', image: 'https://placehold.co/300x200/1e3a8a/ffffff?text=Cable+vs+Fiber' },
+            { title: '5 Ways to Boost Wi-Fi Speed at Home', excerpt: 'Simple tips can drastically improve your home network performance. Start with router placement, check for firmware updates, and consider a mesh network system...', image: 'https://placehold.co/300x200/9ca3af/ffffff?text=WiFi+Boost' },
+        ];
+
+        const reviews = [
+            { name: 'Sarah M.', provider: 'Spectrum', rating: 5, comment: 'Great speeds from Spectrum! Signing up through Wide Broadband was so easy and fast.' },
+            { name: 'John P.', provider: 'Frontier', rating: 5, comment: 'The Gigabit Fiber is incredible. Customer service helped me choose the best option.' },
+            { name: 'David L.', provider: 'Viasat', rating: 4, comment: 'Reliable service in a rural area, which is hard to find. Viasat works great for my needs.' },
+            { name: 'Maria C.', provider: 'Spectrum', rating: 5, comment: 'No contract was a huge plus. The prices Wide Broadband advertised were exactly what I paid.' },
+            { name: 'Alex K.', provider: 'Frontier', rating: 4, comment: 'The installation was quick, and the price lock makes me feel secure in my choice.' },
+            { name: 'Ben H.', provider: 'Viasat', rating: 3, comment: 'Good coverage, but I wish the upload speeds were faster. Still, best option for my location.' },
+        ];
+
+        const faqs = [
+            { q: 'How does Wide Broadband make money?', a: 'Wide Broadband earns commissions when you sign up for services through our links. This is how we keep our comparison service free for you, while remaining provider-independent.' },
+            { q: 'Is the price guaranteed?', a: 'The prices listed are current promotional offers directly from the providers. Final pricing and monthly taxes/fees are confirmed during the sign-up process with the provider.' },
+            { q: 'How long does installation take?', a: 'Installation times vary by provider and technology (fiber often requires a technician). Once you order, the provider will contact you to schedule installation, typically within 5-10 business days.' },
+            { q: 'Do I need to sign a contract?', a: 'Many providers offer plans with no annual contracts. The contract terms are clearly listed next to each package detail.'},
+            { q: 'What speeds do I need for gaming/streaming?', a: 'For 4K streaming and competitive gaming, we generally recommend 500 Mbps or higher. See our speed explanation section above for more details.'}
+        ];
+
+        let currentStep = 1;
+        let comparisonPlans = [];
+        
+        // --- COUNTDOWN TIMER LOGIC ---
+        function startCountdown() {
+            // Set the date we're counting down to (e.g., 3 days from now)
+            const today = new Date();
+            const endDate = new Date(today.getTime() + (3 * 24 * 60 * 60 * 1000)); 
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                if (document.getElementById('days')) {
+                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                }
+
+                // If the count down is finished, write some text 
+                if (distance < 0) {
+                    clearInterval(interval);
+                    if (document.getElementById('countdown')) {
+                        document.getElementById('countdown').innerHTML = '<span class="text-white text-sm">OFFER EXPIRED</span>';
+                    }
+                }
+            }, 60000); // Update every minute to save resources
+        }
+
+
+        // --- CORE NAVIGATION & PAGE RENDERING ---
+
+        /**
+         * Simulates multi-page navigation by hiding all page sections and showing the selected one.
+         * @param {string} pageId - The ID of the page section to show ('home', 'providers', etc.)
+         * @param {string} [providerId] - Optional provider ID for detail pages.
+         * @param {string} [planName] - Optional plan name for pre-selecting in the order form.
+         */
+        function showPage(pageId, providerId = null, planName = null) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => section.classList.add('hidden'));
+
+            const targetSection = document.getElementById(pageId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                window.scrollTo(0, 0); // Scroll to top on page change
+            }
+
+            // Specific logic for the dynamic Package Detail page
+            if (pageId === 'packages-detail' && providerId) {
+                renderPackageDetail(providerId);
+            }
+
+            // Specific logic for Providers page rendering
+            if (pageId === 'providers') {
+                renderProviderList();
+            }
+
+            // Specific logic for Order Form page rendering
+            if (pageId === 'order-form') {
+                resetOrderForm(providerId, planName);
+            }
+        }
+        
+        /**
+         * Initiates the ZIP code search flow (used by Hero/Header button).
+         */
+        function handleZipSearch() {
+            const zipInput = document.getElementById('zip-search').value;
+            triggerSearch(zipInput);
+        }
+
+        /**
+         * Initiates the ZIP code search flow (used by Footer CTA).
+         */
+        function handleFooterZipSearch() {
+            const zipInput = document.getElementById('footer-zip-search').value;
+            triggerSearch(zipInput);
+        }
+
+        /**
+         * Core search logic: shows loading, waits, then shows results.
+         */
+        function triggerSearch(zipInput) {
+            if (!zipInput) {
+                alertUser("Please enter a valid ZIP Code or City to search.", "bg-red-100 border-red-500 text-red-700");
+                return;
+            }
+
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.classList.remove('hidden');
+            setTimeout(() => loadingScreen.classList.add('opacity-100'), 10); // Smooth fade in
+
+            // Simulate network delay
+            setTimeout(() => {
+                loadingScreen.classList.remove('opacity-100');
+                // Use a short delay before hiding to allow for smooth fade out
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    renderSearchResults(zipInput);
+                    showPage('search-results-page');
+                }, 500); 
+            }, 2500); // 2.5 second delay
+        }
+
+
+        // --- RENDER FUNCTIONS ---
+        
+        /**
+         * Renders the search results page dynamically.
+         * For this mock, it defaults to showing Spectrum plans as the main result.
+         * @param {string} zipInput - The ZIP code or city entered by the user.
+         */
+        function renderSearchResults(zipInput) {
+            // Set the ZIP code in the header
+            document.getElementById('results-zip-code').textContent = zipInput;
+            
+            // For simplicity in this SPA simulation, we'll display Spectrum's packages as the "results".
+            const providerId = 'spectrum';
+            const provider = providers.find(p => p.id === providerId);
+            const providerPackages = packages[providerId];
+            if (!provider || !providerPackages) return;
+
+            const plansList = document.getElementById('results-plans-list');
+            const accentClass = `text-${provider.accent}-600`;
+            const borderClass = `border-${provider.accent}-400`;
+
+            plansList.innerHTML = providerPackages.map((plan, index) => `
+                <div id="plan-result-${index}" class="bg-white p-8 rounded-xl shadow-xl border-l-8 ${borderClass} transition duration-500 hover:shadow-2xl hover:border-l-[12px] relative animate-fade-in delay-${index * 150}">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-3xl font-bold text-gray-900">${plan.name} (${provider.name})</h4>
+                        <span class="text-sm font-semibold text-white bg-yellow-500 px-3 py-1 rounded-full shadow-md">${plan.promo}</span>
+                    </div>
+                    
+                    <p class="text-5xl font-extrabold ${accentClass} mt-3">$${plan.price.toFixed(2)}<span class="text-xl font-normal text-gray-500">/mo</span></p>
+
+                    <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm font-medium border-t pt-4 border-gray-100">
+                        <!-- Download Speed -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span class="text-xs text-gray-500">Download Speed</span>
+                            <span class="font-bold text-base text-gray-800">${plan.download}</span>
+                        </div>
+                        <!-- Upload Speed -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" transform="rotate(180 12 12)"></path></svg>
+                            <span class="text-xs text-gray-500">Upload Speed</span>
+                            <span class="font-bold text-base text-gray-800">${plan.upload}</span>
+                        </div>
+                        <!-- Contract Term -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-xs text-gray-500">Contract</span>
+                            <span class="font-bold text-base text-gray-800">${plan.contract}</span>
+                        </div>
+                         <!-- Promotion -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z"></path></svg>
+                            <span class="text-xs text-gray-500">Equipment</span>
+                            <span class="font-bold text-base text-gray-800">${plan.promo.substring(0, 15)}...</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <button onclick="showPage('order-form', '${provider.id}', '${plan.name}');" class="px-6 py-3 font-semibold rounded-full text-white bg-green-500 hover:bg-green-600 transition duration-300 flex-1 shadow-md transform hover:scale-[1.01]">
+                            Book Now
+                        </button>
+                        <button onclick="addToCompare('${provider.name}', '${plan.name}', '${plan.price.toFixed(2)}', '${plan.download}', '${plan.upload}')" class="px-6 py-3 font-semibold rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300 flex-1 transform hover:scale-[1.01]">
+                            Add to Compare
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+        }
+
+        /**
+         * Renders the top 3 reviews on the homepage.
+         */
+        function renderHomeReviews() {
+            const container = document.getElementById('home-reviews-grid');
+            const topReviews = reviews.slice(0, 3);
+            
+            container.innerHTML = topReviews.map((review, index) => `
+                <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-yellow-500 transition duration-300 hover:shadow-xl animate-fade-in delay-${index * 150}">
+                    <div class="flex items-center mb-3">
+                        ${'⭐️'.repeat(review.rating)}${'★'.repeat(5 - review.rating)}
+                    </div>
+                    <p class="text-gray-700 mb-4 italic text-base leading-snug">"${review.comment}"</p>
+                    <p class="font-bold text-sm text-gray-800">- ${review.name} (${review.provider})</p>
+                </div>
+            `).join('');
+        }
+        
+        /**
+         * Renders the top 3 articles on the homepage.
+         */
+        function renderBlogHighlights() {
+             const container = document.getElementById('home-blog-highlights');
+             const topArticles = articles.slice(0, 3);
+            
+             container.innerHTML = topArticles.map((article, index) => `
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 transform hover:shadow-2xl hover:-translate-y-1 animate-fade-in delay-${index * 200}">
+                    <img src="${article.image}" onerror="this.onerror=null; this.src='https://placehold.co/300x200/cccccc/333333?text=Article+Image';" alt="Article Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2 text-gray-900">${article.title}</h4>
+                        <p class="text-gray-600 mb-4 text-sm">${article.excerpt.substring(0, 100)}...</p>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 transition nav-link" onclick="showPage('blog'); return false;">Read More &rarr;</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProviderCard(provider, fullDetail = false) {
+            const logoText = provider.logo.toUpperCase();
+            const accentClass = `text-${provider.accent}-600`;
+            const borderClass = `border-${provider.accent}-400`;
+
+            const features = fullDetail ? `
+                <div class="mt-4 space-y-3 text-sm text-gray-700 pt-3 border-t border-gray-100">
+                    <p class="flex items-center text-base font-semibold">
+                        <svg class="w-5 h-5 mr-2 ${accentClass}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> 
+                        <span class="font-extrabold text-lg">$${provider.minPrice.toFixed(2)}</span>
+                        <span class="font-normal text-sm text-gray-500 ml-1">/mo*</span>
+                    </p>
+                    <p class="flex items-center text-gray-600">
+                        <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-3.353 3-7s-1.343-7-3-7m0 14c-1.657 0-3-3.353-3-7s1.343-7 3-7m-9 7h1.001"></path></svg> 
+                        <span class="font-semibold">${provider.type} Technology</span>
+                    </p>
+                </div>
+            ` : '';
+
+            // Apply subtle scroll reveal animation classes
+            return `
+                <div class="bg-white rounded-xl shadow-xl p-8 border-t-4 ${borderClass} transition duration-500 hover:shadow-2xl transform hover:scale-[1.03] cursor-pointer animate-fade-in" onclick="showPage('packages-detail', '${provider.id}')">
+                    <h3 class="text-3xl font-extrabold text-gray-900 mb-1">${logoText}</h3>
+                    <p class="text-gray-500 mt-0 text-sm">${provider.tagline}</p>
+                    ${features}
+                    <div class="mt-8">
+                        <button class="w-full px-4 py-3 text-base font-semibold rounded-full text-white gradient-accent hover:opacity-90 transition duration-300 shadow-lg transform hover:scale-[1.01]">
+                            View Packages
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderHomeProviders() {
+            const container = document.getElementById('home-provider-cards');
+            // Add a slight stagger delay for better scroll reveal effect
+            // CHECK: container is null if this is called before the element exists. 
+            // The HTML structure was missing the container, which has been re-added.
+            if (container) {
+                 container.innerHTML = providers.map((p, index) => renderProviderCard(p, true).replace('animate-fade-in', `animate-fade-in delay-${index * 200}`)).join('');
+            }
+        }
+
+        function renderProviderList() {
+            const container = document.getElementById('providers-list');
+             // Add a slight stagger delay for better scroll reveal effect
+            container.innerHTML = providers.map((p, index) => renderProviderCard(p, true).replace('animate-fade-in', `animate-fade-in delay-${index * 200}`)).join('');
+        }
+
+        function renderPackageDetail(providerId) {
+            const provider = providers.find(p => p.id === providerId);
+            const providerPackages = packages[providerId];
+            if (!provider || !providerPackages) return;
+
+            document.getElementById('package-title').textContent = `${provider.name} Internet Packages`;
+            document.getElementById('package-tagline').textContent = provider.tagline;
+            
+            const accentClass = `text-${provider.accent}-600`;
+            const borderClass = `border-${provider.accent}-400`;
+
+            const plansList = document.getElementById('plans-list');
+            plansList.innerHTML = providerPackages.map((plan, index) => `
+                <div id="plan-${provider.id}-${plan.name.replace(/\s/g, '-')}" class="bg-white p-8 rounded-xl shadow-xl border-l-8 ${borderClass} transition duration-500 hover:shadow-2xl hover:border-l-[12px] relative animate-fade-in delay-${index * 150}">
+                    <h4 class="text-2xl font-bold text-gray-900">${plan.name}</h4>
+                    <p class="text-5xl font-extrabold ${accentClass} mt-3">$${plan.price.toFixed(2)}<span class="text-xl font-normal text-gray-500">/mo</span></p>
+
+                    <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm font-medium border-t pt-4 border-gray-100">
+                        <!-- Download Speed -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            <span class="text-xs text-gray-500">Download Speed</span>
+                            <span class="font-bold text-base text-gray-800">${plan.download}</span>
+                        </div>
+                        <!-- Upload Speed -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" transform="rotate(180 12 12)"></path></svg>
+                            <span class="text-xs text-gray-500">Upload Speed</span>
+                            <span class="font-bold text-base text-gray-800">${plan.upload}</span>
+                        </div>
+                        <!-- Contract Term -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="text-xs text-gray-500">Contract</span>
+                            <span class="font-bold text-base text-gray-800">${plan.contract}</span>
+                        </div>
+                         <!-- Promotion -->
+                        <div class="flex flex-col items-start space-y-1">
+                            <svg class="w-6 h-6 mr-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2zM21 12c0 4.418-4.03 8-9 8s-9-3.582-9-8 4.03-8 9-8 9 3.582 9 8z"></path></svg>
+                            <span class="text-xs text-gray-500">Promotion</span>
+                            <span class="font-bold text-base text-gray-800">${plan.promo.substring(0, 15)}...</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <button onclick="showPage('order-form', '${provider.id}', '${plan.name}');" class="px-6 py-3 font-semibold rounded-full text-white gradient-accent hover:opacity-90 transition duration-300 flex-1 shadow-md transform hover:scale-[1.01]">
+                            Order Now
+                        </button>
+                        <button onclick="addToCompare('${provider.name}', '${plan.name}', '${plan.price.toFixed(2)}', '${plan.download}', '${plan.upload}')" class="px-6 py-3 font-semibold rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 transition duration-300 flex-1 transform hover:scale-[1.01]">
+                            Add to Compare
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render FAQ
+            const faqContainer = document.getElementById('faq-accordion');
+            faqContainer.innerHTML = faqs.map((item, index) => `
+                <div class="border-b border-gray-200 animate-fade-in delay-${index * 100}">
+                    <button class="w-full text-left py-4 px-2 flex justify-between items-center text-lg font-medium text-gray-800 hover:text-blue-600 transition" onclick="toggleAccordion('faq-${index}')">
+                        ${item.q}
+                        <svg id="arrow-faq-${index}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="faq-${index}" class="px-2 pb-4 text-gray-600 hidden transition-all duration-500 overflow-hidden">
+                        ${item.a}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderHomeFAQ() {
+            const container = document.getElementById('faq-homepage-accordion');
+            // Show first 3 FAQs on homepage
+            const homeFaqs = faqs.slice(0, 3); 
+            
+            container.innerHTML = homeFaqs.map((item, index) => `
+                <div class="border-b border-gray-200 animate-fade-in delay-${index * 100}">
+                    <button class="w-full text-left py-4 px-2 flex justify-between items-center text-lg font-medium text-gray-800 hover:text-blue-600 transition" onclick="toggleAccordion('homepage-faq-${index}')">
+                        ${item.q}
+                        <svg id="arrow-homepage-faq-${index}" class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="homepage-faq-${index}" class="px-2 pb-4 text-gray-600 hidden transition-all duration-500 overflow-hidden">
+                        ${item.a}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+
+        function renderBlog() {
+            const container = document.getElementById('articles-list');
+            container.innerHTML = articles.map((article, index) => `
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition duration-500 transform hover:shadow-2xl hover:-translate-y-1 animate-fade-in delay-${index * 200}">
+                    <img src="${article.image}" onerror="this.onerror=null; this.src='https://placehold.co/300x200/cccccc/333333?text=Article+Image';" alt="Article Thumbnail" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-2 text-gray-900">${article.title}</h4>
+                        <p class="text-gray-600 mb-4 text-sm">${article.excerpt.substring(0, 100)}...</p>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-800 transition nav-link" onclick="showArticleDetail('${article.title.replace(/\s/g, '-')}'); return false;">Read More &rarr;</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderReviews() {
+            const container = document.getElementById('reviews-grid');
+            container.innerHTML = reviews.map((review, index) => `
+                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 transition duration-300 hover:shadow-xl animate-fade-in delay-${index * 150}">
+                    <div class="flex items-center mb-3">
+                        ${'⭐️'.repeat(review.rating)}${'★'.repeat(5 - review.rating)}
+                        <span class="ml-2 text-xs font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">Verified Customer</span>
+                    </div>
+                    <p class="text-gray-700 mb-4 italic">"${review.comment}"</p>
+                    <p class="font-bold text-sm text-gray-800">- ${review.name} (${review.provider})</p>
+                </div>
+            `).join('');
+        }
+
+        // --- ORDER FORM LOGIC ---
+
+        function populateOrderForm(preselectedId = null) {
+            const providerSelect = document.getElementById('order-provider');
+            providerSelect.innerHTML = '<option value="" disabled selected>Select a Provider</option>';
+            providers.forEach(p => {
+                const option = document.createElement('option');
+                option.value = p.id;
+                option.textContent = p.name;
+                if (p.id === preselectedId) {
+                    option.selected = true;
+                }
+                providerSelect.appendChild(option);
+            });
+        }
+
+        function loadPlans(preselectedPlan = null) {
+            const providerId = document.getElementById('order-provider').value;
+            const planOptionsDiv = document.getElementById('plan-options');
+            planOptionsDiv.innerHTML = '';
+
+            if (providerId && packages[providerId]) {
+                packages[providerId].forEach((plan) => {
+                    const inputId = `plan-option-${plan.name.replace(/\s/g, '-')}`;
+                    const isSelected = plan.name === preselectedPlan ? 'checked' : '';
+
+                    planOptionsDiv.innerHTML += `
+                        <label for="${inputId}" class="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50 transition duration-200">
+                            <input type="radio" id="${inputId}" name="selected_plan" value="${plan.name}" class="text-blue-600 focus:ring-blue-500 w-5 h-5" ${isSelected}>
+                            <div class="ml-4">
+                                <span class="font-bold text-lg">${plan.name}</span>
+                                <span class="text-green-600 ml-3 font-extrabold">$${plan.price.toFixed(2)}/mo</span>
+                                <span class="text-sm text-gray-500 block">Speed: ${plan.download} / ${plan.upload} | Promo: ${plan.promo}</span>
+                            </div>
+                        </label>
+                    `;
+                });
+            } else {
+                planOptionsDiv.innerHTML = '<p class="text-gray-500">Select a provider above to load plans.</p>';
+            }
+        }
+
+        function updateStepStatus(step, isActive = false, isComplete = false) {
+            const statusDiv = document.getElementById(`step-${step}-status`);
+            const textSpan = statusDiv.nextElementSibling;
+            statusDiv.classList.remove('bg-blue-600', 'bg-gray-300', 'bg-green-500', 'text-white', 'text-gray-600');
+            textSpan.classList.remove('text-blue-600', 'font-semibold', 'text-gray-600', 'text-green-600');
+
+            if (isComplete) {
+                statusDiv.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+                statusDiv.classList.add('bg-green-500', 'text-white');
+                textSpan.classList.add('text-green-600', 'font-semibold');
+            } else if (isActive) {
+                statusDiv.textContent = step;
+                statusDiv.classList.add('bg-blue-600', 'text-white');
+                textSpan.classList.add('text-blue-600', 'font-semibold');
+            } else {
+                statusDiv.textContent = step;
+                statusDiv.classList.add('bg-gray-300', 'text-gray-600');
+                textSpan.classList.add('text-gray-600');
+            }
+        }
+
+        function nextStep(step) {
+            const currentDiv = document.getElementById(`step-${step}`);
+            const nextDiv = document.getElementById(`step-${step + 1}`);
+            let isValid = true;
+
+            // Simple validation check
+            currentDiv.querySelectorAll('[required]').forEach(input => {
+                if (!input.value) {
+                    input.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+
+            // Special validation for Step 3: ensure a plan is selected
+            if (step === 2) {
+                // We're moving from Provider selection to Plan selection. Validation is primarily that provider is selected.
+                if (!document.getElementById('order-provider').value) {
+                    isValid = false;
+                }
+            } else if (step === 3 && !document.querySelector('input[name="selected_plan"]:checked')) {
+                 isValid = false;
+                 alertUser("Please select an internet plan.", "bg-red-100 border-red-500 text-red-700");
+                 document.getElementById('plan-options').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            if (isValid) {
+                currentDiv.classList.add('hidden');
+                if (nextDiv) {
+                    nextDiv.classList.remove('hidden');
+                    updateStepStatus(step, false, true); // Mark current step complete
+                    updateStepStatus(step + 1, true, false); // Activate next step
+                    currentStep = step + 1;
+                }
+                document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // If validation fails, alert the user and stay on the step
+                if (step !== 3) {
+                     alertUser("Please fill in all required fields to continue.", "bg-red-100 border-red-500 text-red-700");
+                }
+            }
+        }
+
+        function prevStep(step) {
+            const currentDiv = document.getElementById(`step-${step}`);
+            const prevDiv = document.getElementById(`step-${step - 1}`);
+
+            if (prevDiv) {
+                currentDiv.classList.add('hidden');
+                prevDiv.classList.remove('hidden');
+                updateStepStatus(step, false, false); // Deactivate current step
+                updateStepStatus(step - 1, true, false); // Activate previous step
+                currentStep = step - 1;
+                document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        /**
+         * Resets and initializes the order form, optionally pre-selecting provider/plan.
+         * @param {string} [providerId]
+         * @param {string} [planName]
+         */
+        function resetOrderForm(providerId = null, planName = null) {
+            currentStep = 1;
+            document.querySelectorAll('.order-step').forEach(div => div.classList.add('hidden'));
+            document.getElementById('step-1').classList.remove('hidden');
+            document.getElementById('order-confirmation').classList.add('hidden');
+            document.getElementById('order-wizard').reset();
+
+            // Reset status indicators
+            for (let i = 1; i <= 3; i++) {
+                updateStepStatus(i, i === 1, false);
+            }
+
+            // Populate provider dropdown
+            populateOrderForm(providerId);
+
+            // Handle pre-selection and auto-advance
+            if (providerId) {
+                loadPlans(planName);
+                
+                // Set order ZIP input from home screen search if available
+                const homeZip = document.getElementById('zip-search').value || document.getElementById('footer-zip-search').value;
+                if (homeZip) {
+                    document.getElementById('order-zip').value = homeZip;
+                }
+
+                if (planName) {
+                    // Auto-advance to step 3 if both are pre-selected (as happens via Book Now)
+                    document.getElementById('step-1').classList.add('hidden');
+                    document.getElementById('step-2').classList.add('hidden');
+                    document.getElementById('step-3').classList.remove('hidden');
+                    updateStepStatus(1, false, true);
+                    updateStepStatus(2, false, true);
+                    updateStepStatus(3, true, false);
+                    currentStep = 3;
+                } else {
+                    // Auto-advance to step 2 if only provider is selected
+                    document.getElementById('step-1').classList.add('hidden');
+                    document.getElementById('step-2').classList.remove('hidden');
+                    updateStepStatus(1, false, true);
+                    updateStepStatus(2, true, false);
+                    currentStep = 2;
+                }
+            }
+        }
+
+        document.getElementById('order-wizard').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Final check on step 3 submission (should always be valid here but good practice)
+            if (!document.querySelector('input[name="selected_plan"]:checked')) {
+                 alertUser("Please select an internet plan before submitting.", "bg-red-100 border-red-500 text-red-700");
+                 return;
+            }
+
+            const phone = document.getElementById('order-phone').value;
+
+            // Simulate successful order submission
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('order-confirmation').classList.remove('hidden');
+            document.getElementById('conf-phone').textContent = phone;
+            updateStepStatus(3, false, true);
+            document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // --- COMPARISON MODAL LOGIC (Bonus Feature) ---
+
+        function addToCompare(providerName, planName, price, download, upload) {
+            const key = `${providerName}-${planName}`;
+            const newPlan = { key, providerName, planName, price, download, upload };
+
+            // Check if already exists
+            if (comparisonPlans.some(p => p.key === key)) {
+                alertUser("This plan is already in your comparison list!", "bg-yellow-100 border-yellow-500 text-yellow-700");
+                return;
+            }
+
+            // Limit to 3 plans
+            if (comparisonPlans.length >= 3) {
+                alertUser("You can compare a maximum of 3 plans. Remove one to add a new plan.", "bg-red-100 border-red-500 text-red-700");
+                return;
+            }
+
+            comparisonPlans.push(newPlan);
+            alertUser(`${planName} (${providerName}) added to comparison!`, "bg-green-100 border-green-500 text-green-700");
+            renderComparisonTable();
+            openCompareModal();
+        }
+
+        function removeFromCompare(key) {
+            comparisonPlans = comparisonPlans.filter(p => p.key !== key);
+            renderComparisonTable();
+        }
+
+        function renderComparisonTable() {
+            const container = document.getElementById('comparison-table');
+            if (comparisonPlans.length === 0) {
+                container.innerHTML = '<p class="text-center py-8 text-gray-500">Select plans from the package pages to add them to the comparison tool.</p>';
+                return;
+            }
+
+            const features = [
+                { label: 'Plan Name', key: 'planName' },
+                { label: 'Provider', key: 'providerName' },
+                { label: 'Price (mo)', key: 'price', currency: true },
+                { label: 'Download Speed', key: 'download' },
+                { label: 'Upload Speed', key: 'upload' },
+            ];
+
+            // Build the table structure
+            let tableHTML = `
+                <table class="min-w-full divide-y divide-gray-200 border border-gray-200 rounded-lg overflow-hidden">
+                    <thead class="bg-blue-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature</th>
+                            ${comparisonPlans.map(p => `<th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">${p.providerName}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+            `;
+
+            features.forEach(feature => {
+                tableHTML += `
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${feature.label}</td>
+                        ${comparisonPlans.map(p => `
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-700 font-bold">
+                                ${feature.currency ? '$' : ''}${p[feature.key]}
+                            </td>
+                        `).join('')}
+                    </tr>
+                `;
+            });
+
+            // Add the action row
+            tableHTML += `
+                <tr class="bg-gray-50">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Actions</td>
+                    ${comparisonPlans.map(p => `
+                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                            <button onclick="showPage('order-form', '${p.providerName}', '${p.planName}')" class="text-white gradient-accent text-xs font-bold py-1 px-3 rounded-full hover:opacity-90 transition transform hover:scale-[1.03]">Order</button>
+                            <button onclick="removeFromCompare('${p.key}')" class="text-red-500 text-xs font-bold py-1 px-3 rounded-full hover:text-red-700 transition ml-2 transform hover:scale-[1.03]">Remove</button>
+                        </td>
+                    `).join('')}
+                </tr>
+            `;
+
+            tableHTML += `</tbody></table>`;
+            container.innerHTML = tableHTML;
+        }
+
+        function openCompareModal() {
+            document.getElementById('compare-modal').classList.remove('hidden');
+        }
+
+        function closeCompareModal() {
+            document.getElementById('compare-modal').classList.add('hidden');
+        }
+
+        // --- UTILITY & ANIMATION ---
+
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const arrow = document.getElementById(`arrow-${id}`);
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                arrow.classList.add('rotate-180');
+            } else {
+                content.classList.add('hidden');
+                arrow.classList.remove('rotate-180');
+            }
+        }
+
+        /**
+         * Custom alert message box (replaces standard browser alert)
+         * @param {string} message 
+         * @param {string} classes - Tailwind classes for styling the alert box
+         */
+        function alertUser(message, classes) {
+            const existingAlert = document.getElementById('temp-alert');
+            if (existingAlert) existingAlert.remove();
+
+            const alertDiv = document.createElement('div');
+            alertDiv.id = 'temp-alert';
+            alertDiv.className = `fixed top-20 right-4 p-4 rounded-lg shadow-xl border-l-4 ${classes} z-50 transition-all duration-300 transform translate-x-full`;
+            alertDiv.textContent = message;
+
+            document.body.appendChild(alertDiv);
+            setTimeout(() => alertDiv.classList.remove('translate-x-full'), 10); // Show
+            setTimeout(() => alertDiv.classList.add('translate-x-full'), 3000); // Hide
+            setTimeout(() => alertDiv.remove(), 3500); // Remove element
+        }
+
+        // --- COOKIE CONSENT & INITIALIZATION ---
+
+        function checkCookieConsent() {
+            if (!localStorage.getItem('wideBroadband_cookieConsent')) {
+                const banner = document.getElementById('cookie-banner');
+                setTimeout(() => banner.classList.remove('translate-y-full'), 500);
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('wideBroadband_cookieConsent', 'true');
+            document.getElementById('cookie-banner').classList.add('translate-y-full');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        // Initialize App & Event Listeners
+        window.onload = function() {
+            // Set up mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+
+            // Contact Form Mock Submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                document.getElementById('contact-message').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('contact-message').classList.add('hidden');
+                    document.getElementById('contact-form').reset();
+                }, 3000);
+            });
+
+            // Render static/initial content
+            renderHomeProviders();
+            renderHomeReviews();
+            renderBlog();
+            renderHomeFAQ();
+            renderReviews();
+            startCountdown(); // Start the offer countdown
+
+            // Set up initial page view (Home)
+            showPage('home');
+            checkCookieConsent();
+
+            // Intersection Observer for smooth scroll reveals (Animations)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-4', 'translate-y-8');
+                        observer.unobserve(entry.target); // Stop observing once animated
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Apply initial hidden/translated states for scroll reveal animations
+            document.querySelectorAll('.animate-fade-in').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-4', 'transition', 'ease-out');
+                observer.observe(el);
+            });
+            document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+                el.classList.add('opacity-0', 'translate-y-8', 'transition', 'ease-out');
+                observer.observe(el);
+            });
+        };
+
+        // Schema.org Structured Data (JSON-LD)
+        const schemaData = {
+            "@context": "https://schema.org",
+            "@graph": [
+                {
+                    "@type": "Organization",
+                    "name": "Wide Broadband",
+                    "url": "https://widebroadband.com",
+                    "logo": "https://widebroadband.com/logo.png",
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "telephone": "+1-888-808-0237",
+                        "contactType": "Customer Service"
+                    },
+                    "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "3229 Greenpoint Ave",
+                        "addressLocality": "Long Island City",
+                        "addressRegion": "NY",
+                        "postalCode": "11101",
+                        "addressCountry": "US"
+                    }
+                },
+                {
+                    "@type": "WebSite",
+                    "url": "https://widebroadband.com",
+                    "potentialAction": {
+                        "@type": "SearchAction",
+                        "target": "https://widebroadband.com/?q={search_term_string}",
+                        "query-input": "required name=search_term_string"
+                    }
+                },
+                {
+                    "@type": "AggregateRating",
+                    "itemReviewed": { "@type": "Organization", "name": "Wide Broadband" },
+                    "ratingValue": "4.8",
+                    "reviewCount": "1245"
+                },
+                ...reviews.map(r => ({
+                    "@type": "Review",
+                    "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": r.rating
+                    },
+                    "author": { "@type": "Person", "name": r.name },
+                    "reviewBody": r.comment,
+                    "itemReviewed": { "@type": "Product", "name": `${r.provider} Internet Service` }
+                }))
+            ]
+        };
+
+        // Inject schema data into the head
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify(schemaData);
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
