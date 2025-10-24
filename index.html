@@ -959,7 +959,7 @@
                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c-.722.322-1.493.538-2.298.636.832-.498 1.472-1.285 1.777-2.217-.78.463-1.644.8-2.56.982C17.65 4.34 16.634 4 15.553 4c-3.483 0-6.307 2.824-6.307 6.307 0 .495.056.975.166 1.433C5.77 11.234 3.056 9.77 1.277 7.424c-.544.935-.856 2.023-.856 3.17 0 2.18.91 4.106 2.302 5.232-.68-.022-1.32-.208-1.875-.516v.08c0 3.064 2.18 5.626 5.075 6.202-.53.144-1.09.22-1.666.22-.407 0-.805-.04-1.194-.114.796 2.502 3.107 4.33 5.836 4.38-2.167 1.7-4.89 2.709-7.854 2.709-.51 0-1.01-.03-1.498-.088 2.808 1.797 6.132 2.85 9.728 2.85 11.674 0 18.068-9.673 18.068-18.068 0-.275-.008-.546-.02-.816.828-.6.284-1.246 1.49-2.028-1.11-.645-2.287-1.178-3.545-1.57z"/></svg>
                         </a>
                         <a href="#" aria-label="Instagram" class="text-gray-400 hover:text-blue-400 transition duration-300">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.77 1.672 4.98 4.659.21 2.986.21 3.366.21 6.333 0 3.204-.012 3.584-.07 4.85-3.252.148-4.77 1.672-4.98 4.659-.21 2.986-.21 3.366-.21 6.333 0 3.204.012 3.584.07 4.85 3.252.148 4.77 1.672 4.98 4.659.21 2.986.21 3.366.21 6.333 0 3.204-.012 3.584-.07 4.85-3.252.148-4.77 1.672-4.98 4.659-.21 2.986-.21 3.366-.21 6.333z"/></svg>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.77 1.672 4.98 4.659.21 2.986.21 3.366.21 6.333 0 3.204-.012 3.584-.07 4.85-3.252.148-4.77 1.672-4.98 4.659-.21 2.986-.21 3.366-.21 6.333 0 3.204-.012 3.584-.07 4.85-3.252.148-4.77 1.672-4.98 4.659-.21 2.986-.21 3.366-.21 6.333z"/></svg>
                         </a>
                     </div>
                 </div>
@@ -1166,22 +1166,26 @@
          * @param {string} pageId - The ID of the section to show (e.g., 'home', 'providers').
          */
         function showPage(pageId) {
-            currentPage = pageId;
-            const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => {
-                page.style.display = 'none';
-                page.setAttribute('aria-hidden', 'true');
-            });
-            
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.style.display = 'block';
-                targetPage.setAttribute('aria-hidden', 'false');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            try {
+                currentPage = pageId;
+                const pages = document.querySelectorAll('.page-section');
+                pages.forEach(page => {
+                    page.style.display = 'none';
+                    page.setAttribute('aria-hidden', 'true');
+                });
                 
-                // Specific updates for dynamic pages
-                if (pageId === 'providers') renderComparisonTable();
-                if (pageId === 'reviews') renderFullReviewGrid();
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.style.display = 'block';
+                    targetPage.setAttribute('aria-hidden', 'false');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    // Specific updates for dynamic pages
+                    if (pageId === 'providers') renderComparisonTable();
+                    if (pageId === 'reviews') renderFullReviewGrid();
+                }
+            } catch (error) {
+                console.error("Error in showPage:", error);
             }
         }
 
@@ -1190,30 +1194,35 @@
          * @param {string} zip - The ZIP code entered by the user.
          */
         function handleZipSearch(zip) {
-            const zipCode = (zip || '').trim();
-            if (zipCode.length !== 5 || isNaN(zipCode)) {
-                alert('Please enter a valid 5-digit ZIP code.');
-                return;
-            }
+            try {
+                const zipCode = (zip || '').trim();
+                if (zipCode.length !== 5 || isNaN(zipCode)) {
+                    alert('Please enter a valid 5-digit ZIP code.');
+                    return;
+                }
 
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                // Show loading screen immediately
-                loadingScreen.style.display = 'flex';
-                loadingScreen.style.zIndex = '50'; // Ensure it's on top
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    // Show loading screen immediately
+                    loadingScreen.style.display = 'flex';
+                    loadingScreen.style.zIndex = '50'; // Ensure it's on top
 
-                // Simulate network delay
-                setTimeout(() => {
-                    // 1. Hide loading screen
-                    loadingScreen.style.display = 'none';
+                    // Simulate network delay
+                    setTimeout(() => {
+                        // 1. Hide loading screen
+                        loadingScreen.style.display = 'none';
 
-                    // 2. Render results dynamically
-                    renderSearchResults(zipCode);
+                        // 2. Render results dynamically
+                        renderSearchResults(zipCode);
 
-                    // 3. Navigate to results page
-                    showPage('search-results-page'); 
+                        // 3. Navigate to results page
+                        showPage('search-results-page'); 
 
-                }, 2500); // 2.5 second delay
+                    }, 2500); // 2.5 second delay
+                }
+            } catch (error) {
+                console.error("Error in handleZipSearch:", error);
+                alert("An error occurred during search. Please try again.");
             }
         }
         
@@ -1223,118 +1232,133 @@
          * Shows the Speed Test Modal.
          */
         function showSpeedTestModal() {
-            const modal = document.getElementById('speed-test-modal');
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-            // Reset state
-            document.getElementById('current-speed').textContent = '0';
-            document.getElementById('speed-status').textContent = 'Ready to start...';
-            document.getElementById('ping-result').textContent = '--';
-            document.getElementById('download-result').textContent = '--';
-            document.getElementById('upload-result').textContent = '--';
-            document.getElementById('start-speed-test-btn').textContent = 'Start Test';
-            document.getElementById('start-speed-test-btn').disabled = false;
+            try {
+                const modal = document.getElementById('speed-test-modal');
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                // Reset state
+                document.getElementById('current-speed').textContent = '0';
+                document.getElementById('speed-status').textContent = 'Ready to start...';
+                document.getElementById('ping-result').textContent = '--';
+                document.getElementById('download-result').textContent = '--';
+                document.getElementById('upload-result').textContent = '--';
+                document.getElementById('start-speed-test-btn').textContent = 'Start Test';
+                document.getElementById('start-speed-test-btn').disabled = false;
+            } catch (error) {
+                console.error("Error showing speed test modal:", error);
+            }
         }
 
         /**
          * Hides the Speed Test Modal.
          */
         function hideSpeedTestModal() {
-            clearInterval(speedTestInterval);
-            clearTimeout(speedTestTimeout);
-            const modal = document.getElementById('speed-test-modal');
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
+            try {
+                clearInterval(speedTestInterval);
+                clearTimeout(speedTestTimeout);
+                const modal = document.getElementById('speed-test-modal');
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+            } catch (error) {
+                console.error("Error hiding speed test modal:", error);
+            }
         }
 
         /**
          * Runs the simulated speed test.
          */
         function runSpeedTest() {
-            document.getElementById('start-speed-test-btn').disabled = true;
-            document.getElementById('start-speed-test-btn').textContent = 'Testing...';
-            
-            clearInterval(speedTestInterval);
-            clearTimeout(speedTestTimeout);
+            try {
+                document.getElementById('start-speed-test-btn').disabled = true;
+                document.getElementById('start-speed-test-btn').textContent = 'Testing...';
+                
+                clearInterval(speedTestInterval);
+                clearTimeout(speedTestTimeout);
 
-            // Reset results
-            document.getElementById('ping-result').textContent = '...';
-            document.getElementById('download-result').textContent = '...';
-            document.getElementById('upload-result').textContent = '...';
-            document.getElementById('current-speed').textContent = '0';
-            document.getElementById('speed-gauge').style.transform = 'rotate(45deg)';
+                // Reset results
+                document.getElementById('ping-result').textContent = '...';
+                document.getElementById('download-result').textContent = '...';
+                document.getElementById('upload-result').textContent = '...';
+                document.getElementById('current-speed').textContent = '0';
+                document.getElementById('speed-gauge').style.transform = 'rotate(45deg)';
 
-            const status = document.getElementById('speed-status');
-            const currentSpeedEl = document.getElementById('current-speed');
-            const downloadResultEl = document.getElementById('download-result');
-            const uploadResultEl = document.getElementById('upload-result');
-            const pingResultEl = document.getElementById('ping-result');
-            const gaugeEl = document.getElementById('speed-gauge');
-            
-            const maxDownload = Math.floor(Math.random() * (450 - 200 + 1)) + 200; // Realistic Max D/L
-            const maxUpload = Math.floor(maxDownload * (Math.random() * (0.15 - 0.05) + 0.05)); // Realistic Max U/L (5-15% of DL)
-            const finalPing = Math.floor(Math.random() * (50 - 15 + 1)) + 15;
+                const status = document.getElementById('speed-status');
+                const currentSpeedEl = document.getElementById('current-speed');
+                const downloadResultEl = document.getElementById('download-result');
+                const uploadResultEl = document.getElementById('upload-result');
+                const pingResultEl = document.getElementById('ping-result');
+                const gaugeEl = document.getElementById('speed-gauge');
+                
+                const maxDownload = Math.floor(Math.random() * (450 - 200 + 1)) + 200; // Realistic Max D/L
+                const maxUpload = Math.floor(maxDownload * (Math.random() * (0.15 - 0.05) + 0.05)); // Realistic Max U/L (5-15% of DL)
+                const finalPing = Math.floor(Math.random() * (50 - 15 + 1)) + 15;
 
-            let startTime = Date.now();
+                let startTime = Date.now();
 
-            // Phase 1: Ping (1.5s)
-            status.textContent = 'Measuring latency...';
-            speedTestTimeout = setTimeout(() => {
-                pingResultEl.textContent = finalPing;
+                // Phase 1: Ping (1.5s)
+                status.textContent = 'Measuring latency...';
+                speedTestTimeout = setTimeout(() => {
+                    pingResultEl.textContent = finalPing;
 
-                // Phase 2: Download (3s)
-                status.textContent = 'Measuring download speed...';
-                let currentDL = 0;
-                let downloadDuration = 3000;
-                let downloadStartTime = Date.now();
+                    // Phase 2: Download (3s)
+                    status.textContent = 'Measuring download speed...';
+                    let currentDL = 0;
+                    let downloadDuration = 3000;
+                    let downloadStartTime = Date.now();
 
-                speedTestInterval = setInterval(() => {
-                    let elapsed = Date.now() - downloadStartTime;
-                    if (elapsed < downloadDuration) {
-                        // Use sine wave for realistic acceleration/deceleration
-                        let progress = elapsed / downloadDuration;
-                        currentDL = Math.round(maxDownload * (Math.sin(progress * Math.PI)));
-                        
-                        // Update display
-                        currentSpeedEl.textContent = currentDL;
-                        downloadResultEl.textContent = currentDL;
-                        
-                        // Rotate gauge (0deg is 45deg, 180deg is 225deg. Total 180deg sweep)
-                        let rotation = 45 + (progress * 180);
-                        gaugeEl.style.transform = `rotate(${rotation}deg)`;
+                    speedTestInterval = setInterval(() => {
+                        let elapsed = Date.now() - downloadStartTime;
+                        if (elapsed < downloadDuration) {
+                            // Use sine wave for realistic acceleration/deceleration
+                            let progress = elapsed / downloadDuration;
+                            currentDL = Math.round(maxDownload * (Math.sin(progress * Math.PI)));
+                            
+                            // Update display
+                            currentSpeedEl.textContent = currentDL;
+                            downloadResultEl.textContent = currentDL;
+                            
+                            // Rotate gauge (0deg is 45deg, 180deg is 225deg. Total 180deg sweep)
+                            let rotation = 45 + (progress * 180);
+                            gaugeEl.style.transform = `rotate(${rotation}deg)`;
 
-                    } else {
-                        clearInterval(speedTestInterval);
-                        downloadResultEl.textContent = maxDownload;
-                        currentSpeedEl.textContent = maxDownload;
-                        gaugeEl.style.transform = 'rotate(225deg)';
+                        } else {
+                            clearInterval(speedTestInterval);
+                            downloadResultEl.textContent = maxDownload;
+                            currentSpeedEl.textContent = maxDownload;
+                            gaugeEl.style.transform = 'rotate(225deg)';
 
-                        // Phase 3: Upload (2.5s)
-                        status.textContent = 'Measuring upload speed...';
-                        let currentUL = 0;
-                        let uploadDuration = 2500;
-                        let uploadStartTime = Date.now();
+                            // Phase 3: Upload (2.5s)
+                            status.textContent = 'Measuring upload speed...';
+                            let currentUL = 0;
+                            let uploadDuration = 2500;
+                            let uploadStartTime = Date.now();
 
-                        speedTestInterval = setInterval(() => {
-                            let elapsed = Date.now() - uploadStartTime;
-                            if (elapsed < uploadDuration) {
-                                let progress = elapsed / uploadDuration;
-                                currentUL = Math.round(maxUpload * progress);
-                                uploadResultEl.textContent = currentUL;
-                            } else {
-                                clearInterval(speedTestInterval);
-                                uploadResultEl.textContent = maxUpload;
+                            speedTestInterval = setInterval(() => {
+                                let elapsed = Date.now() - uploadStartTime;
+                                if (elapsed < uploadDuration) {
+                                    let progress = elapsed / uploadDuration;
+                                    currentUL = Math.round(maxUpload * progress);
+                                    uploadResultEl.textContent = currentUL;
+                                } else {
+                                    clearInterval(speedTestInterval);
+                                    uploadResultEl.textContent = maxUpload;
 
-                                // Phase 4: Complete
-                                status.textContent = 'Test Complete!';
-                                document.getElementById('start-speed-test-btn').textContent = 'Rerun Test';
-                                document.getElementById('start-speed-test-btn').disabled = false;
-                            }
-                        }, 50); // 50ms interval for smooth simulation
-                    }
-                }, 50); // 50ms interval for smooth simulation
+                                    // Phase 4: Complete
+                                    status.textContent = 'Test Complete!';
+                                    document.getElementById('start-speed-test-btn').textContent = 'Rerun Test';
+                                    document.getElementById('start-speed-test-btn').disabled = false;
+                                }
+                            }, 50); // 50ms interval for smooth simulation
+                        }
+                    }, 50); // 50ms interval for smooth simulation
 
-            }, 1500); // Ping delay
+                }, 1500); // Ping delay
+            } catch (error) {
+                console.error("Error running speed test:", error);
+                document.getElementById('speed-status').textContent = 'Test failed due to an error.';
+                document.getElementById('start-speed-test-btn').textContent = 'Rerun Test';
+                document.getElementById('start-speed-test-btn').disabled = false;
+            }
         }
 
         // --- Data Rendering Functions ---
@@ -1343,80 +1367,88 @@
          * Renders the provider cards on the Home page.
          */
         function renderHomeProviders() {
-            const container = document.getElementById('home-provider-cards');
-            if (!container) return; // Safety check
-            
-            const featuredProviders = providerData.filter(p => p.id === 'spectrum' || p.id === 'att' || p.id === 'xfinity');
-            let html = '';
-
-            featuredProviders.forEach(provider => {
-                const bestPlan = provider.plans.reduce((min, p) => p.price < min.price ? p : min, provider.plans[0]);
+            try {
+                const container = document.getElementById('home-provider-cards');
+                if (!container) return; // Safety check
                 
-                html += `
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" style="border-color: ${provider.color};">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-2xl font-bold" style="color: ${provider.color};">${provider.name}</span>
-                            <span class="text-sm font-semibold text-gray-500">${provider.tech}</span>
-                        </div>
-                        <h3 class="text-xl font-extrabold text-gray-900 mb-2">${bestPlan.name}</h3>
-                        <p class="text-4xl font-extrabold mb-4 text-gray-900">$${bestPlan.price.toFixed(2)}<span class="text-xl font-normal text-gray-500">/mo*</span></p>
-                        
-                        <ul class="space-y-2 text-sm text-gray-700 mb-6">
-                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> Speed: ${bestPlan.speed} Mbps</li>
-                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 005.412 16.96h13.176c-.846-2.185-.884-4.577-.104-6.848"></path></svg> Data Cap: ${bestPlan.cap}</li>
-                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Contract: ${bestPlan.contract}</li>
-                        </ul>
-                        
-                        <button onclick="showPage('providers'); return false;" class="w-full py-3 text-base font-bold rounded-full text-white gradient-accent shadow-md hover:scale-[1.01] transition duration-300">
-                            View All ${provider.name} Plans
-                        </button>
-                    </div>
-                `;
-            });
+                const featuredProviders = providerData.filter(p => p.id === 'spectrum' || p.id === 'att' || p.id === 'xfinity');
+                let html = '';
 
-            container.innerHTML = html;
+                featuredProviders.forEach(provider => {
+                    const bestPlan = provider.plans.reduce((min, p) => p.price < min.price ? p : min, provider.plans[0]);
+                    
+                    html += `
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1" style="border-color: ${provider.color};">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold" style="color: ${provider.color};">${provider.name}</span>
+                                <span class="text-sm font-semibold text-gray-500">${provider.tech}</span>
+                            </div>
+                            <h3 class="text-xl font-extrabold text-gray-900 mb-2">${bestPlan.name}</h3>
+                            <p class="text-4xl font-extrabold mb-4 text-gray-900">$${bestPlan.price.toFixed(2)}<span class="text-xl font-normal text-gray-500">/mo*</span></p>
+                            
+                            <ul class="space-y-2 text-sm text-gray-700 mb-6">
+                                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> Speed: ${bestPlan.speed} Mbps</li>
+                                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 005.412 16.96h13.176c-.846-2.185-.884-4.577-.104-6.848"></path></svg> Data Cap: ${bestPlan.cap}</li>
+                                <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Contract: ${bestPlan.contract}</li>
+                            </ul>
+                            
+                            <button onclick="showPage('providers'); return false;" class="w-full py-3 text-base font-bold rounded-full text-white gradient-accent shadow-md hover:scale-[1.01] transition duration-300">
+                                View All ${provider.name} Plans
+                            </button>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering home providers:", error);
+            }
         }
 
         /**
          * Renders the full comparison table on the Plans page.
          */
         function renderComparisonTable() {
-            const tbody = document.getElementById('comparison-table-body');
-            if (!tbody) return; // Safety check
-            let html = '';
+            try {
+                const tbody = document.getElementById('comparison-table-body');
+                if (!tbody) return; // Safety check
+                let html = '';
 
-            providerData.forEach(provider => {
-                provider.plans.forEach(plan => {
-                    const providerLogo = `<span class="text-lg font-extrabold mr-2" style="color: ${provider.color};">${provider.name}</span>`;
-                    
-                    html += `
-                        <tr class="hover:bg-gray-50 transition duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sticky left-0 bg-white z-10 border-r border-gray-100">
-                                <div class="flex items-center">${providerLogo} ${plan.name}</div>
-                                <span class="text-xs text-gray-500 mt-1 block">Best for: ${plan.bestFor}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
-                                <span class="font-bold text-gray-900">${plan.speed.split('/')[0]}</span>/<span class="text-gray-600">${plan.speed.split('/')[1]}</span> Mbps
-                                <span class="text-xs text-gray-500 mt-1 block">${provider.tech}</span>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-lg font-extrabold text-center text-green-600">$${plan.price.toFixed(2)}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">${plan.cap}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">${plan.contract}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">${plan.install === 0.00 ? 'FREE' : '$' + plan.install.toFixed(2)}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-center">
-                                <button onclick="showOrderForm('${provider.name}', '${plan.name}')" class="px-4 py-2 text-xs font-bold rounded-full text-white cta-primary transition duration-300 hover:scale-[1.05]">
-                                    Order Now
-                                </button>
-                                <button onclick="addToComparison('${provider.name} - ${plan.name}', '${plan.speed}', '${plan.price}', '${plan.contract}')" class="mt-2 px-4 py-2 text-xs font-bold rounded-full text-blue-600 border border-blue-600 hover:bg-blue-50 transition duration-300">
-                                    Compare
-                                </button>
-                            </td>
-                        </tr>
-                    `;
+                providerData.forEach(provider => {
+                    provider.plans.forEach(plan => {
+                        const providerLogo = `<span class="text-lg font-extrabold mr-2" style="color: ${provider.color};">${provider.name}</span>`;
+                        
+                        html += `
+                            <tr class="hover:bg-gray-50 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sticky left-0 bg-white z-10 border-r border-gray-100">
+                                    <div class="flex items-center">${providerLogo} ${plan.name}</div>
+                                    <span class="text-xs text-gray-500 mt-1 block">Best for: ${plan.bestFor}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center">
+                                    <span class="font-bold text-gray-900">${plan.speed.split('/')[0]}</span>/<span class="text-gray-600">${plan.speed.split('/')[1]}</span> Mbps
+                                    <span class="text-xs text-gray-500 mt-1 block">${provider.tech}</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-lg font-extrabold text-center text-green-600">$${plan.price.toFixed(2)}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">${plan.cap}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">${plan.contract}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-center text-gray-700">${plan.install === 0.00 ? 'FREE' : '$' + plan.install.toFixed(2)}</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-center">
+                                    <button onclick="showOrderForm('${provider.name}', '${plan.name}')" class="px-4 py-2 text-xs font-bold rounded-full text-white cta-primary transition duration-300 hover:scale-[1.05]">
+                                        Order Now
+                                    </button>
+                                    <button onclick="addToComparison('${provider.name} - ${plan.name}', '${plan.speed}', '${plan.price}', '${plan.contract}')" class="mt-2 px-4 py-2 text-xs font-bold rounded-full text-blue-600 border border-blue-600 hover:bg-blue-50 transition duration-300">
+                                        Compare
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
                 });
-            });
 
-            tbody.innerHTML = html;
+                tbody.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering comparison table:", error);
+            }
         }
 
 
@@ -1425,55 +1457,59 @@
          * @param {string} zipCode - The ZIP code used for the search.
          */
         function renderSearchResults(zipCode) {
-            const container = document.getElementById('available-plans-list');
-            const zipDisplay = document.getElementById('results-zip-code');
-            if (!container || !zipDisplay) return;
+            try {
+                const container = document.getElementById('available-plans-list');
+                const zipDisplay = document.getElementById('results-zip-code');
+                if (!container || !zipDisplay) return;
 
-            zipDisplay.textContent = zipCode;
-            
-            const spectrum = providerData.find(p => p.id === 'spectrum');
-            if (!spectrum) return;
+                zipDisplay.textContent = zipCode;
+                
+                const spectrum = providerData.find(p => p.id === 'spectrum');
+                if (!spectrum) return;
 
-            let html = '';
-            spectrum.plans.forEach((plan, index) => {
-                const isPromo = index === 0; // Highlight the cheapest plan
-                html += `
-                    <div class="bg-white p-6 rounded-xl shadow-2xl transition duration-300 transform hover:shadow-3xl hover:-translate-y-1 border-l-8" style="border-color: ${spectrum.color};">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                            <div class="mb-4 md:mb-0">
-                                <div class="flex items-center">
-                                    <span class="text-lg font-extrabold mr-2" style="color: ${spectrum.color};">${spectrum.name}</span>
-                                    <h2 class="text-3xl font-extrabold text-gray-900">${plan.name}</h2>
+                let html = '';
+                spectrum.plans.forEach((plan, index) => {
+                    const isPromo = index === 0; // Highlight the cheapest plan
+                    html += `
+                        <div class="bg-white p-6 rounded-xl shadow-2xl transition duration-300 transform hover:shadow-3xl hover:-translate-y-1 border-l-8" style="border-color: ${spectrum.color};">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                                <div class="mb-4 md:mb-0">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-extrabold mr-2" style="color: ${spectrum.color};">${spectrum.name}</span>
+                                        <h2 class="text-3xl font-extrabold text-gray-900">${plan.name}</h2>
+                                    </div>
+                                    ${isPromo ? `<span class="inline-block px-3 py-1 text-xs font-bold text-white bg-red-600 rounded-full mt-1">BEST PROMOTIONAL DEAL</span>` : ''}
+                                    <p class="text-lg text-gray-600 mt-2">${plan.bestFor} | ${spectrum.tech} Technology</p>
                                 </div>
-                                ${isPromo ? `<span class="inline-block px-3 py-1 text-xs font-bold text-white bg-red-600 rounded-full mt-1">BEST PROMOTIONAL DEAL</span>` : ''}
-                                <p class="text-lg text-gray-600 mt-2">${plan.bestFor} | ${spectrum.tech} Technology</p>
+
+                                <div class="flex items-center space-x-6">
+                                    <div class="text-right">
+                                        <p class="text-xl text-gray-600">Speed</p>
+                                        <p class="text-4xl font-extrabold text-blue-600">${plan.speed.split('/')[0]}<span class="text-xl"> Mbps</span></p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-xl text-gray-600">Starting Price</p>
+                                        <p class="text-5xl font-extrabold text-green-600">$${plan.price.toFixed(2)}<span class="text-xl font-normal text-gray-500">/mo</span></p>
+                                    </div>
+                                    <button onclick="showOrderForm('${spectrum.name}', '${plan.name}')" class="px-8 py-4 text-lg font-bold rounded-full text-white cta-primary hover:scale-[1.03] transition duration-300 transform shadow-lg">
+                                        Book Now
+                                    </button>
+                                </div>
                             </div>
-
-                            <div class="flex items-center space-x-6">
-                                <div class="text-right">
-                                    <p class="text-xl text-gray-600">Speed</p>
-                                    <p class="text-4xl font-extrabold text-blue-600">${plan.speed.split('/')[0]}<span class="text-xl"> Mbps</span></p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-xl text-gray-600">Starting Price</p>
-                                    <p class="text-5xl font-extrabold text-green-600">$${plan.price.toFixed(2)}<span class="text-xl font-normal text-gray-500">/mo</span></p>
-                                </div>
-                                <button onclick="showOrderForm('${spectrum.name}', '${plan.name}')" class="px-8 py-4 text-lg font-bold rounded-full text-white cta-primary hover:scale-[1.03] transition duration-300 transform shadow-lg">
-                                    Book Now
-                                </button>
+                            
+                            <div class="mt-6 pt-4 border-t border-gray-100 flex flex-wrap gap-x-6 text-sm text-gray-700">
+                                 <span class="flex items-center"><svg class="w-5 h-5 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 005.412 16.96h13.176c-.846-2.185-.884-4.577-.104-6.848"></path></svg> Data Cap: ${plan.cap}</span>
+                                 <span class="flex items-center"><svg class="w-5 h-5 mr-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Contract: ${plan.contract}</span>
+                                 <span class="flex items-center"><svg class="w-5 h-5 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3v-1"></path></svg> Install: ${plan.install === 0.00 ? 'FREE' : '$' + plan.install.toFixed(2)}</span>
                             </div>
                         </div>
-                        
-                        <div class="mt-6 pt-4 border-t border-gray-100 flex flex-wrap gap-x-6 text-sm text-gray-700">
-                             <span class="flex items-center"><svg class="w-5 h-5 mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 005.412 16.96h13.176c-.846-2.185-.884-4.577-.104-6.848"></path></svg> Data Cap: ${plan.cap}</span>
-                             <span class="flex items-center"><svg class="w-5 h-5 mr-1 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Contract: ${plan.contract}</span>
-                             <span class="flex items-center"><svg class="w-5 h-5 mr-1 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3v-1"></path></svg> Install: ${plan.install === 0.00 ? 'FREE' : '$' + plan.install.toFixed(2)}</span>
-                        </div>
-                    </div>
-                `;
-            });
+                    `;
+                });
 
-            container.innerHTML = html;
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering search results:", error);
+            }
         }
 
 
@@ -1481,69 +1517,81 @@
          * Renders the full customer review grid on the Reviews page.
          */
         function renderFullReviewGrid() {
-            const container = document.getElementById('full-review-grid');
-            if (!container) return; // Safety check
+            try {
+                const container = document.getElementById('full-review-grid');
+                if (!container) return; // Safety check
 
-            let html = '';
-            testimonials.forEach(review => {
-                const stars = '⭐'.repeat(review.rating);
-                html += `
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 transition duration-300 transform hover:scale-[1.01]">
-                        <div class="flex justify-between items-center mb-3">
-                            <span class="text-2xl" aria-label="${review.rating} stars">${stars}</span>
-                            <span class="text-xs font-semibold text-gray-500">Verified Customer</span>
+                let html = '';
+                testimonials.forEach(review => {
+                    const stars = '⭐'.repeat(review.rating);
+                    html += `
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 transition duration-300 transform hover:scale-[1.01]">
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-2xl" aria-label="${review.rating} stars">${stars}</span>
+                                <span class="text-xs font-semibold text-gray-500">Verified Customer</span>
+                            </div>
+                            <p class="italic text-gray-700 mb-4">"${review.quote}"</p>
+                            <p class="font-bold text-sm text-gray-900">— ${review.name}</p>
+                            <span class="text-xs text-blue-600 font-medium">Provider: ${review.provider}</span>
                         </div>
-                        <p class="italic text-gray-700 mb-4">"${review.quote}"</p>
-                        <p class="font-bold text-sm text-gray-900">— ${review.name}</p>
-                        <span class="text-xs text-blue-600 font-medium">Provider: ${review.provider}</span>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering full review grid:", error);
+            }
         }
 
         /**
          * Renders the FAQ accordion.
          */
         function renderFAQs() {
-            const container = document.getElementById('faq-accordion');
-            if (!container) return; // Safety check
-            let html = '';
+            try {
+                const container = document.getElementById('faq-accordion');
+                if (!container) return; // Safety check
+                let html = '';
 
-            faqs.forEach((item, index) => {
-                const id = `faq-${index}`;
-                html += `
-                    <div class="border border-gray-200 rounded-xl bg-white shadow-md">
-                        <button class="w-full p-5 text-left flex justify-between items-center font-bold text-gray-900 hover:bg-gray-50 transition duration-150" aria-expanded="false" aria-controls="${id}-content" onclick="toggleFAQ('${id}')">
-                            ${item.q}
-                            <svg id="${id}-icon" class="w-5 h-5 ml-2 transform rotate-0 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                        <div id="${id}-content" class="px-5 py-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
-                            <p class="pb-5 text-gray-600">${item.a}</p>
+                faqs.forEach((item, index) => {
+                    const id = `faq-${index}`;
+                    html += `
+                        <div class="border border-gray-200 rounded-xl bg-white shadow-md">
+                            <button class="w-full p-5 text-left flex justify-between items-center font-bold text-gray-900 hover:bg-gray-50 transition duration-150" aria-expanded="false" aria-controls="${id}-content" onclick="toggleFAQ('${id}')">
+                                ${item.q}
+                                <svg id="${id}-icon" class="w-5 h-5 ml-2 transform rotate-0 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="${id}-content" class="px-5 py-0 overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0;">
+                                <p class="pb-5 text-gray-600">${item.a}</p>
+                            </div>
                         </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering FAQs:", error);
+            }
         }
         
         /**
          * Toggles the FAQ accordion item.
          */
         function toggleFAQ(id) {
-            const content = document.getElementById(`${id}-content`);
-            const button = content.previousElementSibling;
-            const icon = document.getElementById(`${id}-icon`);
-            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            try {
+                const content = document.getElementById(`${id}-content`);
+                const button = content.previousElementSibling;
+                const icon = document.getElementById(`${id}-icon`);
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
-            if (isExpanded) {
-                content.style.maxHeight = '0';
-                button.setAttribute('aria-expanded', 'false');
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                content.style.maxHeight = content.scrollHeight + 'px';
-                button.setAttribute('aria-expanded', 'true');
-                icon.style.transform = 'rotate(180deg)';
+                if (isExpanded) {
+                    content.style.maxHeight = '0';
+                    button.setAttribute('aria-expanded', 'false');
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    button.setAttribute('aria-expanded', 'true');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            } catch (error) {
+                console.error("Error toggling FAQ:", error);
             }
         }
         
@@ -1551,24 +1599,28 @@
          * Renders the carousel testimonials for the home page.
          */
         function renderCarouselTestimonials() {
-            const container = document.getElementById('testimonial-carousel');
-            if (!container) return;
+            try {
+                const container = document.getElementById('testimonial-carousel');
+                if (!container) return;
 
-            let html = '';
-            const featuredReviews = testimonials.slice(0, 3); 
-            
-            featuredReviews.forEach(review => {
-                const stars = '⭐'.repeat(review.rating);
-                html += `
-                    <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-600 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
-                        <span class="text-2xl" aria-label="${review.rating} stars">${stars}</span>
-                        <p class="italic text-gray-700 my-4 text-base">"${review.quote}"</p>
-                        <p class="font-bold text-sm text-gray-900">— ${review.name}</p>
-                        <span class="text-xs text-blue-600 font-medium">Provider: ${review.provider}</span>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
+                let html = '';
+                const featuredReviews = testimonials.slice(0, 3); 
+                
+                featuredReviews.forEach(review => {
+                    const stars = '⭐'.repeat(review.rating);
+                    html += `
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-blue-600 hover:shadow-2xl transition duration-300 transform hover:scale-[1.01]">
+                            <span class="text-2xl" aria-label="${review.rating} stars">${stars}</span>
+                            <p class="italic text-gray-700 my-4 text-base">"${review.quote}"</p>
+                            <p class="font-bold text-sm text-gray-900">— ${review.name}</p>
+                            <span class="text-xs text-blue-600 font-medium">Provider: ${review.provider}</span>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering carousel testimonials:", error);
+            }
         }
 
         // --- Order Form & Modals ---
@@ -1579,31 +1631,35 @@
          * @param {string} planName 
          */
         function showOrderForm(providerName = '', planName = '') {
-            showPage('order-form');
-            
-            const providerSelect = document.getElementById('select-provider');
-            const planSelect = document.getElementById('select-plan');
+            try {
+                showPage('order-form');
+                
+                const providerSelect = document.getElementById('select-provider');
+                const planSelect = document.getElementById('select-plan');
 
-            // Populate Provider Select
-            providerSelect.innerHTML = '<option value="">-- Choose Provider --</option>';
-            providerData.forEach(p => {
-                const option = document.createElement('option');
-                option.value = p.name;
-                option.textContent = p.name;
-                providerSelect.appendChild(option);
-            });
-            
-            // Pre-select if arguments provided
-            if (providerName) {
-                providerSelect.value = providerName;
-                populatePlanSelect(providerName);
-                if (planName) {
-                    planSelect.value = planName;
+                // Populate Provider Select
+                providerSelect.innerHTML = '<option value="">-- Choose Provider --</option>';
+                providerData.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p.name;
+                    option.textContent = p.name;
+                    providerSelect.appendChild(option);
+                });
+                
+                // Pre-select if arguments provided
+                if (providerName) {
+                    providerSelect.value = providerName;
+                    populatePlanSelect(providerName);
+                    if (planName) {
+                        planSelect.value = planName;
+                    }
                 }
+                
+                // Set step 1 visible and progress bar
+                nextStep(1); 
+            } catch (error) {
+                console.error("Error showing order form:", error);
             }
-            
-            // Set step 1 visible and progress bar
-            nextStep(1); 
         }
 
         /**
@@ -1611,17 +1667,21 @@
          * @param {string} providerName 
          */
         function populatePlanSelect(providerName) {
-            const planSelect = document.getElementById('select-plan');
-            planSelect.innerHTML = '<option value="">-- Choose Plan --</option>';
+            try {
+                const planSelect = document.getElementById('select-plan');
+                planSelect.innerHTML = '<option value="">-- Choose Plan --</option>';
 
-            const provider = providerData.find(p => p.name === providerName);
-            if (provider) {
-                provider.plans.forEach(plan => {
-                    const option = document.createElement('option');
-                    option.value = plan.name;
-                    option.textContent = `${plan.name} ($${plan.price.toFixed(2)}/mo, ${plan.speed} Mbps)`;
-                    planSelect.appendChild(option);
-                });
+                const provider = providerData.find(p => p.name === providerName);
+                if (provider) {
+                    provider.plans.forEach(plan => {
+                        const option = document.createElement('option');
+                        option.value = plan.name;
+                        option.textContent = `${plan.name} ($${plan.price.toFixed(2)}/mo, ${plan.speed} Mbps)`;
+                        planSelect.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error("Error populating plan select:", error);
             }
         }
         
@@ -1630,32 +1690,40 @@
          * @param {number} step - The step number to transition to.
          */
         function nextStep(step) {
-            const steps = [1, 2, 3];
-            steps.forEach(s => {
-                const stepEl = document.getElementById(`form-step-${s}`);
-                const statusEl = document.getElementById(`step-${s}-status`);
-                if (s === step) {
-                    stepEl.classList.remove('hidden');
-                    statusEl.classList.remove('text-gray-400');
-                    statusEl.classList.add('text-blue-600');
-                } else {
-                    stepEl.classList.add('hidden');
-                    statusEl.classList.remove('text-blue-600');
-                    statusEl.classList.add('text-gray-400');
+            try {
+                const steps = [1, 2, 3];
+                steps.forEach(s => {
+                    const stepEl = document.getElementById(`form-step-${s}`);
+                    const statusEl = document.getElementById(`step-${s}-status`);
+                    if (stepEl && statusEl) {
+                        if (s === step) {
+                            stepEl.classList.remove('hidden');
+                            statusEl.classList.remove('text-gray-400');
+                            statusEl.classList.add('text-blue-600');
+                        } else {
+                            stepEl.classList.add('hidden');
+                            statusEl.classList.remove('text-blue-600');
+                            statusEl.classList.add('text-gray-400');
+                        }
+                    }
+                });
+
+                // Update progress bar
+                const progressBar = document.getElementById('progress-bar');
+                if (progressBar) {
+                    progressBar.style.width = `${step * 33.33}%`;
                 }
-            });
 
-            // Update progress bar
-            const progressBar = document.getElementById('progress-bar');
-            progressBar.style.width = `${step * 33.33}%`;
-
-            if (step === 3) {
-                // Populate confirmation details
-                document.getElementById('confirm-name').textContent = document.getElementById('full-name').value;
-                document.getElementById('confirm-email').textContent = document.getElementById('email').value;
-                document.getElementById('confirm-phone').textContent = document.getElementById('phone').value;
-                document.getElementById('confirm-provider').textContent = document.getElementById('select-provider').value;
-                document.getElementById('confirm-plan').textContent = document.getElementById('select-plan').value;
+                if (step === 3) {
+                    // Populate confirmation details
+                    document.getElementById('confirm-name').textContent = document.getElementById('full-name').value;
+                    document.getElementById('confirm-email').textContent = document.getElementById('email').value;
+                    document.getElementById('confirm-phone').textContent = document.getElementById('phone').value;
+                    document.getElementById('confirm-provider').textContent = document.getElementById('select-provider').value;
+                    document.getElementById('confirm-plan').textContent = document.getElementById('select-plan').value;
+                }
+            } catch (error) {
+                console.error("Error navigating form steps:", error);
             }
         }
         
@@ -1663,19 +1731,27 @@
          * Shows the Request Callback Modal.
          */
         function showRequestCallbackModal() {
-            const modal = document.getElementById('callback-modal');
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-            document.getElementById('callback-status').classList.add('hidden');
+            try {
+                const modal = document.getElementById('callback-modal');
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                document.getElementById('callback-status').classList.add('hidden');
+            } catch (error) {
+                console.error("Error showing callback modal:", error);
+            }
         }
 
         /**
          * Hides the Request Callback Modal.
          */
         function hideRequestCallbackModal() {
-            const modal = document.getElementById('callback-modal');
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
+            try {
+                const modal = document.getElementById('callback-modal');
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+            } catch (error) {
+                console.error("Error hiding callback modal:", error);
+            }
         }
 
         // --- Plan Comparison Functions ---
@@ -1684,49 +1760,58 @@
          * Adds a plan to the comparison modal.
          */
         function addToComparison(name, speed, price, contract) {
-            if (comparisonPlans.length >= 3) {
-                alert("You can compare a maximum of 3 plans.");
-                return;
-            }
+            try {
+                if (comparisonPlans.length >= 3) {
+                    alert("You can compare a maximum of 3 plans.");
+                    return;
+                }
 
-            const newPlan = { name, speed, price, contract };
-            // Check if plan already exists
-            if (comparisonPlans.some(p => p.name === name)) {
-                alert("This plan is already added for comparison.");
-                return;
+                const newPlan = { name, speed, price, contract };
+                // Check if plan already exists
+                if (comparisonPlans.some(p => p.name === name)) {
+                    alert("This plan is already added for comparison.");
+                    return;
+                }
+                
+                comparisonPlans.push(newPlan);
+                renderComparisonDisplay();
+                showCompareModal();
+            } catch (error) {
+                console.error("Error adding to comparison:", error);
             }
-            
-            comparisonPlans.push(newPlan);
-            renderComparisonDisplay();
-            showCompareModal();
         }
 
         /**
          * Renders the plans inside the comparison modal.
          */
         function renderComparisonDisplay() {
-            const container = document.getElementById('comparison-display');
-            let html = '';
+            try {
+                const container = document.getElementById('comparison-display');
+                if (!container) return;
+                let html = '';
 
-            if (comparisonPlans.length === 0) {
-                container.innerHTML = `<p class="text-center md:col-span-3 text-gray-600 py-8">Select up to 3 plans to compare them here.</p>`;
-                return;
-            }
+                if (comparisonPlans.length === 0) {
+                    container.innerHTML = `<p class="text-center md:col-span-3 text-gray-600 py-8">Select up to 3 plans to compare them here.</p>`;
+                    return;
+                }
 
-            comparisonPlans.forEach((plan, index) => {
-                html += `
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md relative border-t-4 border-blue-600">
-                        <button onclick="removeFromComparison(${index})" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-lg font-bold" aria-label="Remove plan">&times;</button>
-                        <h3 class="text-xl font-extrabold text-gray-900 mb-2">${plan.name}</h3>
-                        <p class="text-3xl font-bold text-green-600 mb-4">$${plan.price}/mo</p>
-                        <div class="space-y-2 text-gray-700 text-sm">
-                            <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> <strong>Speed:</strong> ${plan.speed} Mbps</p>
-                            <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <strong>Contract:</strong> ${plan.contract}</p>
+                comparisonPlans.forEach((plan, index) => {
+                    html += `
+                        <div class="bg-blue-50 p-6 rounded-xl shadow-md relative border-t-4 border-blue-600">
+                            <button onclick="removeFromComparison(${index})" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-lg font-bold" aria-label="Remove plan">&times;</button>
+                            <h3 class="text-xl font-extrabold text-gray-900 mb-2">${plan.name}</h3>
+                            <p class="text-3xl font-bold text-green-600 mb-4">$${plan.price}/mo</p>
+                            <div class="space-y-2 text-gray-700 text-sm">
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg> <strong>Speed:</strong> ${plan.speed} Mbps</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> <strong>Contract:</strong> ${plan.contract}</p>
+                            </div>
                         </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
+                    `;
+                });
+                container.innerHTML = html;
+            } catch (error) {
+                console.error("Error rendering comparison display:", error);
+            }
         }
 
         /**
@@ -1734,35 +1819,51 @@
          * @param {number} index 
          */
         function removeFromComparison(index) {
-            comparisonPlans.splice(index, 1);
-            renderComparisonDisplay();
+            try {
+                comparisonPlans.splice(index, 1);
+                renderComparisonDisplay();
+            } catch (error) {
+                console.error("Error removing from comparison:", error);
+            }
         }
         
         /**
          * Clears all plans from the comparison list.
          */
         function clearComparison() {
-            comparisonPlans.length = 0; // Clear array
-            renderComparisonDisplay();
+            try {
+                comparisonPlans.length = 0; // Clear array
+                renderComparisonDisplay();
+            } catch (error) {
+                console.error("Error clearing comparison:", error);
+            }
         }
         
         /**
          * Shows the Comparison Modal.
          */
         function showCompareModal() {
-            renderComparisonDisplay();
-            const modal = document.getElementById('compare-modal');
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
+            try {
+                renderComparisonDisplay();
+                const modal = document.getElementById('compare-modal');
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+            } catch (error) {
+                console.error("Error showing compare modal:", error);
+            }
         }
 
         /**
          * Hides the Comparison Modal.
          */
         function hideCompareModal() {
-            const modal = document.getElementById('compare-modal');
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
+            try {
+                const modal = document.getElementById('compare-modal');
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+            } catch (error) {
+                console.error("Error hiding compare modal:", error);
+            }
         }
 
         // --- Timer and Utility Functions ---
@@ -1771,136 +1872,177 @@
          * Updates the promotional countdown timer.
          */
         function updateCountdown() {
-            // Target time: 1 hour from initial load, simulated.
-            const targetTime = localStorage.getItem('promoEndTime') || Date.now() + 3600000; // Default 1 hour
-            
-            if (!localStorage.getItem('promoEndTime')) {
-                localStorage.setItem('promoEndTime', targetTime);
+            try {
+                // Target time: 1 hour from initial load, simulated.
+                const targetTime = localStorage.getItem('promoEndTime') || Date.now() + 3600000; // Default 1 hour
+                
+                if (!localStorage.getItem('promoEndTime')) {
+                    localStorage.setItem('promoEndTime', targetTime);
+                }
+                
+                const remainingTime = targetTime - Date.now();
+                const timerEl = document.getElementById('countdown-timer');
+
+                if (!timerEl) return;
+
+                if (remainingTime <= 0) {
+                    clearInterval(countdownInterval);
+                    timerEl.textContent = 'EXPIRED';
+                    return;
+                }
+
+                const totalSeconds = Math.floor(remainingTime / 1000);
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+
+                const format = (n) => String(n).padStart(2, '0');
+                timerEl.textContent = `${format(hours)}:${format(minutes)}:${format(seconds)} Remaining`;
+            } catch (error) {
+                console.error("Error updating countdown:", error);
             }
-            
-            const remainingTime = targetTime - Date.now();
-            const timerEl = document.getElementById('countdown-timer');
-
-            if (remainingTime <= 0) {
-                clearInterval(countdownInterval);
-                timerEl.textContent = 'EXPIRED';
-                return;
-            }
-
-            const totalSeconds = Math.floor(remainingTime / 1000);
-            const hours = Math.floor(totalSeconds / 3600);
-            const minutes = Math.floor((totalSeconds % 3600) / 60);
-            const seconds = totalSeconds % 60;
-
-            const format = (n) => String(n).padStart(2, '0');
-            timerEl.textContent = `${format(hours)}:${format(minutes)}:${format(seconds)} Remaining`;
         }
 
         /**
          * Handles the Cookie Acceptance.
          */
         function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookie-banner').style.transform = 'translateY(100%)';
+            try {
+                localStorage.setItem('cookiesAccepted', 'true');
+                const banner = document.getElementById('cookie-banner');
+                if (banner) {
+                    banner.style.transform = 'translateY(100%)';
+                }
+            } catch (error) {
+                console.error("Error accepting cookies:", error);
+            }
         }
         
         /**
          * Initializes scroll reveal observer.
          */
         function initScrollReveal() {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Apply the final state (opacity 1, reset transform)
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
+            try {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Apply the final state (opacity 1, reset transform)
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    rootMargin: '0px',
+                    threshold: 0.1
                 });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.1
-            });
 
-            document.querySelectorAll('.animate-fade-in').forEach(el => {
-                // Set initial state (opacity 0, transformed)
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                observer.observe(el);
-            });
+                document.querySelectorAll('.animate-fade-in').forEach(el => {
+                    // Set initial state (opacity 0, transformed)
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    observer.observe(el);
+                });
+            } catch (error) {
+                console.error("Error initializing scroll reveal:", error);
+            }
         }
 
 
         // --- Event Listeners and Initializers ---
 
         window.onload = function () {
-            // Initial render of dynamic components
-            renderHomeProviders();
-            renderCarouselTestimonials();
-            renderFAQs();
-            
-            // Set up initial state and listeners
-            showPage(currentPage); // Show the initial page
-            
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
+            try {
+                // Initial render of dynamic components
+                renderHomeProviders();
+                renderCarouselTestimonials();
+                renderFAQs();
+                
+                // Set up initial state and listeners
+                showPage(currentPage); // Show the initial page
+                
+                // Mobile Menu Toggle
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenuButton && mobileMenu) {
+                    mobileMenuButton.addEventListener('click', () => {
+                        mobileMenu.classList.toggle('hidden');
+                    });
+                }
+
+                window.closeMobileMenu = () => { mobileMenu.classList.add('hidden'); };
+
+                // Start countdown timer
+                countdownInterval = setInterval(updateCountdown, 1000);
+                
+                // Check for cookie banner
+                const cookieBanner = document.getElementById('cookie-banner');
+                if (cookieBanner && localStorage.getItem('cookiesAccepted') !== 'true') {
+                    setTimeout(() => {
+                        cookieBanner.style.transform = 'translateY(0)';
+                    }, 500);
+                }
+                
+                // Initialize scroll reveal
+                initScrollReveal();
+
+                // Order Form Listener
+                const orderWizard = document.getElementById('order-wizard');
+                if (orderWizard) {
+                    orderWizard.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        // Simulate submission and redirect to thank you page
+                        showPage('thank-you-page');
+                    });
+                }
+                
+                // Call Back Form Listener
+                const callbackForm = document.getElementById('callback-form');
+                if (callbackForm) {
+                    callbackForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        // Simulate submission
+                        document.getElementById('callback-status').classList.remove('hidden');
+                        setTimeout(hideRequestCallbackModal, 2000);
+                    });
+                }
+
+                // Plan Select Change Listener for Step 2
+                const selectProvider = document.getElementById('select-provider');
+                if (selectProvider) {
+                    selectProvider.addEventListener('change', (e) => {
+                        populatePlanSelect(e.target.value);
+                    });
+                }
+                
+                // Contact Form Listener
+                const contactForm = document.getElementById('contact-form');
+                if (contactForm) {
+                    contactForm.addEventListener('submit', function(e) {
+                         e.preventDefault();
+                         document.getElementById('contact-form').reset();
+                         document.getElementById('contact-message-status').classList.remove('hidden');
+                         setTimeout(() => {
+                             document.getElementById('contact-message-status').classList.add('hidden');
+                         }, 3000);
+                    });
+                }
+            } catch (error) {
+                console.error("CRITICAL APP INITIALIZATION FAILURE:", error);
+                // Attempt to force visibility of the main structure
+                showPage('home');
             }
-
-            window.closeMobileMenu = () => { mobileMenu.classList.add('hidden'); };
-
-            // Start countdown timer
-            countdownInterval = setInterval(updateCountdown, 1000);
-            
-            // Check for cookie banner
-            if (localStorage.getItem('cookiesAccepted') !== 'true') {
-                setTimeout(() => {
-                    document.getElementById('cookie-banner').style.transform = 'translateY(0)';
-                }, 500);
-            }
-            
-            // Initialize scroll reveal
-            initScrollReveal();
-
-            // Order Form Listener
-            document.getElementById('order-wizard').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Simulate submission and redirect to thank you page
-                showPage('thank-you-page');
-            });
-            
-            // Call Back Form Listener
-            document.getElementById('callback-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                // Simulate submission
-                document.getElementById('callback-status').classList.remove('hidden');
-                setTimeout(hideRequestCallbackModal, 2000);
-            });
-
-            // Plan Select Change Listener for Step 2
-            document.getElementById('select-provider').addEventListener('change', (e) => {
-                populatePlanSelect(e.target.value);
-            });
-            
-            // Contact Form Listener
-            document.getElementById('contact-form').addEventListener('submit', function(e) {
-                 e.preventDefault();
-                 document.getElementById('contact-form').reset();
-                 document.getElementById('contact-message-status').classList.remove('hidden');
-                 setTimeout(() => {
-                     document.getElementById('contact-message-status').classList.add('hidden');
-                 }, 3000);
-            });
         };
         
-        // Ensure initial rendering is done even if window.onload fires late
+        // DOMContentLoaded Fallback/Safety Check
         document.addEventListener('DOMContentLoaded', () => {
-             if (!document.getElementById('home-provider-cards').innerHTML) {
-                renderHomeProviders();
+             try {
+                 const homeCards = document.getElementById('home-provider-cards');
+                 if (homeCards && !homeCards.innerHTML) {
+                    renderHomeProviders();
+                 }
+             } catch (error) {
+                 console.error("DOMContentLoaded fallback failed:", error);
              }
         });
 
