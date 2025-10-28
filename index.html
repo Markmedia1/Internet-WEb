@@ -78,12 +78,11 @@
             display: block; /* Home page visible by default */
         }
 
-        /* --- Slower, Aesthetic Animations (Updated to 1.2s) */
+        /* --- Slower, Aesthetic Animations (Updated for luxury feel) --- */
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
-            /* Speed increased to 1.2s for slower, refreshing feel */
-            transition: opacity 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: opacity 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .animate-on-scroll.is-visible {
             opacity: 1;
@@ -170,55 +169,35 @@
         }
 
 
-        /* --- Aesthetic Loading Vibe */
-        .loader-arrow {
-            width: 60px;
-            height: 60px;
-            border: 5px solid transparent;
-            border-top: 5px solid #0073e6;
+        /* --- NEW Bouncing Dots Loading Animation --- */
+        .loader-dots-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px; /* Adjust height as needed */
+        }
+        .loader-dot {
+            width: 16px;
+            height: 16px;
+            margin: 0 8px;
             border-radius: 50%;
-            animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-            position: relative;
+            background-color: #3b82f6; /* Blue-500 */
+            animation: bounce 1.4s infinite ease-in-out both;
         }
-        .loader-arrow::after {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 0 8px 12px 8px;
-            border-style: solid;
-            border-color: transparent transparent #0073e6 transparent;
+        .loader-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loader-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* Keep loader subtext style */
+        .loader-subtext {
+            margin-top: 1rem; /* Increased margin slightly */
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* font-semibold */
+            color: #374151; /* gray-700 */
         }
-        .loader-provider-icon {
-            position: absolute;
-            font-size: 1.5rem;
-            font-weight: bold;
-            opacity: 0.5;
-            color: #9ca3af; /* gray-400 */
-        }
-        .loader-provider-icon:nth-child(2) { top: -30px; left: 50%; transform: translateX(-50%); }
-        .loader-provider-icon:nth-child(3) { right: -30px; top: 50%; transform: translateY(-50%); }
-        .loader-provider-icon:nth-child(4) { bottom: -30px; left: 50%; transform: translateX(-50%); }
-        .loader-provider-icon:nth-child(5) { left: -30px; top: 50%; transform: translateY(-50%); }
         
-        /* Spectrum-specific styling for results page */
-        .spectrum-price {
-            color: #0048a4; /* Spectrum Blue */
-        }
-        .spectrum-results-card {
-             border-left: 8px solid #0048a4;
-        }
-        .spectrum-small-price {
-            font-weight: 700;
-            font-size: 1.875rem; /* 30px */
-            line-height: 2.25rem; /* 36px */
-        }
-
         /* HSI Style Provider Card (General) */
         .hsi-card {
             border: 1px solid #e5e7eb;
@@ -260,7 +239,7 @@
             }
         }
         
-        /* Custom Progress Bar Animation */
+        /* Custom Progress Bar Animation (for coverage) */
         .progress-bar-container {
             height: 10px;
             background-color: #e5e7eb;
@@ -287,6 +266,46 @@
             font-size: 1.125rem; /* text-lg */
             font-weight: 600; /* font-semibold */
             padding: 0.5rem 0;
+        }
+
+        /* Custom Slider Styling */
+        .price-slider-range {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .price-slider-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0073e6;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+        .price-slider-range::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0073e6;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Provider Name Color Styling (Home Table) */
+        .provider-name-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* full */
+            font-weight: 700; /* bold */
+            font-size: 1rem; /* text-base */
+            color: white; /* Ensure text is visible */
         }
     </style>
     
@@ -331,11 +350,8 @@
 
                     <!-- Desktop Nav Links -->
                     <div class="hidden md:flex space-x-8 text-sm font-medium">
-                        <!-- Nav Link 1: Changed to HOME -->
                         <a href="#" onclick="showPage('home'); return false;" class="text-gray-900 hover:text-gray-700 transition duration-300">Home</a>
-                        <!-- Nav Link 2: NEW Cheap Internet Page -->
                         <a href="#" onclick="showPage('cheap-internet'); return false;" class="text-gray-900 hover:text-gray-700 transition duration-300">Cheap Internet</a>
-                        <!-- Nav Link 3: Provider Directory -->
                         <a href="#" onclick="showPage('provider-directory'); return false;" class="text-gray-900 hover:text-gray-700 transition duration-300">Providers</a>
                         <a href="#" onclick="showPage('reviews'); return false;" class="text-gray-900 hover:text-gray-700 transition duration-300">Reviews</a>
                         <a href="#" onclick="showPage('blog'); return false;" class="text-gray-900 hover:text-gray-700 transition duration-300">Blog</a>
@@ -407,7 +423,6 @@
 
                         <!-- Live Lookup Result Display -->
                         <div class="mt-3 text-sm text-gray-700 font-medium" id="zip-lookup-result">
-                            <!-- Removed city/state display -->
                         </div>
                         
                         <!-- Urgency/Trust Row -->
@@ -420,10 +435,10 @@
                             <!-- Verified Badge -->
                             <div class="flex items-center space-x-2 p-3 bg-green-100 border border-green-300 rounded-full shadow-sm">
                                 <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                <span class="text-sm font-semibold text-green-800">Verified Providers</span>
-                            </div>
+                            <span class="text-sm font-semibold text-green-800">Verified Providers</span>
                         </div>
                     </div>
+                </div>
                 </div>
 
                 <!-- Provider Sliding Trust Bar -->
@@ -464,7 +479,7 @@
                             <!-- Card 1 -->
                             <div class="text-center p-6 bg-gray-50 rounded-2xl shadow-lg">
                                 <div class="flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 mx-auto">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03 3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
                                 </div>
                                 <h3 class="mt-4 text-lg font-bold text-gray-900">Compare Providers</h3>
                                 <p class="mt-1 text-sm text-gray-600">See speeds, prices, and reviews in your ZIP.</p>
@@ -519,61 +534,8 @@
                                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider"></th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    <!-- Row 1: Spectrum -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-bold text-lg text-gray-800">Spectrum</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-semibold text-gray-900">Up to 1000 Mbps</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-bold text-2xl text-gray-900">$49.99/mo</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="text-gray-700">No Data Cap</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right">
-                                            <a href="#" onclick="showPage('cheap-internet'); return false;" class="px-5 py-2.5 text-sm font-medium rounded-full cta-secondary">Compare All Plans</a>
-                                        </td>
-                                    </tr>
-                                    <!-- Row 2: AT&T -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-bold text-lg text-gray-800">AT&T Fiber</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-semibold text-gray-900">Up to 2 Gbps</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-bold text-2xl text-gray-900">$55.00/mo</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="text-gray-700">No Data Cap</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right">
-                                            <a href="#" onclick="showPage('cheap-internet'); return false;" class="px-5 py-2.5 text-sm font-medium rounded-full cta-secondary">Compare All Plans</a>
-                                        </td>
-                                    </tr>
-                                    <!-- Row 3: Xfinity -->
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-bold text-lg text-gray-800">Xfinity</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-semibold text-gray-900">Up to 800 Mbps</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="font-bold text-2xl text-gray-900">$39.99/mo</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <span class="text-gray-700">1.2 TB Cap</span>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right">
-                                            <a href="#" onclick="showPage('cheap-internet'); return false;" class="px-5 py-2.5 text-sm font-medium rounded-full cta-secondary">Compare All Plans</a>
-                                        </td>
-                                    </tr>
+                                <tbody class="divide-y divide-gray-200" id="home-plans-table-body">
+                                    <!-- Rows will be injected by JS -->
                                 </tbody>
                             </table>
                         </div>
@@ -705,10 +667,10 @@
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <header class="text-center bg-white p-8 rounded-xl shadow-lg border-b-4 border-blue-500 mb-12">
                         <h1 class="text-5xl font-extrabold text-gray-900">
-                            Plans in <span class="text-blue-600">Your Area</span>
+                            Plans in <span id="displayed-city-state" class="text-blue-600">Your Area</span>
                         </h1>
                         <p class="mt-2 text-lg text-gray-600">
-                            We found plans available for **ZIP Code: <span id="displayed-zip"></span>**. Use the filters below to refine your search.
+                            We found plans available for ZIP Code: <span id="displayed-zip" class="font-bold"></span>. Use the filters below to refine your search.
                         </p>
                         <!-- Re-Search Form (Minimalist) -->
                         <form id="comparison-zip-form" class="mt-6 max-w-lg mx-auto" onsubmit="handleZipSearch(event); return false;">
@@ -746,7 +708,7 @@
                                 <p class="mt-3 text-gray-700 text-sm">
                                     Based on high coverage (92% for this area) and reliable no-contract policy, **Spectrum** is the most recommended choice for residents in your neighborhood. They offer speed tiers up to 2 Gigabytes per second.
                                 </p>
-                                <a href="tel:${PHONE_NUMBER}" class="mt-4 w-full block text-center px-4 py-2 text-sm font-semibold rounded-full cta-primary">
+                                <a href="tel:8888080237" class="mt-4 w-full block text-center px-4 py-2 text-sm font-semibold rounded-full cta-primary">
                                     Lock in Spectrum's Best Rate
                                 </a>
                             </div>
@@ -760,7 +722,23 @@
                             <!-- Filters -->
                             <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 animate-on-scroll">
                                 <h3 class="text-lg font-bold text-gray-900 mb-4">Filter Deals</h3>
-                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <!-- Price Slider -->
+                                    <div class="md:col-span-2 p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex justify-between items-baseline mb-2">
+                                            <label for="comparison-price-slider" class="text-sm font-semibold text-gray-700">Max Monthly Price:</label>
+                                            <span id="price-slider-value" class="text-lg font-bold text-blue-600">$75/mo</span>
+                                        </div>
+                                        <input type="range" id="comparison-price-slider" min="20" max="100" value="75" step="5"
+                                               oninput="document.getElementById('price-slider-value').textContent = '$' + this.value + '/mo';"
+                                               onchange="window.applyComparisonFilters()"
+                                               class="price-slider-range">
+                                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                            <span>$20</span>
+                                            <span>$100+</span>
+                                        </div>
+                                    </div>
+                                    <!-- Speed Filter -->
                                     <select id="comparison-speed-filter" onchange="applyComparisonFilters()" class="px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700">
                                         <option value="all">Minimum Speed</option>
                                         <option value="100">100+ Mbps</option>
@@ -768,12 +746,7 @@
                                         <option value="500">500+ Mbps</option>
                                         <option value="900">Gigabit+</option>
                                     </select>
-                                    <select id="comparison-price-filter" onchange="applyComparisonFilters()" class="px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700">
-                                        <option value="1000">Max Price</option>
-                                        <option value="30">$30/mo or less</option>
-                                        <option value="50">$50/mo or less</option>
-                                        <option value="75">$75/mo or less</option>
-                                    </select>
+                                    <!-- Connection Filter -->
                                     <select id="comparison-connection-filter" onchange="applyComparisonFilters()" class="px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700">
                                         <option value="all">Connection Type</option>
                                         <option value="Fiber">Fiber Only</option>
@@ -781,7 +754,6 @@
                                         <option value="5G">5G Home</option>
                                         <option value="Satellite">Satellite Only</option>
                                     </select>
-                                    <button onclick="applyComparisonFilters()" class="px-4 py-3 rounded-lg cta-secondary text-sm font-semibold">Apply Filters</button>
                                 </div>
                             </div>
                             
@@ -845,19 +817,7 @@
             =========================================
             -->
             <section id="provider-directory" class="page-content py-24 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-4xl font-extrabold text-center text-gray-900 header-accent">
-                        Browse Internet Providers
-                    </h2>
-                    <p class="mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto">
-                        Click any provider below to see detailed packages, speeds, and service information.
-                    </p>
-
-                    <!-- Provider Directory Container -->
-                    <div id="provider-directory-container" class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <!-- Content dynamically injected by renderProviderDirectory() -->
-                    </div>
-                </div>
+                <!-- Content dynamically injected by renderProviderDirectory() -->
             </section>
 
             <!-- 
@@ -1181,22 +1141,19 @@
 
     <!-- 
     =========================================
-    MODALS & OVERLAYS
+    MODALS & OVERLAYS - UPDATED LOADER
     =========================================
     -->
-
-    <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 z-50 bg-white bg-opacity-90 backdrop-blur-sm items-center justify-center" style="display: none; pointer-events: none;">
-        <div class="flex flex-col items-center">
-            <!-- Aesthetic Loader -->
-            <div class="relative w-32 h-32 flex items-center justify-center">
-                <span class="loader-provider-icon">AT&T</span>
-                <span class="loader-provider-icon">Xfinity</span>
-                <span class="loader-provider-icon">Verizon</span>
-                <span class="loader-provider-icon">Spectrum</span>
-                <div class="loader-arrow"></div>
+        <div class="flex flex-col items-center w-full px-8"> <!-- Added padding for smaller screens -->
+            <!-- NEW Bouncing Dots Loader Structure -->
+            <div class="loader-dots-container">
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
+                <div class="loader-dot"></div>
             </div>
-            <p class="mt-8 text-lg font-semibold text-gray-700">Checking for providers in your area...</p>
+            <!-- Removed Progress Bar and Text -->
+            <p class="loader-subtext">Checking providers in your area...</p>
         </div>
     </div>
 
@@ -1271,22 +1228,22 @@
             ];
             
             const BLOG_CONTENT = [
-                { type: 'In-Depth Guides', title: 'The Ultimate Guide to Fiber Optic Internet', snippet: 'Fiber internet offers symmetrical download and upload speeds, making it ideal for video calls and large file transfers. This guide covers everything about its growing availability.', img: 'Fiber+Optics' },
-                { type: 'Deals & Offers', title: 'How to Get Free Mobile Lines with Your Internet', snippet: 'Many providers like Spectrum and Xfinity now offer free unlimited mobile lines for a year when you sign up for their internet. This can save you hundreds...', img: 'Free+Mobile+Lines' },
-                { type: 'Tech Explained', title: 'Cable vs Fiber: What’s Right for You?', snippet: 'We break down the pros and cons of the two most common high-speed technologies based on budget, speed needs, and geographical location.', img: 'Cable+vs+Fiber' },
-                { type: 'Market Trends', title: 'Top 5 Internet Providers for Gaming in 2025', snippet: 'A deep dive into the providers offering the lowest latency and highest upload speeds critical for competitive online gaming.', img: 'Gaming+Internet' },
-                { type: 'Service Information', title: 'Understanding Data Caps and Why They Matter', snippet: 'A clear explanation of data caps, the providers who have them (like Xfinity), and how unlimited data plans work.', img: 'Data+Cap+Icon' },
+                { type: 'Provider Comparison', title: 'Top 5 Internet Providers: Speed, Reliability, & Price', snippet: 'We analyze the biggest players—Spectrum, AT&T, Xfinity, and Verizon—on what matters most to your bottom line and connection quality.', img: 'Competitive+Provider+Logos' },
+                { type: 'Technology Explained', title: 'Fiber vs. Cable: Which is the Best Connection for Your Home?', snippet: 'A deep dive into the two primary broadband technologies. Learn why Fiber is faster for uploads and where Cable still offers great value.', img: 'Fiber+Optic+vs+Coaxial+Cable' },
+                { type: 'Speed Guide', title: 'Do You Need Gigabit Speed? Matching Mbps to Your Household Needs', snippet: 'Stop overpaying! Use our guide to figure out the exact download and upload speeds required for heavy 4K streaming, gaming, and working from home.', img: 'Speedometer+Gauge+Mbps' },
+                { type: 'Service Information', title: 'The Truth About Unlimited Data and Hidden Fees', snippet: 'Many plans advertise "Unlimited Data," but exceptions apply. We explain data caps, data throttling, and how to spot misleading contract terms.', img: 'No+Data+Cap+Icon' },
+                { type: 'Budget Advice', title: 'Finding the Cheapest Plans: Low-Cost Options for Every Budget', snippet: 'From government assistance programs to introductory rates, here is our strategy for finding high-speed internet without breaking the bank.', img: 'Piggy+Bank+Internet' },
             ];
             
-            // Removed ZIP_DATA_CSV and ZIP_MAPPING as requested.
-
-            // --- Global state for filtering ---
+            // --- Global state ---
             window.currentZip = null;
+            window.currentCityState = null; // Store city/state info
             window.allPlans = [];
 
             // --- DOM Elements ---
             const allPages = document.querySelectorAll('.page-content');
             const loader = document.getElementById('loading-screen');
+            // Removed references to progress bar
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
@@ -1310,6 +1267,17 @@
                     
                     // Scroll to top
                     window.scrollTo(0, 0);
+                    
+                    // Specific page rendering call after navigation
+                    if (pageId === 'provider-directory') {
+                        renderProviderDirectory();
+                    } else if (pageId === 'cheap-internet') {
+                        renderCheapInternetPage();
+                    } else if (pageId === 'reviews') {
+                        renderReviews();
+                    } else if (pageId === 'blog') {
+                        renderBlog();
+                    } 
                 } catch (e) {
                     console.error("Error in showPage:", e);
                     // Critical fallback
@@ -1454,7 +1422,7 @@
                 });
             }
 
-            // --- Loading Screen (No Change) ---
+            // --- UPDATED Loading Screen Functions (Simplified) ---
             function showLoader() {
                 if (loader) {
                     loader.style.display = 'flex';
@@ -1495,7 +1463,7 @@
                 const timerInterval = setInterval(updateTimer, 1000);
             }
             
-            // --- Scroll Animation Logic (No Change) ---
+            // --- Scroll Animation Logic (Modified to 1.5s) ---
             function initScrollAnimations() {
                 const observerOptions = {
                     root: null,
@@ -1561,13 +1529,15 @@
             }
 
             // --- Comparison Page Renderer (MODIFIED for no City/State) ---
-            function renderComparisonPage(zip) {
+            function renderComparisonPage(zip, cityState) {
                 // Since this function rebuilds the coverage area, we can safely target it.
                 const coverageBarsContainer = document.getElementById('coverage-bars');
                 const displayedZipElement = document.getElementById('displayed-zip');
+                const displayedCityStateElement = document.getElementById('displayed-city-state'); // New element
                 
                 // Set the current ZIP on the results page header
                 if(displayedZipElement) displayedZipElement.textContent = zip;
+                if(displayedCityStateElement) displayedCityStateElement.textContent = cityState || 'Your Area'; // Display city/state or fallback
                 
                 // Check for null only on the specific element that receives dynamic content
                 if (!coverageBarsContainer) {
@@ -1613,8 +1583,16 @@
                         window.allPlans.push({ provider: providerName, ...plan });
                     });
                 }
+
+                // Set initial price slider value
+                const slider = document.getElementById('comparison-price-slider');
+                const sliderValue = document.getElementById('price-slider-value');
+                if (slider && sliderValue) {
+                    slider.value = 75; // Reset to default
+                    sliderValue.textContent = `$${slider.value}/mo`;
+                }
                 
-                // Render the initial plan cards (this is safe now that the filter elements exist in the main HTML)
+                // Render the initial plan cards
                 window.renderComparisonFilteredPlans();
 
                 // 3. Trigger delayed scroll animation to make the progress bars slide in
@@ -1632,21 +1610,21 @@
 
                 // These elements are now guaranteed to exist because they are static HTML
                 const speedFilter = document.getElementById('comparison-speed-filter');
-                const priceFilter = document.getElementById('comparison-price-filter');
+                const priceSlider = document.getElementById('comparison-price-slider'); // Changed from priceFilter
                 const connectionFilter = document.getElementById('comparison-connection-filter');
                 const orderPlanSelect = document.getElementById('order-plan');
 
                 let filteredPlans = window.allPlans;
                 let selectHtml = '';
 
-                // Apply Filters (null checks included in filter logic)
+                // Apply Filters
+                if (priceSlider) {
+                    const maxPrice = parseFloat(priceSlider.value);
+                    filteredPlans = filteredPlans.filter(plan => plan.price <= maxPrice);
+                }
                 if (speedFilter && speedFilter.value !== 'all') {
                     const minSpeed = parseInt(speedFilter.value, 10);
                     filteredPlans = filteredPlans.filter(plan => plan.speed >= minSpeed);
-                }
-                if (priceFilter && priceFilter.value !== '1000') { // Use 1000 as the "all" default max price
-                    const maxPrice = parseFloat(priceFilter.value);
-                    filteredPlans = filteredPlans.filter(plan => plan.price <= maxPrice);
                 }
                 if (connectionFilter && connectionFilter.value !== 'all') {
                     filteredPlans = filteredPlans.filter(plan => 
@@ -1703,12 +1681,7 @@
             // Re-usable Plan Card Renderer (Same as previous version)
             function renderPlanCard(plan) {
                 // Ensure provider-specific colors/logos are handled
-                let providerColor = '#0073e6'; // Default Blue
-                if (plan.provider === 'Spectrum') providerColor = '#0048a4';
-                if (plan.provider === 'AT&T') providerColor = '#00a34f';
-                if (plan.provider === 'Xfinity') providerColor = '#d9001b';
-                if (plan.provider === 'Verizon') providerColor = '#fe0000';
-                if (plan.provider === 'Frontier') providerColor = '#ff6600';
+                let providerColor = getProviderColor(plan.provider).hex || '#0073e6'; // Use helper
                 
                 const cardHtml = `
                     <div class="hsi-card bg-white overflow-hidden shadow-xl hover:shadow-2xl hover:border-blue-500 transition duration-300" style="border-left: 6px solid ${providerColor};">
@@ -1763,6 +1736,24 @@
                 return cardHtml;
             }
             
+            // --- Helper function to get Provider Colors ---
+            function getProviderColor(providerName) {
+                switch (providerName) {
+                    case 'Spectrum': return { hex: '#0048a4', tag: 'bg-blue-100 text-blue-800' };
+                    case 'AT&T': return { hex: '#00a34f', tag: 'bg-green-100 text-green-800' };
+                    case 'Xfinity': return { hex: '#d9001b', tag: 'bg-red-100 text-red-800' };
+                    case 'Verizon': return { hex: '#fe0000', tag: 'bg-red-100 text-red-800' };
+                    case 'Frontier': return { hex: '#ff6600', tag: 'bg-orange-100 text-orange-800' };
+                    case 'Cox': return { hex: '#990000', tag: 'bg-red-100 text-red-800' };
+                    case 'Optimum': return { hex: '#0057b8', tag: 'bg-blue-100 text-blue-800' };
+                    case 'T-Mobile Home Internet': return { hex: '#e20074', tag: 'bg-pink-100 text-pink-800' };
+                    case 'Viasat': return { hex: '#4f46e5', tag: 'bg-indigo-100 text-indigo-800' };
+                    case 'HughesNet': return { hex: '#7c3aed', tag: 'bg-violet-100 text-violet-800' };
+                    default: return { hex: '#1f2937', tag: 'bg-gray-100 text-gray-800' }; // Default gray
+                }
+            }
+
+
             // --- Input Validation (Replaces Live Lookup) ---
             window.validateZipInput = function(zip, resultElementId = 'zip-lookup-result') {
                 const resultElement = document.getElementById(resultElementId);
@@ -1784,29 +1775,84 @@
             }
 
 
-            // --- Search Logic (Simplified for Generic Results) ---
-            window.handleZipSearch = function(event) {
+            // --- UPDATED Search Logic (with ZIP API call) ---
+            window.handleZipSearch = async function(event) { // Added async
                 if (event) event.preventDefault();
                 
                 // Use the submitting form's input field
                 const form = event.target.closest('form');
                 const zipInput = form.querySelector('input[name="zip"]');
-                const zip = zipInput ? zipInput.value.trim() : '00000'; // Default if somehow zip is missing
+                const zip = zipInput ? zipInput.value.trim() : '';
+                const resultId = form.id === 'zip-form' ? 'zip-lookup-result' : 'zip-lookup-result-comp';
+                const resultElement = document.getElementById(resultId);
                 
                 if (!/^\d{5}$/.test(zip)) {
-                    console.error("Validation Failed: Please enter a valid 5-digit ZIP code.");
-                    // Ensure validation error is shown on the current form
-                    const resultId = form.id === 'zip-form' ? 'zip-lookup-result' : 'zip-lookup-result-comp';
-                    window.validateZipInput(zip, resultId); 
+                    if(resultElement) {
+                        resultElement.textContent = 'Please enter a valid 5-digit ZIP Code';
+                        resultElement.classList.remove('text-green-600');
+                        resultElement.classList.add('text-red-500');
+                    }
+                    console.error("Validation Failed: Invalid ZIP.");
                     return;
                 }
+                 if(resultElement) { // Clear previous validation message
+                    resultElement.textContent = '';
+                }
                 
-                showLoader();
+                showLoader(); // Show the new bouncing dots loader
+
+                let cityStateInfo = null;
+                let isValidZipFromAPI = false; // Flag to check API result
                 
+                try {
+                    // Fetch city/state info from zippopotam.us
+                    const response = await fetch(`https://api.zippopotam.us/us/${zip}`);
+                    
+                    // Check if the ZIP exists according to the API (status 200 means it found it)
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data && data.places && data.places.length > 0) {
+                            const place = data.places[0];
+                            cityStateInfo = `${place['place name']}, ${place['state abbreviation']}`;
+                            isValidZipFromAPI = true; // Mark as valid based on API response
+                        } else {
+                             // This case might happen if API structure changes or returns empty places for a 200 OK
+                             console.warn("ZIP API returned OK but no place data found.");
+                             cityStateInfo = "Location"; // Fallback text
+                             // We might still consider this "valid" if the API said 200 OK
+                             isValidZipFromAPI = true; 
+                        }
+                    } else {
+                        // If response status is not OK (e.g., 404 Not Found), the ZIP is invalid/not found
+                        console.warn(`ZIP code ${zip} not found by API (Status: ${response.status}).`);
+                        cityStateInfo = "Your Area"; // Fallback text
+                        isValidZipFromAPI = false;
+                    }
+
+                } catch (error) {
+                    console.error("Error fetching ZIP code info:", error);
+                    cityStateInfo = "Your Area"; // Fallback text on error
+                    isValidZipFromAPI = false; // Assume invalid on fetch error
+                }
+
+                // --- ADDED VALIDATION CHECK (MOVED) ---
+                // This check now happens *before* the 2-second timeout
+                if (!isValidZipFromAPI) {
+                    hideLoader(); // Hide loader immediately
+                    if(resultElement) {
+                        resultElement.textContent = 'Invalid or unsupported ZIP Code.';
+                        resultElement.classList.remove('text-green-600');
+                        resultElement.classList.add('text-red-500');
+                    }
+                     console.error("Search stopped: ZIP code deemed invalid by API.");
+                    return; // Stop execution
+                }
+
                 // Simulate fetching the generic data
                 setTimeout(() => {
                     try {
                         window.currentZip = zip;
+                        window.currentCityState = cityStateInfo; // Store globally
                         
                         // 1. Initialize all plans
                         window.allPlans = [];
@@ -1817,8 +1863,7 @@
                         }
                         
                         // 2. Render the comparison page
-                        // We pass only the ZIP now
-                        renderComparisonPage(zip); 
+                        renderComparisonPage(zip, cityStateInfo); 
                         
                         // 3. Navigate to the page
                         showPage('comparison-page'); 
@@ -1829,7 +1874,7 @@
                     } finally {
                         hideLoader(); 
                     }
-                }, 1200); // Slower animation load time
+                }, 2000); // 2-second delay for perceived loading
             }
 
             // --- Dynamic Rendering: Cheap Internet (No Change) ---
@@ -1842,8 +1887,10 @@
 
                 // Collect all cheapest plans from all providers
                 for (const providerName in PLANS_DATA) {
-                    const cheapestPlan = PLANS_DATA[providerName].reduce((min, p) => p.price < min.price ? p : min, PLANS_DATA[providerName][0]);
-                    allPlans.push({ provider: providerName, ...cheapestPlan });
+                    if (PLANS_DATA[providerName] && PLANS_DATA[providerName].length > 0) {
+                        const cheapestPlan = PLANS_DATA[providerName].reduce((min, p) => p.price < min.price ? p : min, PLANS_DATA[providerName][0]);
+                        allPlans.push({ provider: providerName, ...cheapestPlan });
+                    }
                 }
 
                 // Sort by price (cheapest first for the "Cheap Internet" page)
@@ -1857,46 +1904,104 @@
                 container.innerHTML = comparisonHtml;
             }
 
-            // --- Dynamic Rendering: Directory (No Change) ---
-            function renderProviderDirectory() {
-                const container = document.getElementById('provider-directory-container');
-                if (!container) return;
+            // --- Dynamic Rendering: Provider Directory (MODIFIED & CORRECTED) ---
+            window.renderProviderDirectory = function() {
+                const pageContainer = document.getElementById('provider-directory');
+                if (!pageContainer) {
+                    console.error("Provider directory page container not found.");
+                    return;
+                }
+
+                let providerGridHtml = '';
+                const providerNames = Object.keys(PLANS_DATA).sort(); // Sort names alphabetically
                 
-                let directoryHtml = '';
-                
-                for (const providerName in PLANS_DATA) {
+                // 1. Generate the provider grid/cards first
+                providerNames.forEach(providerName => {
                     const plans = PLANS_DATA[providerName];
+                    if (!plans || plans.length === 0) return; // Skip if no plans
+
                     const cheapestPrice = plans.reduce((min, p) => p.price < min ? p.price : min, plans[0].price);
                     const connectionType = plans[0].connection;
-                    
-                    // Create card that calls showProviderPackages on click
-                    directoryHtml += `
-                        <div data-provider="${providerName}" class="provider-card p-6 bg-gray-50 rounded-2xl shadow-lg border border-gray-200 cursor-pointer hover:shadow-xl hover:border-blue-400 transition duration-300 transform hover:scale-[1.02]">
-                            <h3 class="text-3xl font-extrabold text-gray-900">${providerName}</h3>
-                            <p class="mt-1 text-sm text-gray-600">${connectionType} Provider</p>
-                            <div class="mt-4">
-                                <p class="text-xs text-gray-500 uppercase">Starts From</p>
-                                <p class="text-2xl font-bold text-blue-600">$${cheapestPrice.toFixed(2)}/mo</p>
+                    const colors = getProviderColor(providerName);
+
+                    // This card remains clickable to show package details
+                    providerGridHtml += `
+                        <div data-provider="${providerName}" class="provider-card p-6 bg-white rounded-2xl shadow-md border border-gray-200 cursor-pointer hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <!-- Logo replaced by color-named text -->
+                                <span class="text-3xl font-extrabold" style="color: ${colors.hex};">${providerName}</span>
                             </div>
+                            <p class="text-sm font-medium text-gray-700">${connectionType} Plans</p>
+                            <p class="text-xs text-gray-500 uppercase mt-2">Starting Price</p>
+                            <p class="text-2xl font-bold text-green-600">$${cheapestPrice.toFixed(2)}/mo</p>
                             <div class="mt-4">
-                                <span class="px-3 py-1 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">View Details</span>
+                                <span class="inline-block px-4 py-1 text-sm font-semibold rounded-full ${colors.tag}">View Packages &rarr;</span>
                             </div>
                         </div>
                     `;
-                }
-                
-                container.innerHTML = directoryHtml;
-
-                // Attach delegated click listener to the container
-                container.addEventListener('click', (e) => {
-                    const card = e.target.closest('.provider-card');
-                    if (card) {
-                        const provider = card.getAttribute('data-provider');
-                        if (provider) {
-                            showProviderPackages(provider);
-                        }
-                    }
                 });
+
+                // 2. Combine SEO content and the provider grid
+                const fullContentHtml = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-4xl font-extrabold text-center text-gray-900 header-accent">
+                            Our Internet Partners
+                        </h2>
+                        
+                        <p class="mt-4 text-xl text-gray-600 text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+                            Wide Broadband partners with the nation's leading ISPs to bring you a comprehensive comparison tool. We make it simple to see the top internet, TV, and mobile providers available at your address.
+                        </p>
+
+                        <!-- Provider Directory Heading -->
+                        <h3 class="text-3xl font-extrabold text-gray-900 text-center border-b pb-3 mb-8 animate-on-scroll">
+                            Directory of Internet Service Providers
+                        </h3>
+
+                        <!-- Provider Grid Container (Populated by JS below) -->
+                        <div id="provider-directory-grid" class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 animate-on-scroll">
+                            ${providerGridHtml}
+                        </div>
+                        
+                        <!-- Wide Broadband Methodology Section -->
+                        <div class="bg-blue-50 p-8 rounded-2xl shadow-lg mt-16 animate-on-scroll">
+                            <h3 class="text-3xl font-bold text-gray-900 mb-4 flex items-center space-x-3">
+                                <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11 2a1 1 0 10-2 0v1h2V2zm5 0a1 1 0 10-2 0v1h2V2zM4 2a1 1 0 10-2 0v1h2V2zm14 0a1 1 0 10-2 0v1h2V2zM10 2a1 1 0 10-2 0v1h2V2zM2 4a1 1 0 00-1 1v10a1 1 0 001 1h16a1 1 0 001-1V5a1 1 0 00-1-1H2zm0 1h16v10H2V5zm1-2a1 1 0 011-1h12a1 1 0 011 1v1H3V3z" clip-rule="evenodd"></path></svg>
+                                How Wide Broadband Works With Providers
+                            </h3>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                At **Wide Broadband**, we are committed to providing the most accurate plan information possible. Our team cross-references data from multiple sources to ensure what you see is up-to-date.
+                            </p>
+                             <ul class="list-disc list-inside mt-4 ml-6 space-y-2 text-gray-700 font-semibold">
+                                <li>Official **Federal and State Broadband Maps**.</li>
+                                <li>Our proprietary **Internal Technology** that analyzes provider data.</li>
+                                <li>Direct, real-time updates from our **Provider Partners**.</li>
+                            </ul>
+                            <p class="text-lg text-gray-700 leading-relaxed mt-4">
+                                Furthermore, many providers directly share **ZIP codes and detailed coverage data** which we use to refine customer search results to be as accurate as possible for your exact location.
+                            </p>
+                            <a href="#" onclick="window.showPage('blog'); return false;" class="mt-6 inline-block text-blue-600 hover:underline font-semibold">Learn more about our methodology &rarr;</a>
+                        </div>
+                    </div>
+                `;
+
+                pageContainer.innerHTML = fullContentHtml;
+                initScrollAnimations(); // Re-run animations for new content
+                
+                // Re-attach delegated click listener to the newly rendered grid container
+                const newGridContainer = document.getElementById('provider-directory-grid');
+                if (newGridContainer) {
+                    newGridContainer.addEventListener('click', (e) => {
+                        const card = e.target.closest('.provider-card');
+                        if (card) {
+                            const provider = card.getAttribute('data-provider');
+                            if (provider) {
+                                window.showProviderPackages(provider);
+                            }
+                        }
+                    });
+                } else {
+                    console.error("Could not find the new provider directory grid container to attach listener.");
+                }
             }
             
             // --- Dynamic Rendering: Reviews (No Change) ---
@@ -1924,23 +2029,35 @@
                  container.innerHTML = reviewsHtml;
             }
 
-            // --- Dynamic Rendering: Blog (No Change) ---
+            // --- Dynamic Rendering: Blog (FIXED) ---
             function renderBlog() {
                 const container = document.getElementById('blog-content');
-                if (!container) return;
+                if (!container) {
+                    console.error("Blog content container not found."); 
+                    return;
+                }
 
                 let blogHtml = '';
+
+                // Check if BLOG_CONTENT has at least one post
+                if (!BLOG_CONTENT || BLOG_CONTENT.length === 0) {
+                    container.innerHTML = '<p class="text-center text-gray-500">No blog posts available yet.</p>';
+                    return;
+                }
 
                 // Main Article (Col-span 2)
                 const mainPost = BLOG_CONTENT[0];
                 blogHtml += `
                     <div class="md:col-span-2 bg-white rounded-2xl shadow-xl overflow-hidden animate-on-scroll">
-                        <img class="h-64 w-full object-cover" loading="lazy" src="https://placehold.co/800x400/0073e6/white?text=${mainPost.img}" alt="${mainPost.title}">
+                        <!-- Corrected image URL encoding for placeholders -->
+                        <img class="h-64 w-full object-cover" loading="lazy" 
+                             src="https://placehold.co/800x400/0073e6/white?text=${encodeURIComponent(mainPost.img)}" 
+                             alt="${mainPost.title}" onerror="this.src='https://placehold.co/800x400/cccccc/ffffff?text=Image+Not+Found'">
                         <div class="p-8">
                             <p class="text-sm font-medium text-blue-600">${mainPost.type}</p>
                             <h3 class="mt-2 text-2xl font-bold text-gray-900">${mainPost.title}</h3>
                             <p class="mt-4 text-base text-gray-600">${mainPost.snippet}</p>
-                            <a href="#" onclick="showPage('blog'); return false;" class="mt-6 inline-block font-semibold text-blue-600 hover:text-blue-800">Read Full Article &rarr;</a>
+                            <a href="#" onclick="window.showPage('blog'); return false;" class="mt-6 inline-block font-semibold text-blue-600 hover:text-blue-800">Read Full Article &rarr;</a>
                         </div>
                     </div>
                 `;
@@ -1950,19 +2067,64 @@
                 sidebarPosts.forEach(post => {
                     blogHtml += `
                         <div class="bg-white rounded-2xl shadow-xl overflow-hidden animate-on-scroll">
-                            <img class="h-48 w-full object-cover" loading="lazy" src="https://placehold.co/600x400/111827/white?text=${post.img}" alt="${post.title}">
+                            <!-- Corrected image URL encoding for placeholders -->
+                            <img class="h-48 w-full object-cover" loading="lazy" 
+                                 src="https://placehold.co/600x400/111827/white?text=${encodeURIComponent(post.img)}" 
+                                 alt="${post.title}" onerror="this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found'">
                             <div class="p-6">
                                 <p class="text-sm font-medium text-blue-600">${post.type}</p>
                                 <h3 class="mt-2 text-xl font-bold text-gray-900">${post.title}</h3>
                                 <p class="mt-2 text-sm text-gray-600">${post.snippet}</p>
-                                <a href="#" onclick="showPage('blog'); return false;" class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-800">Learn More &rarr;</a>
+                                <a href="#" onclick="window.showPage('blog'); return false;" class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-800">Learn More &rarr;</a>
                             </div>
                         </div>
                     `;
                 });
                 
                 container.innerHTML = blogHtml;
+                initScrollAnimations(); // Re-run for new content
             }
+
+             // --- NEW: Render Home Page Plans Table ---
+            function renderHomePlansTable() {
+                const tableBody = document.getElementById('home-plans-table-body');
+                if (!tableBody) return;
+
+                // Select specific plans for display (e.g., top 3)
+                const homePlans = [
+                    { provider: "Spectrum", ...PLANS_DATA["Spectrum"].find(p => p.speed === 1000) }, // Find Gig plan
+                    { provider: "AT&T", ...PLANS_DATA["AT&T"].find(p => p.speed === 1000) }, // Find Gig plan
+                    { provider: "Xfinity", ...PLANS_DATA["Xfinity"].find(p => p.speed === 1200) } // Find Gigabit Extra
+                ].filter(p => p.name); // Filter out any not found
+
+                 let tableHtml = '';
+                 homePlans.forEach(plan => {
+                     const providerColor = getProviderColor(plan.provider).hex || '#1f2937'; // Get color
+                     tableHtml += `
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="provider-name-badge" style="background-color: ${providerColor};">
+                                    ${plan.provider}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="font-semibold text-gray-900">Up to ${plan.speed} Mbps</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="font-bold text-2xl text-gray-900">$${plan.price.toFixed(2)}/mo</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="text-gray-700">${plan.dataCap}</span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right">
+                                <a href="#" onclick="showPage('cheap-internet'); return false;" class="px-5 py-2.5 text-sm font-medium rounded-full cta-secondary">Compare All Plans</a>
+                            </td>
+                        </tr>
+                     `;
+                 });
+                 tableBody.innerHTML = tableHtml;
+            }
+
 
             // --- Initialization ---
             document.addEventListener('DOMContentLoaded', () => {
@@ -1980,19 +2142,29 @@
                     const contactForm = document.getElementById('contact-form');
                     if (contactForm) contactForm.addEventListener('submit', window.handleContactSubmit); 
 
-                    // Attach filter change listeners (They are now defined in the HTML so they should be present)
+                    // Attach filter change listeners
                     const compSpeedFilter = document.getElementById('comparison-speed-filter');
                     if (compSpeedFilter) compSpeedFilter.addEventListener('change', window.applyComparisonFilters); 
-                    const compPriceFilter = document.getElementById('comparison-price-filter');
-                    if (compPriceFilter) compPriceFilter.addEventListener('change', window.applyComparisonFilters); 
                     const compConnectionFilter = document.getElementById('comparison-connection-filter');
                     if (compConnectionFilter) compConnectionFilter.addEventListener('change', window.applyComparisonFilters); 
                     
+                    // Price Slider Listeners
+                    const priceSlider = document.getElementById('comparison-price-slider');
+                    if (priceSlider) {
+                        // Update text on input (dragging)
+                        priceSlider.addEventListener('input', () => {
+                            const disp = document.getElementById('price-slider-value');
+                            if(disp) disp.textContent = `$${priceSlider.value}/mo`;
+                        });
+                        // Filter results on change (mouse up)
+                        priceSlider.addEventListener('change', window.applyComparisonFilters);
+                    }
+                    
                     // Render dynamic content
-                    renderProviderDirectory();
                     renderReviews();
-                    renderBlog();
+                    renderBlog(); 
                     renderCheapInternetPage(); 
+                    renderHomePlansTable(); // Render the updated home plans table
 
                     // Start Timer
                     startCountdown();
@@ -2000,8 +2172,9 @@
                     // Init Slower Animations
                     initScrollAnimations();
 
-                    // Set initial page
-                    showPage('home'); 
+                    // Set initial page view
+                    window.showPage('home'); 
+                    // renderProviderDirectory is called by showPage
 
                 } catch (e) {
                     console.error("Critical error during initialization:", e);
@@ -2015,3 +2188,4 @@
 
 </body>
 </html>
+
