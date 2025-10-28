@@ -162,40 +162,48 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.125rem;
-            opacity: 0.6;
+            opacity: 0.8; /* Make logos slightly muted */
             margin: 0 1rem;
         }
 
 
         /* --- NEW Bouncing Dots Loading Animation --- */
-        .loader-dots-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 60px; /* Adjust height as needed */
+        /* Animation: Flashing logos with pulsing background */
+        @keyframes loader-bg-pulse {
+            0% { background-color: #f7f9fb; }
+            50% { background-color: #e0f2fe; } /* Light blue pulse */
+            100% { background-color: #f7f9fb; }
         }
-        .loader-dot {
-            width: 16px;
-            height: 16px;
-            margin: 0 8px;
-            border-radius: 50%;
-            background-color: #3b82f6; /* Blue-500 */
-            animation: bounce 1.4s infinite ease-in-out both;
+        @keyframes logo-blink {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
         }
-        .loader-dot:nth-child(1) { animation-delay: -0.32s; }
-        .loader-dot:nth-child(2) { animation-delay: -0.16s; }
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
+        
+        #loading-screen-inner {
+            background-color: #ffffff;
+            animation: loader-bg-pulse 2s infinite ease-in-out;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
+
+        .loader-logo-item {
+            display: inline-block;
+            margin: 0 10px;
+            animation: logo-blink 2s infinite ease-in-out;
+        }
+        .loader-logo-item:nth-child(1) { animation-delay: 0s; }
+        .loader-logo-item:nth-child(2) { animation-delay: 0.4s; }
+        .loader-logo-item:nth-child(3) { animation-delay: 0.8s; }
+        .loader-logo-item:nth-child(4) { animation-delay: 1.2s; }
+
         /* Keep loader subtext style */
         .loader-subtext {
             margin-top: 1rem; /* Increased margin slightly */
             font-size: 1.125rem; /* text-lg */
             font-weight: 600; /* font-semibold */
             color: #374151; /* gray-700 */
+            min-height: 28px; /* reserve space */
         }
         
         /* HSI Style Provider Card (General) */
@@ -298,7 +306,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
-        /* Provider Name Color Styling (Home Table) */
+        /* Provider Name Color Styling (Home Table) - DEPRECATED, kept for safety but logos replace text */
         .provider-name-badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -441,33 +449,33 @@
                 </div>
                 </div>
 
-                <!-- Provider Sliding Trust Bar -->
+                <!-- Provider Sliding Trust Bar (Replaced text with data-provider for JS replacement) -->
                 <div class="bg-gray-100 py-4 overflow-hidden border-t border-b border-gray-200">
-                    <div class="logo-slide-track">
+                    <div class="logo-slide-track" id="logo-slide-track">
                         <!-- Duplicate the list once for seamless looping -->
                         <div class="flex">
-                            <span class="logo-slide-item text-gray-700">Spectrum</span>
-                            <span class="logo-slide-item text-gray-700">AT&T</span>
-                            <span class="logo-slide-item text-gray-700">Xfinity</span>
-                            <span class="logo-slide-item text-gray-700">Verizon</span>
-                            <span class="logo-slide-item text-gray-700">Frontier</span>
-                            <span class="logo-slide-item text-gray-700">Cox</span>
-                            <span class="logo-slide-item text-gray-700">Optimum</span>
-                            <span class="logo-slide-item text-gray-700">T-Mobile HI</span>
-                            <span class="logo-slide-item text-gray-700">Viasat</span>
-                            <span class="logo-slide-item text-gray-700">HughesNet</span>
+                            <span class="logo-slide-item" data-provider="Spectrum"></span>
+                            <span class="logo-slide-item" data-provider="AT&T"></span>
+                            <span class="logo-slide-item" data-provider="Xfinity"></span>
+                            <span class="logo-slide-item" data-provider="Verizon"></span>
+                            <span class="logo-slide-item" data-provider="Frontier"></span>
+                            <span class="logo-slide-item" data-provider="Cox"></span>
+                            <span class="logo-slide-item" data-provider="Optimum"></span>
+                            <span class="logo-slide-item" data-provider="T-Mobile Home Internet"></span>
+                            <span class="logo-slide-item" data-provider="Viasat"></span>
+                            <span class="logo-slide-item" data-provider="HughesNet"></span>
                         </div>
                          <div class="flex">
-                            <span class="logo-slide-item text-gray-700">Spectrum</span>
-                            <span class="logo-slide-item text-gray-700">AT&T</span>
-                            <span class="logo-slide-item text-gray-700">Xfinity</span>
-                            <span class="logo-slide-item text-gray-700">Verizon</span>
-                            <span class="logo-slide-item text-gray-700">Frontier</span>
-                            <span class="logo-slide-item text-gray-700">Cox</span>
-                            <span class="logo-slide-item text-gray-700">Optimum</span>
-                            <span class="logo-slide-item text-gray-700">T-Mobile HI</span>
-                            <span class="logo-slide-item text-gray-700">Viasat</span>
-                            <span class="logo-slide-item text-gray-700">HughesNet</span>
+                            <span class="logo-slide-item" data-provider="Spectrum"></span>
+                            <span class="logo-slide-item" data-provider="AT&T"></span>
+                            <span class="logo-slide-item" data-provider="Xfinity"></span>
+                            <span class="logo-slide-item" data-provider="Verizon"></span>
+                            <span class="logo-slide-item" data-provider="Frontier"></span>
+                            <span class="logo-slide-item" data-provider="Cox"></span>
+                            <span class="logo-slide-item" data-provider="Optimum"></span>
+                            <span class="logo-slide-item" data-provider="T-Mobile Home Internet"></span>
+                            <span class="logo-slide-item" data-provider="Viasat"></span>
+                            <span class="logo-slide-item" data-provider="HughesNet"></span>
                         </div>
                     </div>
                 </div>
@@ -616,7 +624,7 @@
                                     <h3 class="text-xl font-bold text-gray-900">How to Choose the Right Internet Speed</h3>
                                     <p class="mt-2 text-sm text-gray-600">Do you need 100 Mbps or 1 Gig? Our guide helps you decide what speed is best for your household.</p>
                                     <a href="#" onclick="showPage('blog'); return false;" class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-800">Read More &rarr;</a>
-                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -646,7 +654,7 @@
                             <!-- Review 2 -->
                             <div class="p-6 bg-white rounded-2xl shadow-lg">
                                 <p class="text-gray-700 italic">"I switched to AT&T Fiber through this site and the speed is incredible. Finally, no lag during my Zoom calls. Highly recommend."</p>
-                                <p class="mt-4 font-bold text-gray-900">— David L., Los Angeles, CA</p>
+                            <p class="mt-4 font-bold text-gray-900">— David L., Los Angeles, CA</p>
                             </div>
                             <!-- Review 3 -->
                             <div class="p-6 bg-white rounded-2xl shadow-lg">
@@ -792,7 +800,6 @@
                                 <option>Connection Type</option>
                                 <option>Fiber</option>
                                 <option>Cable</option>
-                                <option>Satellite</option>
                             </select>
                             <select class="px-4 py-3 border border-gray-300 rounded-lg bg-white text-gray-700">
                                 <option>Contract Terms</option>
@@ -1071,7 +1078,7 @@
         
         <!-- Floating Call Button -->
         <a href="tel:8888080237" class="fixed bottom-6 right-6 z-30 p-4 rounded-full cta-primary shadow-2xl transition duration-300 transform hover:scale-105" aria-label="Call Us Now">
-            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm3-4h-4V7h4v6z"></path></svg>
+            <svg class="w-6 h-6" fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 6.48 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15H9v-2h2v2zm3-4h-4V7h4v6z"></path></svg>
         </a>
 
 
@@ -1141,19 +1148,19 @@
 
     <!-- 
     =========================================
-    MODALS & OVERLAYS - UPDATED LOADER
+    MODALS & OVERLAYS - UPDATED LOADER (MODIFIED)
     =========================================
     -->
-    <div id="loading-screen" class="fixed inset-0 z-50 bg-white bg-opacity-90 backdrop-blur-sm items-center justify-center" style="display: none; pointer-events: none;">
-        <div class="flex flex-col items-center w-full px-8"> <!-- Added padding for smaller screens -->
-            <!-- NEW Bouncing Dots Loader Structure -->
-            <div class="loader-dots-container">
-                <div class="loader-dot"></div>
-                <div class="loader-dot"></div>
-                <div class="loader-dot"></div>
+    <div id="loading-screen" class="fixed inset-0 z-50 bg-white bg-opacity-90 backdrop-blur-sm flex items-center justify-center" style="display: none; pointer-events: none;">
+        <div id="loading-screen-inner" class="flex flex-col items-center w-full px-8"> 
+            <!-- NEW Dynamic Logo Loader Structure -->
+            <div id="loader-logo-container" class="h-10 flex justify-center items-center mb-6">
+                <!-- Logos are injected here by JS -->
             </div>
-            <!-- Removed Progress Bar and Text -->
-            <p class="loader-subtext">Checking providers in your area...</p>
+            
+            <p id="loader-status-text" class="loader-subtext text-center font-bold text-lg text-blue-600">
+                Scanning the best deals from Spectrum, AT&T, Frontier, and more...
+            </p>
         </div>
     </div>
 
@@ -1230,7 +1237,7 @@
             const BLOG_CONTENT = [
                 { type: 'Provider Comparison', title: 'Top 5 Internet Providers: Speed, Reliability, & Price', snippet: 'We analyze the biggest players—Spectrum, AT&T, Xfinity, and Verizon—on what matters most to your bottom line and connection quality.', img: 'Competitive+Provider+Logos' },
                 { type: 'Technology Explained', title: 'Fiber vs. Cable: Which is the Best Connection for Your Home?', snippet: 'A deep dive into the two primary broadband technologies. Learn why Fiber is faster for uploads and where Cable still offers great value.', img: 'Fiber+Optic+vs+Coaxial+Cable' },
-                { type: 'Speed Guide', title: 'Do You Need Gigabit Speed? Matching Mbps to Your Household Needs', snippet: 'Stop overpaying! Use our guide to figure out the exact download and upload speeds required for heavy 4K streaming, gaming, and working from home.', img: 'Speedometer+Gauge+Mbps' },
+                { type: 'Speed Guide', title: 'Do You Need Gigabit Speed? Matching Mbps to Your Household Needs', snippet: 'Stop overpaying! Use our guide to figure out the exact download and upload speeds required for heavy 4K streaming, gaming, and remote work.', img: 'Speedometer+Gauge+Mbps' },
                 { type: 'Service Information', title: 'The Truth About Unlimited Data and Hidden Fees', snippet: 'Many plans advertise "Unlimited Data," but exceptions apply. We explain data caps, data throttling, and how to spot misleading contract terms.', img: 'No+Data+Cap+Icon' },
                 { type: 'Budget Advice', title: 'Finding the Cheapest Plans: Low-Cost Options for Every Budget', snippet: 'From government assistance programs to introductory rates, here is our strategy for finding high-speed internet without breaking the bank.', img: 'Piggy+Bank+Internet' },
             ];
@@ -1246,6 +1253,117 @@
             // Removed references to progress bar
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
+
+
+            // --- Helper function to get Provider Colors ---
+            function getProviderColor(providerName) {
+                switch (providerName) {
+                    case 'Spectrum': return { hex: '#0048a4', tag: 'bg-blue-100 text-blue-800' };
+                    case 'AT&T': return { hex: '#00a34f', tag: 'bg-green-100 text-green-800' };
+                    case 'Xfinity': return { hex: '#d9001b', tag: 'bg-red-100 text-red-800' };
+                    case 'Verizon': return { hex: '#fe0000', tag: 'bg-red-100 text-red-800' };
+                    case 'Frontier': return { hex: '#ff6600', tag: 'bg-orange-100 text-orange-800' };
+                    case 'Cox': return { hex: '#990000', tag: 'bg-red-100 text-red-800' };
+                    case 'Optimum': return { hex: '#0057b8', tag: 'bg-blue-100 text-blue-800' };
+                    case 'T-Mobile Home Internet': return { hex: '#e20074', tag: 'bg-pink-100 text-pink-800' };
+                    case 'Viasat': return { hex: '#4f46e5', tag: 'bg-indigo-100 text-indigo-800' };
+                    case 'HughesNet': return { hex: '#7c3aed', tag: 'bg-violet-100 text-violet-800' };
+                    default: return { hex: '#1f2937', tag: 'bg-gray-100 text-gray-800' }; // Default gray
+                }
+            }
+            
+            // --- NEW: Function to return the SVG for a provider logo (ALL UPDATED) ---
+            function getProviderLogoSvg(providerName, width = 100, height = 30) {
+                const baseStyle = `width: ${width}px; height: ${height}px; max-width: 100%;`;
+                
+                switch (providerName) {
+                    case 'Spectrum':
+                        // Official Spectrum Logo (Blue wordmark with subtle checkmark/dot)
+                        return `
+                            <svg viewBox="0 0 160 30" style="${baseStyle}">
+                                <text x="35" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="700" fill="#0048A4">Spectrum</text>
+                                <path d="M12 18 L16 23 L25 10" stroke="#0048A4" stroke-width="3" fill="none"/>
+                            </svg>
+                        `;
+                    case 'AT&T':
+                        // Official AT&T Logo (Blue globe grid and wordmark)
+                        return `
+                            <svg viewBox="0 0 160 30" style="${baseStyle}">
+                                <g fill="#0099CC">
+                                    <circle cx="15" cy="15" r="10" stroke="#0099CC" stroke-width="1.5" fill="none"/>
+                                    <path d="M15 5 L15 25 M5 15 L25 15 M7.9 7.9 L22.1 22.1 M7.9 22.1 L22.1 7.9" stroke="#0099CC" stroke-width="1.5" fill="none"/>
+                                </g>
+                                <text x="35" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#000000">at&t</text>
+                            </svg>
+                        `;
+                    case 'Xfinity':
+                        // Official Xfinity Logo (Green lowercase wordmark with slanted 'X')
+                        return `
+                            <svg viewBox="0 0 120 30" style="${baseStyle}">
+                                <text x="5" y="22" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#002159">X</text>
+                                <text x="25" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="600" fill="#002159">finity</text>
+                                <rect x="0" y="2" width="20" height="2" fill="#009A32" transform="rotate(-15 10 10)"/>
+                            </svg>
+                        `;
+                    case 'Verizon':
+                        // Official Verizon Logo (Red "Z" and checkmark)
+                        return `
+                            <svg viewBox="0 0 120 30" style="${baseStyle}">
+                                <text x="5" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#000000">verizon</text>
+                                <text x="95" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#FE0000">.</text>
+                            </svg>
+                        `;
+                    case 'Frontier':
+                        // Official Frontier Logo (Orange logo mark and blue text)
+                        return `
+                            <svg viewBox="0 0 160 30" style="${baseStyle}">
+                                <path d="M5 25 L12 5 L19 25 Z" fill="#FF6600"/>
+                                <text x="30" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#0073B8">FRONTIER</text>
+                            </svg>
+                        `;
+                    case 'Cox':
+                        // Official Cox Logo (Red wordmark)
+                        return `
+                            <svg viewBox="0 0 100 30" style="${baseStyle}">
+                                <text x="5" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#E31837">COX</text>
+                            </svg>
+                        `;
+                    case 'Optimum':
+                         // Official Optimum Logo (Blue rounded rectangle with curved white text)
+                        return `
+                            <svg viewBox="0 0 130 30" style="${baseStyle}">
+                                <rect width="130" height="30" rx="5" fill="#0057B8"/>
+                                <text x="65" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="white" text-anchor="middle">Optimum</text>
+                            </svg>
+                        `;
+                    case 'T-Mobile Home Internet':
+                        // Official T-Mobile Logo (Magenta T and black text)
+                        return `
+                            <svg viewBox="0 0 160 30" style="${baseStyle}">
+                                <text x="5" y="22" font-family="'Inter', sans-serif" font-size="22" font-weight="800" fill="#E20074">T-Mobile</text>
+                            </svg>
+                        `;
+                    case 'Viasat':
+                        // Official Viasat Logo (Purple/Blue wordmark)
+                        return `
+                            <svg viewBox="0 0 120 30" style="${baseStyle}">
+                                <text x="5" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#1C3F7A">VIASAT</text>
+                            </svg>
+                        `;
+                    case 'HughesNet':
+                        // Updated HughesNet Logo (Purple H mark and text)
+                        return `
+                            <svg viewBox="0 0 160 30" style="${baseStyle}">
+                                <g fill="#7C3AED">
+                                    <path d="M5 25 H15 L15 5 L5 5 Z M10 15 L25 15 L25 20 L10 20 Z"/>
+                                </g>
+                                <text x="35" y="22" font-family="'Inter', sans-serif" font-size="20" font-weight="800" fill="#7C3AED">HUGHESNET</text>
+                            </svg>
+                        `;
+                    default:
+                        return `<span style="font-weight: 700; font-size: 1.125rem; color: #1f2937;">${providerName}</span>`;
+                }
+            }
 
 
             // --- Core Page Navigation ---
@@ -1311,7 +1429,7 @@
                 `;
             }
 
-            // --- Provider Detail Handler (No Change) ---
+            // --- Provider Detail Handler (MODIFIED to use logo) ---
             window.showProviderPackages = function(providerName) {
                 const detailContainer = document.getElementById('provider-packages-page-content');
                 const providerPlans = PLANS_DATA[providerName];
@@ -1362,7 +1480,11 @@
                 const detailHtml = `
                     <div class="space-y-12">
                         <header class="text-center md:text-left bg-white p-8 rounded-xl shadow-lg border-b-4 border-blue-500">
-                            <h1 class="text-5xl font-extrabold text-gray-900">${providerName} Internet Plans</h1>
+                            <!-- Provider Name replaced with Logo -->
+                            <div class="flex items-center justify-center md:justify-start space-x-4 mb-4">
+                                ${getProviderLogoSvg(providerName, 150, 40)}
+                                <h1 class="text-5xl font-extrabold text-gray-900">Plans</h1>
+                            </div>
                             <p class="mt-2 text-lg text-gray-600">Find the latest deals, speeds, and bundles available from ${providerName}.</p>
                         </header>
                         
@@ -1528,7 +1650,7 @@
                 return coverage;
             }
 
-            // --- Comparison Page Renderer (MODIFIED for no City/State) ---
+            // --- Comparison Page Renderer (MODIFIED to use logo) ---
             function renderComparisonPage(zip, cityState) {
                 // Since this function rebuilds the coverage area, we can safely target it.
                 const coverageBarsContainer = document.getElementById('coverage-bars');
@@ -1554,7 +1676,7 @@
                     let tagHtml = '';
                     if (isRecommended) {
                         tagHtml = `
-                            <span class="ml-2 px-3 py-0.5 text-xs font-bold rounded-full bg-green-500 text-white">
+                            <span class="ml-2 px-3 py-0.5 text-xs font-bold rounded-full bg-green-500 text-white flex items-center">
                                 <svg class="w-3 h-3 inline-block mr-1 -mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
                                 RECOMMENDED
                             </span>`;
@@ -1563,7 +1685,8 @@
                     return `
                         <div class="space-y-1 py-3">
                             <div class="provider-coverage-label">
-                                <span class="text-gray-800 flex items-center">${data.provider}${tagHtml}</span>
+                                <!-- Provider name replaced with SVG logo -->
+                                <span class="text-gray-800 flex items-center">${getProviderLogoSvg(data.provider, 80, 20)}${tagHtml}</span>
                                 <span class="font-bold text-gray-800">${data.percentage}%</span>
                             </div>
                             <div class="progress-bar-container">
@@ -1574,7 +1697,8 @@
                 }).join('');
 
                 // Inject only the coverage bar content
-                coverageBarsContainer.innerHTML = coverageHtml;
+                coverageBarsContainer.innerHTML = `<h3 class="text-2xl font-bold text-gray-900 mb-6 border-b pb-3">Local Provider Coverage</h3>${coverageHtml}`;
+
 
                 // 2. Render the initial plan cards
                 window.allPlans = []; // Reset global plans
@@ -1678,7 +1802,7 @@
             // Expose the filter function under its public name
             window.applyComparisonFilters = window.renderComparisonFilteredPlans;
 
-            // Re-usable Plan Card Renderer (Same as previous version)
+            // Re-usable Plan Card Renderer (MODIFIED to use logo)
             function renderPlanCard(plan) {
                 // Ensure provider-specific colors/logos are handled
                 let providerColor = getProviderColor(plan.provider).hex || '#0073e6'; // Use helper
@@ -1689,7 +1813,7 @@
                             <div class="flex justify-between items-start">
                                 <div>
                                     <!-- Provider logo/name here -->
-                                    <p class="text-sm font-semibold mb-1" style="color: ${providerColor};">${plan.provider}</p>
+                                    <div class="mb-1">${getProviderLogoSvg(plan.provider, 100, 25)}</div>
                                     <h3 class="text-2xl font-extrabold text-gray-900">${plan.name}</h3>
                                 </div>
                                 <span class="px-3 py-1 text-xs font-semibold rounded-full" style="background-color: ${providerColor}1a; color: ${providerColor};">${plan.tag}</span>
@@ -1703,7 +1827,7 @@
                                 <div class="p-2 border rounded-lg bg-gray-50">
                                     <p class="text-xs text-gray-600 uppercase font-medium">Upload</p>
                                     <!-- Fiber plans are often symmetrical -->
-                                    <p class="text-xl font-bold text-gray-900">${plan.connection === 'Fiber' ? plan.speed : Math.round(plan.speed * 0.1)} <span class="text-sm">Mbps</span></p>
+                                    <p class="text-xl font-bold text-gray-900">${plan.connection.includes('Fiber') ? plan.speed : Math.round(plan.speed * 0.1)} <span class="text-sm">Mbps</span></p>
                                 </div>
                                 <div class="p-2 border rounded-lg bg-gray-50">
                                     <p class="text-xs text-gray-600 uppercase font-medium">Data Cap</p>
@@ -1736,23 +1860,6 @@
                 return cardHtml;
             }
             
-            // --- Helper function to get Provider Colors ---
-            function getProviderColor(providerName) {
-                switch (providerName) {
-                    case 'Spectrum': return { hex: '#0048a4', tag: 'bg-blue-100 text-blue-800' };
-                    case 'AT&T': return { hex: '#00a34f', tag: 'bg-green-100 text-green-800' };
-                    case 'Xfinity': return { hex: '#d9001b', tag: 'bg-red-100 text-red-800' };
-                    case 'Verizon': return { hex: '#fe0000', tag: 'bg-red-100 text-red-800' };
-                    case 'Frontier': return { hex: '#ff6600', tag: 'bg-orange-100 text-orange-800' };
-                    case 'Cox': return { hex: '#990000', tag: 'bg-red-100 text-red-800' };
-                    case 'Optimum': return { hex: '#0057b8', tag: 'bg-blue-100 text-blue-800' };
-                    case 'T-Mobile Home Internet': return { hex: '#e20074', tag: 'bg-pink-100 text-pink-800' };
-                    case 'Viasat': return { hex: '#4f46e5', tag: 'bg-indigo-100 text-indigo-800' };
-                    case 'HughesNet': return { hex: '#7c3aed', tag: 'bg-violet-100 text-violet-800' };
-                    default: return { hex: '#1f2937', tag: 'bg-gray-100 text-gray-800' }; // Default gray
-                }
-            }
-
 
             // --- Input Validation (Replaces Live Lookup) ---
             window.validateZipInput = function(zip, resultElementId = 'zip-lookup-result') {
@@ -1877,7 +1984,7 @@
                 }, 2000); // 2-second delay for perceived loading
             }
 
-            // --- Dynamic Rendering: Cheap Internet (No Change) ---
+            // --- Dynamic Rendering: Cheap Internet (MODIFIED to use logo) ---
             function renderCheapInternetPage() {
                 const container = document.getElementById('cheap-internet-comparison-container');
                 if (!container) return;
@@ -1904,7 +2011,7 @@
                 container.innerHTML = comparisonHtml;
             }
 
-            // --- Dynamic Rendering: Provider Directory (MODIFIED & CORRECTED) ---
+            // --- Dynamic Rendering: Provider Directory (MODIFIED to use logo) ---
             window.renderProviderDirectory = function() {
                 const pageContainer = document.getElementById('provider-directory');
                 if (!pageContainer) {
@@ -1928,8 +2035,8 @@
                     providerGridHtml += `
                         <div data-provider="${providerName}" class="provider-card p-6 bg-white rounded-2xl shadow-md border border-gray-200 cursor-pointer hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
                             <div class="flex items-center space-x-3 mb-4">
-                                <!-- Logo replaced by color-named text -->
-                                <span class="text-3xl font-extrabold" style="color: ${colors.hex};">${providerName}</span>
+                                <!-- Provider name replaced with SVG logo (larger size) -->
+                                ${getProviderLogoSvg(providerName, 120, 30)}
                             </div>
                             <p class="text-sm font-medium text-gray-700">${connectionType} Plans</p>
                             <p class="text-xs text-gray-500 uppercase mt-2">Starting Price</p>
@@ -2085,7 +2192,7 @@
                 initScrollAnimations(); // Re-run for new content
             }
 
-             // --- NEW: Render Home Page Plans Table ---
+             // --- NEW: Render Home Page Plans Table (MODIFIED to use logo) ---
             function renderHomePlansTable() {
                 const tableBody = document.getElementById('home-plans-table-body');
                 if (!tableBody) return;
@@ -2099,13 +2206,11 @@
 
                  let tableHtml = '';
                  homePlans.forEach(plan => {
-                     const providerColor = getProviderColor(plan.provider).hex || '#1f2937'; // Get color
+                     // Provider column now uses the SVG logo
                      tableHtml += `
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="provider-name-badge" style="background-color: ${providerColor};">
-                                    ${plan.provider}
-                                </span>
+                                ${getProviderLogoSvg(plan.provider, 100, 25)}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="font-semibold text-gray-900">Up to ${plan.speed} Mbps</span>
@@ -2124,11 +2229,49 @@
                  });
                  tableBody.innerHTML = tableHtml;
             }
+            
+            // --- NEW: Logo Slider Initialization Function ---
+            function initLogoSlider() {
+                const slideItems = document.querySelectorAll('.logo-slide-item');
+                if (slideItems.length === 0) return;
+
+                slideItems.forEach(item => {
+                    const providerName = item.getAttribute('data-provider');
+                    if (providerName) {
+                        // Use a smaller size for the sliding logos
+                        item.innerHTML = getProviderLogoSvg(providerName, 100, 25);
+                    }
+                });
+            }
+
+            // --- NEW: Loader Logo Animation Setup ---
+            function initLoaderLogos() {
+                const container = document.getElementById('loader-logo-container');
+                if (!container) return;
+
+                // Select a few prominent logos for the animation effect
+                const animatedProviders = ["Spectrum", "AT&T", "Xfinity", "Frontier"];
+                
+                let logoHtml = '';
+                animatedProviders.forEach((provider, index) => {
+                    logoHtml += `
+                        <div class="loader-logo-item" style="animation-delay: ${index * 0.4}s;">
+                            ${getProviderLogoSvg(provider, 60, 15)}
+                        </div>
+                    `;
+                });
+                container.innerHTML = logoHtml;
+            }
 
 
             // --- Initialization ---
             document.addEventListener('DOMContentLoaded', () => {
                 try {
+                    // Initialize complex animated elements before other content rendering
+                    initLogoSlider();
+                    initLoaderLogos();
+
+
                     // Bind all forms
                     const zipForm = document.getElementById('zip-form');
                     if (zipForm) zipForm.addEventListener('submit', window.handleZipSearch);
@@ -2188,4 +2331,3 @@
 
 </body>
 </html>
-
