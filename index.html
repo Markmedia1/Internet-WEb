@@ -1007,7 +1007,7 @@ src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
                     </p>
                     
                     <div class="mt-12 bg-white p-8 rounded-2xl shadow-xl">
-                        <!-- FINAL FORM FIX: Removed onsubmit. Added _template and _captcha to force immediate redirect to _next page. -->
+                        <!-- UPDATED: Ensure email and CAPTCHA settings are correct -->
                         <form id="secure-order-form" class="space-y-6" 
                               action="https://formsubmit.co/widebroadband@gmail.com" 
                               method="POST">
@@ -1079,25 +1079,45 @@ src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
             
             <!-- 
             =========================================
-            THANK YOU PAGE
+            THANK YOU PAGE (FRESH LOOK)
             =========================================
             -->
-            <section id="thank-you-page" class="page-content py-32 bg-gray-50 text-center">
+            <section id="thank-you-page" class="page-content py-32 sm:py-48 bg-gray-900 text-center">
                 <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <!-- Animated Checkmark -->
-                    <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    <!-- Animated Checkmark/Success Icon (Larger, more vibrant) -->
+                    <div class="w-32 h-32 bg-green-500 rounded-full flex items-center justify-center mx-auto shadow-2xl animate-pulse">
+                        <svg class="w-20 h-20 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                        </svg>
                     </div>
                     
-                    <h2 class="mt-8 text-4xl font-extrabold text-gray-900">
-                        Thank You For Your Order!
+                    <h2 class="mt-12 text-5xl font-extrabold text-white leading-tight">
+                        Order Received!
                     </h2>
-                    <p class="mt-4 text-lg text-gray-600">
-                        You will receive a call from our department shortly to confirm your details and schedule your installation.
+                    <p class="mt-6 text-xl text-gray-300">
+                        Thank you for choosing Wide Broadband. Your plan details have been securely submitted.
                     </p>
-                    <div class="mt-8">
-                        <a href="#home" onclick="showPage('home'); return false;" class="px-6 py-3 rounded-full text-base font-semibold cta-secondary">
-                            &larr; Back to Home
+                    
+                    <div class="mt-10 p-6 bg-gray-800 rounded-xl shadow-inner border-t-4 border-blue-500">
+                        <h3 class="text-2xl font-bold text-blue-400">What Happens Next?</h3>
+                        <p class="mt-4 text-lg text-gray-200 font-semibold">
+                            A representative will call you shortly on the phone number provided to:
+                        </p>
+                        <ul class="mt-4 space-y-3 text-left text-gray-300 mx-auto max-w-sm">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 mr-3 mt-1 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M16 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 9l-4 4-2-2 1.4-1.4 1.6 1.6 2.6-2.6 1.4 1.4z"></path></svg>
+                                <span>Confirm your address and plan selection.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 mr-3 mt-1 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M16 4h-3V2h-2v2H9V2H7v2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-1 9l-4 4-2-2 1.4-1.4 1.6 1.6 2.6-2.6 1.4 1.4z"></path></svg>
+                                <span>Schedule the best date for your installation.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <a href="#home" onclick="showPage('home'); return false;" class="px-8 py-3 rounded-full text-lg font-semibold bg-white text-gray-900 hover:bg-gray-100 transition duration-300 shadow-xl">
+                            &larr; Return to Home Page
                         </a>
                     </div>
                 </div>
