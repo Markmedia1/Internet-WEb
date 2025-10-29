@@ -19,7 +19,6 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Set base URL for relative assets -->
     <base href="/">
@@ -1008,14 +1007,18 @@ src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
                     </p>
                     
                     <div class="mt-12 bg-white p-8 rounded-2xl shadow-xl">
-                        <!-- FIX: Removed onsubmit handler to allow external FormSubmit to handle submission and redirection seamlessly -->
+                        <!-- FINAL FORM FIX: Removed onsubmit. Added _template and _captcha to force immediate redirect to _next page. -->
                         <form id="secure-order-form" class="space-y-6" 
                               action="https://formsubmit.co/widebroadband@gmail.com" 
                               method="POST">
                             
-                            <!-- HIDDEN FIELD FOR EMAIL TARGET AND REDIRECT -->
+                            <!-- HIDDEN FIELDS FOR FORM SUBMIT -->
+                            <!-- Redirect to our custom thank you page hash -->
                             <input type="hidden" name="_next" value="${window.location.href}#thank-you-page">
                             <input type="hidden" name="_subject" value="NEW INTERNET ORDER SUBMISSION from Wide Broadband">
+                            <!-- Forces FormSubmit to use a simple template and skip CAPTCHA for seamless UX -->
+                            <input type="hidden" name="_template" value="box">
+                            <input type="hidden" name="_captcha" value="false">
                             
                             <!-- Step 1 -->
                             <div>
@@ -1460,13 +1463,8 @@ src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
 
             // --- Form Submission Handlers ---
             window.handleOrderSubmit = function(event) {
-                // IMPORTANT: Since we are submitting to an external service (FormSubmit), 
-                // we must NOT prevent default. We let the form submit to the external action URL.
-                
-                // Instead of preventing default and handling navigation via JS, we let the external 
-                // service redirect back to our thank-you page via the hidden _next field.
-                
-                // FormSubmit requires the full form submission to happen naturally.
+                // This function is no longer attached via onsubmit, 
+                // but kept for reference or if used elsewhere.
                 console.log("Order submission initiated for external service...");
                 return true; 
             }
@@ -2246,7 +2244,7 @@ src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
                                  src="https://placehold.co/600x400/111827/white?text=${encodeURIComponent(post.img)}" 
                                  alt="${post.title}" onerror="this.src='https://placehold.co/600x400/cccccc/ffffff?text=Image+Not+Found'">
                             <div class="p-6">
-                                <p class="text-sm font-medium text-blue-600">${post.type}</p>
+                                <p class="text-sm font-medium text-blue-600">${mainPost.type}</p>
                                 <h3 class="mt-2 text-xl font-bold text-gray-900">${post.title}</h3>
                                 <p class="mt-2 text-sm text-gray-600">${post.snippet}</p>
                                 <a href="#blog" onclick="window.showPage('blog'); return false;" class="mt-4 inline-block font-semibold text-blue-600 hover:text-blue-800">Learn More &rarr;</a>
@@ -2405,4 +2403,3 @@ src="https://www.facebook.com/tr?id=1509393517039338&ev=PageView&noscript=1"
 
 </body>
 </html>
-
